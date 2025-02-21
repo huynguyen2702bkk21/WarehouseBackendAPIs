@@ -3,9 +3,10 @@
     public class WMSDbContext : DbContext, IUnitOfWork
     {
 
-        //public DbSet<LotAdjustment> LotAdjustments { get; set; }
-        //public DbSet<Department> Departments { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Employee> Employees { get; set; }
+
         //public DbSet<GoodsIssue> GoodsIssues { get; set; }
         //public DbSet<FinishedProductIssue> FinisedProductIssues { get; set; }
         //public DbSet<GoodsReceipt> GoodsReceipts { get; set; }
@@ -39,6 +40,8 @@
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new CustomerEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new SupplierEntityTypeConfiguration());
 
 
 

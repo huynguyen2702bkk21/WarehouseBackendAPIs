@@ -1,4 +1,4 @@
-﻿namespace WMS.Infrastructure.EFConfigurations
+﻿namespace WMS.Infrastructure.EFConfigurations.PersonConfigurations
 {
     public class EmployeeEntityTypeConfiguration : IEntityTypeConfiguration<Employee>
     {

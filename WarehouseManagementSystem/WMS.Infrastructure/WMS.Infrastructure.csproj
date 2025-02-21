@@ -26,4 +26,14 @@
     <ProjectReference Include="..\WMS.Domain\WMS.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="EFConfigurations\MaterialLotAdjustmentConfigurations\" />
+    <Folder Include="EFConfigurations\MaterialConfigurations\" />
+    <Folder Include="EFConfigurations\InventoryReceiptConfigurations\" />
+    <Folder Include="EFConfigurations\InventoryIssueConfigurations\" />
+    <Folder Include="EFConfigurations\EquipmentConfigurations\" />
+    <Folder Include="EFConfigurations\InventoryLogConfigurations\" />
+    <Folder Include="EFConfigurations\StorageConfigurations\" />
+  </ItemGroup>
+
 </Project>
