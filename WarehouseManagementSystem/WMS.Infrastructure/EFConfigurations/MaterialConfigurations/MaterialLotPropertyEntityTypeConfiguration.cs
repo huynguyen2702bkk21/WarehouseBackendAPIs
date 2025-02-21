@@ -6,12 +6,12 @@
         {
             builder.HasKey(b => b.propertyId);
 
-            builder.Property(b => b.propertyName)
+            builder.Property(b => b.propertyName)               
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(50);      
 
             builder.Property(b => b.propertyValue)
-                .IsRequired()
+                .IsRequired()             
                 .HasMaxLength(50);
 
             builder.HasOne(s => s.materialLot)

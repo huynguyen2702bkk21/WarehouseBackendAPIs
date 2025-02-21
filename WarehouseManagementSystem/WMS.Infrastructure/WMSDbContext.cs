@@ -20,6 +20,11 @@
         public DbSet<MaterialLotProperty> MaterialLotProperties { get; set; }
         public DbSet<MaterialSubLot> MaterialSubLots { get; set; }
 
+        // Equipment Aggregate
+        public DbSet<EquipmentClass> EquipmentClasses { get; set; }
+        public DbSet<EquipmentClassProperty> EquipmentClassProperties { get; set; }
+        public DbSet<Equipment> Equipments { get; set; }
+        public DbSet<EquipmentProperty> EquipmentProperties { get; set; }
 
 
 
@@ -64,7 +69,11 @@
             modelBuilder.ApplyConfiguration(new MaterialLotPropertyEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new MaterialSubLotEntityTypeConfiguration());
 
-
+            // equipment aggregate
+            modelBuilder.ApplyConfiguration(new EquipmentClassEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new EquipmentClassPropertyEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new EquipmentEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new EquipmentPropertyEntityTypeConfiguration());
 
 
             base.OnModelCreating(modelBuilder);

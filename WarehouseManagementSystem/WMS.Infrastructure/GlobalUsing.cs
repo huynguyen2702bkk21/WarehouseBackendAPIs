@@ -10,3 +10,5 @@ global using WMS.Domain.AggregateModels.StorageAggregate;
 global using WMS.Infrastructure.EFConfigurations.StorageConfigurations;
 global using WMS.Domain.AggregateModels.MaterialAggregate;
 global using WMS.Infrastructure.EFConfigurations.MaterialConfigurations;
+global using WMS.Domain.AggregateModels.EquipmentAggregate;
+global using WMS.Infrastructure.EFConfigurations.EquipmentConfigurations;
