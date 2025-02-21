@@ -1,15 +1,11 @@
-﻿using DocumentFormat.OpenXml.Bibliography;
-using DocumentFormat.OpenXml.Spreadsheet;
-using Microsoft.EntityFrameworkCore.Storage;
-
-namespace WMS.Infrastructure
+﻿namespace WMS.Infrastructure
 {
     public class WMSDbContext : DbContext, IUnitOfWork
     {
 
         //public DbSet<LotAdjustment> LotAdjustments { get; set; }
         //public DbSet<Department> Departments { get; set; }
-        //public DbSet<Employee> Employees { get; set; }
+        public DbSet<Employee> Employees { get; set; }
         //public DbSet<GoodsIssue> GoodsIssues { get; set; }
         //public DbSet<FinishedProductIssue> FinisedProductIssues { get; set; }
         //public DbSet<GoodsReceipt> GoodsReceipts { get; set; }
@@ -31,27 +27,24 @@ namespace WMS.Infrastructure
         public IDbContextTransaction? GetCurrentTransaction() => _currentTransaction;
         public bool HasActiveTransaction => _currentTransaction != null;
 
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public WMSDbContext(DbContextOptions options) : base(options) { }
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+//#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+//        public WMSDbContext(DbContextOptions options) : base(options) { }
+//#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
         public WMSDbContext(DbContextOptions options, IMediator mediator) : base(options)
         {
             _mediator = mediator;
         }
 
-
-
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.ApplyConfiguration(new LotAdjustmentEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
+
+
+
+            base.OnModelCreating(modelBuilder);
 
         }
-
-
-
 
         public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
         {

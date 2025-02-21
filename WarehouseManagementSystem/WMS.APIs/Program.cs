@@ -1,5 +1,4 @@
-
-namespace WMS.APIs
+﻿namespace WMS.APIs
 {
     public class Program
     {
@@ -8,6 +7,15 @@ namespace WMS.APIs
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            // Đọc chuỗi kết nối từ appsettings.json
+            var connectionString = builder.Configuration.GetConnectionString("PostgreSqlConnection");
+
+            // Cấu hình DbContext sử dụng PostgreSQL
+            builder.Services.AddDbContext<WMSDbContext>(options =>
+                options.UseNpgsql(connectionString, b => b.MigrationsAssembly("WMS.APIs")));
+
+            builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
