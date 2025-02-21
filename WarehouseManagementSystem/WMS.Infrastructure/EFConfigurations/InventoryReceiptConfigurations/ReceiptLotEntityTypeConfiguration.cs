@@ -18,12 +18,14 @@
             builder.HasOne(s => s.material)
                 .WithMany(s => s.receiptLots)
                 .HasForeignKey(s => s.materialId)
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(s => s.inventoryReceiptEntry)
                 .WithOne(s => s.receiptLot)
                 .HasForeignKey<ReceiptLot>(s => s.InventoryReceiptEntryId)
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
 
         }
     }

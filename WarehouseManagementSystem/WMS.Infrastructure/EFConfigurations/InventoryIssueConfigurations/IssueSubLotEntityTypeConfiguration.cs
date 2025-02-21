@@ -1,13 +1,13 @@
-﻿namespace WMS.Infrastructure.EFConfigurations.InventoryReceiptConfigurations
+﻿namespace WMS.Infrastructure.EFConfigurations.InventoryIssueConfigurations
 {
-    public class ReceiptSubLotEntityTypeConfiguration : IEntityTypeConfiguration<ReceiptSublot>
+    public class IssueSubLotEntityTypeConfiguration : IEntityTypeConfiguration<IssueSublot>
     {
-        public void Configure(EntityTypeBuilder<ReceiptSublot> builder)
+        public void Configure(EntityTypeBuilder<IssueSublot> builder)
         {
 
-            builder.HasKey(s => s.receiptLotId);
+            builder.HasKey(s => s.issueSublotId);
 
-            builder.Property(s => s.importedQuantity)
+            builder.Property(s => s.requestedQuantity)
                 .IsRequired();
 
             builder.Property(s => s.subLotStatus)
@@ -23,16 +23,18 @@
                 .IsRequired();
 
             builder.HasOne(s => s.location)
-                .WithMany(s => s.receiptSublots)
+                .WithMany(s => s.issueSublots)
                 .HasForeignKey(s => s.locationId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(s => s.receiptLot)
-                .WithMany(s => s.receiptSublots)
-                .HasForeignKey(s => s.receiptLotId)
+            builder.HasOne(s => s.issueLot)
+                .WithMany(s => s.issueSublots)
+                .HasForeignKey(s => s.issueLotId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
+
+            
         }
     }
 }

@@ -23,12 +23,14 @@
             builder.HasOne(s => s.receivedBy)
                 .WithMany(s => s.inventoryReceipts)
                 .HasForeignKey(s => s.employeeId)
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(s => s.warehouse)
                 .WithMany(s => s.inventoryReceipts)
                 .HasForeignKey(s => s.warehouseId)
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
 
 
         }

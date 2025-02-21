@@ -15,12 +15,14 @@
             builder.HasOne(s => s.receiptLot)
                 .WithOne(s => s.inventoryReceiptEntry)
                 .HasForeignKey<InventoryReceiptEntry>(s => s.lotNumber)
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(s => s.inventoryReceipt)
                 .WithMany(s => s.entries)
                 .HasForeignKey(s => s.InventoryReceiptId)
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

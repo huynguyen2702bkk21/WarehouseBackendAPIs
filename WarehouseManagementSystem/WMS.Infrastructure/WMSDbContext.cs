@@ -26,16 +26,20 @@
         public DbSet<Equipment> Equipments { get; set; }
         public DbSet<EquipmentProperty> EquipmentProperties { get; set; }
 
+        // Inventory Receipt Aggregate
+        public DbSet<InventoryReceipt> InventoryReceipts { get; set; }
+        public DbSet<InventoryReceiptEntry> InventoryReceiptEntries { get; set; }
+        public DbSet<ReceiptLot> ReceiptLots { get; set; }
+        public DbSet<ReceiptSublot> ReceiptSublots { get; set; }
 
-
+        // Inventory Issue Aggregate
+        public DbSet<InventoryIssue> InventoryIssues { get; set; }
+        public DbSet<InventoryIssueEntry> InventoryIssueEntries { get; set; }
+        public DbSet<IssueLot> IssueLots { get; set; }
+        public DbSet<IssueSublot> IssueSublots { get; set; }
         
 
-
-
-
-
         private readonly IMediator _mediator;
-
         private IDbContextTransaction? _currentTransaction;
         public IDbContextTransaction? GetCurrentTransaction() => _currentTransaction;
         public bool HasActiveTransaction => _currentTransaction != null;
@@ -74,6 +78,18 @@
             modelBuilder.ApplyConfiguration(new EquipmentClassPropertyEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EquipmentEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EquipmentPropertyEntityTypeConfiguration());
+
+            // inventory receipt aggregate
+            modelBuilder.ApplyConfiguration(new InventoryReceiptEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new InventoryReceiptEntryEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ReceiptLotEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ReceiptSubLotEntityTypeConfiguration());
+
+            // inventory issue aggregate
+            modelBuilder.ApplyConfiguration(new InventoryIssueEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new InventoryIssueEntryEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new IssueLotEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new IssueSubLotEntityTypeConfiguration());
 
 
             base.OnModelCreating(modelBuilder);

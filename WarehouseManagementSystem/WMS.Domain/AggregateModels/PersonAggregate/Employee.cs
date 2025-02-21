@@ -9,5 +9,6 @@
         public EmployeeType role { get; set; }
 
         public List<InventoryReceipt> inventoryReceipts { get; set; }
+        public List<InventoryIssue> inventoryIssues { get; set; }
     }
 }

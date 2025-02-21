@@ -13,3 +13,9 @@ global using WMS.Infrastructure.EFConfigurations.MaterialConfigurations;
 global using WMS.Domain.AggregateModels.EquipmentAggregate;
 global using WMS.Infrastructure.EFConfigurations.EquipmentConfigurations;
 global using WMS.Domain.AggregateModels.InventoryReceiptAggregate;
+global using WMS.Domain.AggregateModels.InventoryIssueAggregate;
+global using WMS.Infrastructure.EFConfigurations.InventoryReceiptConfigurations;
+global using WMS.Infrastructure.EFConfigurations.InventoryIssueConfigurations;
+
+
+

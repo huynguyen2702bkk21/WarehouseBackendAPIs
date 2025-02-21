@@ -8,5 +8,8 @@
         public string customerName { get; set; }
         public string address { get; set; }
         public string contactDetails { get; set; }
+        public List<InventoryIssue> inventoryIssues { get; set; }
+
+
     }
 }
