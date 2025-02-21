@@ -1,4 +1,6 @@
-﻿namespace WMS.Domain.AggregateModels.PersonAggregate
+﻿using WMS.Domain.AggregateModels.InventoryReceiptAggregate;
+
+namespace WMS.Domain.AggregateModels.PersonAggregate
 {
     public class Supplier : Entity, IAggregateRoot  
     {
@@ -8,5 +10,7 @@
         public string supplierName { get; set; }
         public string address { get; set; }
         public string contactDetails { get; set; }
+
+        public List<InventoryReceipt> inventoryReceipts { get; set; }
     }
 }

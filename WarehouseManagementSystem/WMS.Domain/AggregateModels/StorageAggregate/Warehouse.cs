@@ -6,6 +6,8 @@
         public string warehouseId { get; set; }
 
         public string warehouseName { get; set; }
+
         public List<Location> locations { get; set; }
-     }
+        public List<InventoryReceipt> inventoryReceipts { get; set; }
+    }
 }

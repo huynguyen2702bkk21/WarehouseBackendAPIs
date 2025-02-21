@@ -14,5 +14,7 @@
         public double exisitingQuantity { get; set; }
         public List<MaterialLotProperty> properties { get; set; }
         public List<MaterialSubLot> subLots{ get; set; }
+
+
     }
 }

@@ -7,5 +7,7 @@
 
         public string employeeName { get; set; }
         public EmployeeType role { get; set; }
+
+        public List<InventoryReceipt> inventoryReceipts { get; set; }
     }
 }

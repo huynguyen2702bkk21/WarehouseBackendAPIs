@@ -12,6 +12,7 @@
 
         public List<MaterialProperty> porperties { get; set; }
         public List<MaterialLot> lots { get; set; }
+        public List<ReceiptLot> receiptLots { get; set; }
 
     }
 }
