@@ -2,7 +2,9 @@
 {
     public class Warehouse : Entity, IAggregateRoot
     {
+        [Key]
         public string warehouseId { get; set; }
+
         public string warehouseName { get; set; }
         public List<Location> locations { get; set; }
      }

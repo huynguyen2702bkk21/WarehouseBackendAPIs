@@ -33,7 +33,6 @@
     <Folder Include="EFConfigurations\InventoryIssueConfigurations\" />
     <Folder Include="EFConfigurations\EquipmentConfigurations\" />
     <Folder Include="EFConfigurations\InventoryLogConfigurations\" />
-    <Folder Include="EFConfigurations\StorageConfigurations\" />
   </ItemGroup>
 
 </Project>

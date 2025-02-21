@@ -10,6 +10,10 @@
                 .IsRequired();
 
             builder.Property(b => b.role)
+                .HasConversion(
+                    v => v.ToString(),                  
+                    v => (EmployeeType)Enum.Parse(typeof(EmployeeType), v))
+                .HasMaxLength(50)
                 .IsRequired();
         }
     }

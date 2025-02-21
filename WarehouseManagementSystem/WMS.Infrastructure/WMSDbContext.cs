@@ -2,24 +2,18 @@
 {
     public class WMSDbContext : DbContext, IUnitOfWork
     {
-
+        // Person Aggregate
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Employee> Employees { get; set; }
 
-        //public DbSet<GoodsIssue> GoodsIssues { get; set; }
-        //public DbSet<FinishedProductIssue> FinisedProductIssues { get; set; }
-        //public DbSet<GoodsReceipt> GoodsReceipts { get; set; }
-        //public DbSet<FinishedProductReceipt> FinishedProductReceipts { get; set; }
-        //public DbSet<InventoryLogEntry> InventoryLogEntries { get; set; }
-        //public DbSet<Item> Items { get; set; }
-        //public DbSet<ItemClass> ItemClasses { get; set; }
-        //public DbSet<ItemLot> ItemLots { get; set; }
-        //public DbSet<IsolatedItemLot> IsolatedItemLots { get; set; }
-        //public DbSet<FinishedProductInventory> FinishedProductInventories { get; set; }
-        //public DbSet<Warehouse> Warehouses { get; set; }
-        //public DbSet<Location> Locations { get; set; }
-        //public DbSet<ItemLotLocation> ItemLotLocations { get; set; }
+        // Storage Aggregate
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<Warehouse> Warehouses { get; set; }
+        
+
+
+
 
 
         private readonly IMediator _mediator;
@@ -42,6 +36,8 @@
             modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new CustomerEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new SupplierEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new WarehouseEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new LocationEntityTypeConfiguration());
 
 
 
