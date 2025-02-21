@@ -8,3 +8,5 @@ global using WMS.Domain.Seedwork;
 global using WMS.Infrastructure.EFConfigurations.PersonConfigurations;
 global using WMS.Domain.AggregateModels.StorageAggregate;
 global using WMS.Infrastructure.EFConfigurations.StorageConfigurations;
+global using WMS.Domain.AggregateModels.MaterialAggregate;
+global using WMS.Infrastructure.EFConfigurations.MaterialConfigurations;

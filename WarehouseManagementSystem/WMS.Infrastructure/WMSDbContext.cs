@@ -10,6 +10,19 @@
         // Storage Aggregate
         public DbSet<Location> Locations { get; set; }
         public DbSet<Warehouse> Warehouses { get; set; }
+
+        // Material Aggregate
+        public DbSet<Material> Materials { get; set; }
+        public DbSet<MaterialProperty> MaterialProperties { get; set; }
+        public DbSet<MaterialClass> MaterialClasses { get; set; }
+        public DbSet<MaterialClassProperty> MaterialClassProperties { get; set; }
+        public DbSet<MaterialLot> MaterialLots { get; set; }
+        public DbSet<MaterialLotProperty> MaterialLotProperties { get; set; }
+        public DbSet<MaterialSubLot> MaterialSubLots { get; set; }
+
+
+
+
         
 
 
@@ -33,11 +46,24 @@
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // person aggregate
             modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new CustomerEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new SupplierEntityTypeConfiguration());
+
+            // storage aggregate
             modelBuilder.ApplyConfiguration(new WarehouseEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new LocationEntityTypeConfiguration());
+
+            // material aggregate
+            modelBuilder.ApplyConfiguration(new MaterialEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new MaterialPropertyEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new MaterialClassEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new MaterialClassPropertyEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new MaterialLotEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new MaterialLotPropertyEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new MaterialSubLotEntityTypeConfiguration());
+
 
 
 

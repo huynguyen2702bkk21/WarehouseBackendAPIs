@@ -28,7 +28,6 @@
 
   <ItemGroup>
     <Folder Include="EFConfigurations\MaterialLotAdjustmentConfigurations\" />
-    <Folder Include="EFConfigurations\MaterialConfigurations\" />
     <Folder Include="EFConfigurations\InventoryReceiptConfigurations\" />
     <Folder Include="EFConfigurations\InventoryIssueConfigurations\" />
     <Folder Include="EFConfigurations\EquipmentConfigurations\" />
