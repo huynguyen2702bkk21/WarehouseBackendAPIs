@@ -22,7 +22,7 @@
 
             builder.HasOne(s => s.receivedBy)
                 .WithMany(s => s.inventoryReceipts)
-                .HasForeignKey(s => s.employeeId)
+                .HasForeignKey(s => s.personId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 

@@ -10,7 +10,6 @@
   <ItemGroup>
     <Folder Include="DomainEvents\" />
     <Folder Include="Exceptions\" />
-    <Folder Include="InterfaceRepositories\IStorage\" />
   </ItemGroup>
 
   <ItemGroup>

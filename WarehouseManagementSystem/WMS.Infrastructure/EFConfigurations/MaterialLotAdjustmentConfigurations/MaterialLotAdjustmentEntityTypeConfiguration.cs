@@ -41,7 +41,7 @@
 
             builder.HasOne(s => s.adjustedBy)
                 .WithMany(s => s.materialLotAdjustments)
-                .HasForeignKey(s => s.employeeId)
+                .HasForeignKey(s => s.personId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 

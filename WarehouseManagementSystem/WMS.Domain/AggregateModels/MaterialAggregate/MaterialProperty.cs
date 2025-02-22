@@ -1,6 +1,6 @@
 ﻿namespace WMS.Domain.AggregateModels.MaterialAggregate
 {
-    public class MaterialProperty
+    public class MaterialProperty : Entity, IAggregateRoot
     {
         [Key]
         public string propertyId { get; set; }

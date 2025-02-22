@@ -5,10 +5,10 @@ namespace WMS.Infrastructure
 {
     public class WMSDbContext : DbContext, IUnitOfWork
     {
-        // Person Aggregate
+        // Party Aggregate
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
-        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Person> Persons { get; set; }
 
         // Storage Aggregate
         public DbSet<Location> Locations { get; set; }
@@ -63,8 +63,8 @@ namespace WMS.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // person aggregate
-            modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
+            // party aggregate
+            modelBuilder.ApplyConfiguration(new PersonEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new CustomerEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new SupplierEntityTypeConfiguration());
 

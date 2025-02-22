@@ -12,9 +12,9 @@
         public string customerId { get; set; }
         public Customer customer { get; set; }
 
-        [ForeignKey("employeeId")]
-        public string employeeId { get; set; }
-        public Employee issuedBy { get; set; }
+        [ForeignKey("personId")]
+        public string pesonId { get; set; }
+        public Person issuedBy { get; set; }
 
         [ForeignKey("warehouseId")]
         public string warehouseId { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace WMS.Domain.AggregateModels.EquipmentAggregate
 {
-    public class EquipmentClassProperty : Entity
+    public class EquipmentClassProperty : Entity, IAggregateRoot
     {
         [Key]
         public string propertyId { get; set; }

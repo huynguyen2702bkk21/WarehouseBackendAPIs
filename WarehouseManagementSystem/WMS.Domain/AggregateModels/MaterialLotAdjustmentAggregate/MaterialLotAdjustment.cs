@@ -20,9 +20,9 @@
         public string warehouseId { get; set; }
         public Warehouse warehouse { get; set; }
 
-        [ForeignKey("employeeId")]
-        public string employeeId { get; set; }
-        public Employee adjustedBy { get; set; }
+        [ForeignKey("personId")]
+        public string personId { get; set; }
+        public Person adjustedBy { get; set; }
 
     }
 }
