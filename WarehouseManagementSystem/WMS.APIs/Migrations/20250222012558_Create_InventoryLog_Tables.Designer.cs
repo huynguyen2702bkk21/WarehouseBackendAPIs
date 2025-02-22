@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WMS.Infrastructure;
@@ -11,9 +12,11 @@ using WMS.Infrastructure;
 namespace WMS.APIs.Migrations
 {
     [DbContext(typeof(WMSDbContext))]
-    partial class WMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250222012558_Create_InventoryLog_Tables")]
+    partial class Create_InventoryLog_Tables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -286,6 +289,9 @@ namespace WMS.APIs.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("materialLotlotNumber")
+                        .HasColumnType("text");
+
                     b.Property<string>("note")
                         .IsRequired()
                         .HasColumnType("text");
@@ -296,9 +302,8 @@ namespace WMS.APIs.Migrations
                     b.Property<DateTime>("transactionDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("transactionType")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("transactionType")
+                        .HasColumnType("integer");
 
                     b.Property<string>("warehouseId")
                         .IsRequired()
@@ -306,11 +311,11 @@ namespace WMS.APIs.Migrations
 
                     b.HasKey("inventoryLogId");
 
-                    b.HasIndex("lotNumber");
+                    b.HasIndex("materialLotlotNumber");
 
                     b.HasIndex("warehouseId");
 
-                    b.ToTable("InventoryLogs");
+                    b.ToTable("InventoryLog");
                 });
 
             modelBuilder.Entity("WMS.Domain.AggregateModels.InventoryReceiptAggregate.InventoryReceipt", b =>
@@ -874,14 +879,12 @@ namespace WMS.APIs.Migrations
                 {
                     b.HasOne("WMS.Domain.AggregateModels.MaterialAggregate.MaterialLot", "materialLot")
                         .WithMany("inventoryLogs")
-                        .HasForeignKey("lotNumber")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("materialLotlotNumber");
 
                     b.HasOne("WMS.Domain.AggregateModels.StorageAggregate.Warehouse", "warehouse")
                         .WithMany("inventoryLogs")
                         .HasForeignKey("warehouseId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("materialLot");

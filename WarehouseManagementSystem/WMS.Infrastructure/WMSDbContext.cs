@@ -1,4 +1,6 @@
-﻿namespace WMS.Infrastructure
+﻿using WMS.Infrastructure.EFConfigurations.InventoryLogConfigurations;
+
+namespace WMS.Infrastructure
 {
     public class WMSDbContext : DbContext, IUnitOfWork
     {
@@ -37,7 +39,9 @@
         public DbSet<InventoryIssueEntry> InventoryIssueEntries { get; set; }
         public DbSet<IssueLot> IssueLots { get; set; }
         public DbSet<IssueSublot> IssueSublots { get; set; }
-        
+
+        // InventoryLog Aggregate
+        public DbSet<InventoryLog> InventoryLogs { get; set; }
 
         private readonly IMediator _mediator;
         private IDbContextTransaction? _currentTransaction;
@@ -91,6 +95,8 @@
             modelBuilder.ApplyConfiguration(new IssueLotEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new IssueSubLotEntityTypeConfiguration());
 
+            // inventory Log aggregate
+            modelBuilder.ApplyConfiguration(new InventoryLogEntityTypeConfiguration());
 
             base.OnModelCreating(modelBuilder);
 

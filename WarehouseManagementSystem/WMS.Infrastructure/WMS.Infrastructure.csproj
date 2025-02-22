@@ -28,7 +28,6 @@
 
   <ItemGroup>
     <Folder Include="EFConfigurations\MaterialLotAdjustmentConfigurations\" />
-    <Folder Include="EFConfigurations\InventoryLogConfigurations\" />
   </ItemGroup>
 
 </Project>

@@ -16,6 +16,8 @@ global using WMS.Domain.AggregateModels.InventoryReceiptAggregate;
 global using WMS.Domain.AggregateModels.InventoryIssueAggregate;
 global using WMS.Infrastructure.EFConfigurations.InventoryReceiptConfigurations;
 global using WMS.Infrastructure.EFConfigurations.InventoryIssueConfigurations;
+global using WMS.Domain.AggregateModels.InventoryLogAggregate;
+
 
 
 

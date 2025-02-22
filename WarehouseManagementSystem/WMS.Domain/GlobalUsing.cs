@@ -8,5 +8,7 @@ global using WMS.Domain.Enum;
 global using WMS.Domain.Seedwork;
 global using WMS.Domain.AggregateModels.InventoryReceiptAggregate;
 global using WMS.Domain.AggregateModels.InventoryIssueAggregate;
+global using WMS.Domain.AggregateModels.InventoryLogAggregate;
+
 
 
