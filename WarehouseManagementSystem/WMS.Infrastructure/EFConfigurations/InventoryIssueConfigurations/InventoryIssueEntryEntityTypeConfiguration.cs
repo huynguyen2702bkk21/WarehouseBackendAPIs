@@ -15,6 +15,12 @@
             builder.Property(s => s.requestedQuantity)
                 .IsRequired();
 
+            builder.HasOne(s => s.material)
+                .WithMany(s => s.issueEntries)
+                .HasForeignKey(s => s.materialId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
             builder.HasOne(s => s.inventoryIssue)
                 .WithMany(s => s.entries)
                 .HasForeignKey(s => s.inventoryIssueId)

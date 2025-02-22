@@ -15,12 +15,6 @@
                     v => (LotStatus)Enum.Parse(typeof(LotStatus), v))
                 .IsRequired();
 
-            builder.HasOne(s => s.material)
-                .WithMany(s => s.issueLots)
-                .HasForeignKey(s => s.materialId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
-
             builder.HasOne(s => s.inventoryIssueEntry)
                 .WithOne(s => s.issueLot)
                 .HasForeignKey<IssueLot>(s => s.inventoryIssueEntryId)

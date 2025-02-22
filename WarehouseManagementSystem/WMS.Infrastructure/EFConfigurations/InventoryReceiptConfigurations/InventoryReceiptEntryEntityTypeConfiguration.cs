@@ -11,7 +11,13 @@
 
             builder.Property(s => s.note)
                 .HasMaxLength(500);
-                
+
+            builder.HasOne(s => s.material)
+                .WithMany(s => s.receiptEntries)
+                .HasForeignKey(s => s.materialId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
             builder.HasOne(s => s.receiptLot)
                 .WithOne(s => s.inventoryReceiptEntry)
                 .HasForeignKey<InventoryReceiptEntry>(s => s.lotNumber)

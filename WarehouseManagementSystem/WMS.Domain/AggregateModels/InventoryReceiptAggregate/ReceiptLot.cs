@@ -9,10 +9,6 @@
         public List<ReceiptSublot> receiptSublots { get; set; }
         public LotStatus lotStatus { get; set; }
 
-        [ForeignKey("materialId")]
-        public string materialId { get; set; }
-        public Material material { get; set; }
-
         [ForeignKey("inventoryReceiptEntryId")]
         public string InventoryReceiptEntryId { get; set; }
         public InventoryReceiptEntry inventoryReceiptEntry { get; set; }

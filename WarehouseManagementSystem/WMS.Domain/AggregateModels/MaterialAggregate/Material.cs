@@ -12,8 +12,8 @@
 
         public List<MaterialProperty> porperties { get; set; }
         public List<MaterialLot> lots { get; set; }
-        public List<ReceiptLot> receiptLots { get; set; }
-        public List<IssueLot> issueLots { get; set; }
+        public List<InventoryReceiptEntry> receiptEntries  { get; set; }
+        public List<InventoryIssueEntry> issueEntries  { get; set; }
 
     }
 }

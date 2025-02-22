@@ -6,6 +6,11 @@
         public string inventoryReceiptEntryId { get; set; }
         
         public string purchaseOrderNumber { get; set; }
+
+        [ForeignKey("materialId")]
+        public string materialId { get; set; }
+        public Material material { get; set; }
+
         public string note { get; set; }
 
         [ForeignKey("lotNumber")]
