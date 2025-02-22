@@ -26,8 +26,4 @@
     <ProjectReference Include="..\WMS.Domain\WMS.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="EFConfigurations\MaterialLotAdjustmentConfigurations\" />
-  </ItemGroup>
-
 </Project>

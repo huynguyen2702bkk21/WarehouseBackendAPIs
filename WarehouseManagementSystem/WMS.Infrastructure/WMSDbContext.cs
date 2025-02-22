@@ -1,4 +1,5 @@
 ﻿using WMS.Infrastructure.EFConfigurations.InventoryLogConfigurations;
+using WMS.Infrastructure.EFConfigurations.MaterialLotAdjustmentConfigurations;
 
 namespace WMS.Infrastructure
 {
@@ -42,6 +43,9 @@ namespace WMS.Infrastructure
 
         // InventoryLog Aggregate
         public DbSet<InventoryLog> InventoryLogs { get; set; }
+
+        // MaterialLotAdjustment Aggregate
+        public DbSet<MaterialLotAdjustment> MaterialLotAdjustments { get; set; }
 
         private readonly IMediator _mediator;
         private IDbContextTransaction? _currentTransaction;
@@ -97,6 +101,9 @@ namespace WMS.Infrastructure
 
             // inventory Log aggregate
             modelBuilder.ApplyConfiguration(new InventoryLogEntityTypeConfiguration());
+
+            // material lot adjustment aggregate
+            modelBuilder.ApplyConfiguration(new MaterialLotAdjustmentEntityTypeConfiguration());
 
             base.OnModelCreating(modelBuilder);
 

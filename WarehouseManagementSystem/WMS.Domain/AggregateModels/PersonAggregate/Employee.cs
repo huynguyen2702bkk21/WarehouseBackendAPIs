@@ -10,5 +10,7 @@
 
         public List<InventoryReceipt> inventoryReceipts { get; set; }
         public List<InventoryIssue> inventoryIssues { get; set; }
+        public List<MaterialLotAdjustment> materialLotAdjustments { get; set; }
+
     }
 }
