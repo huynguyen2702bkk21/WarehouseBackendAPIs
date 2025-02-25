@@ -11,10 +11,10 @@ namespace WMS.APIs
 
             // Add services to the container.
 
-            // Add the connection string to the container
+            // Add the connection EmployeeType to the container
             var connectionString = builder.Configuration.GetConnectionString("PostgreSqlConnection");
 
-            // Add the DbContext to the container with the connection string
+            // Add the DbContext to the container with the connection EmployeeType
             builder.Services.AddDbContext<WMSDbContext>(options =>
                 options.UseNpgsql(connectionString, b => b.MigrationsAssembly("WMS.APIs")));
 

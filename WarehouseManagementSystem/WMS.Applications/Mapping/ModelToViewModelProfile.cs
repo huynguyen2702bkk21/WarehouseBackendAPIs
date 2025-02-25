@@ -1,8 +1,4 @@
-﻿using WMS.Application.DTOs.PartyDTOs;
-using WMS.Domain.AggregateModels.PartyAggregate;
-using WMS.Domain.Enum;
-
-namespace WMS.Application.Mapping
+﻿namespace WMS.Application.Mapping
 {
     public class ModelToViewModelProfile : Profile
     {
@@ -13,9 +9,8 @@ namespace WMS.Application.Mapping
 
         public void MapPersonViewModel()
         {
-            CreateMap<Person, PersonDTO>();
-
-
+            CreateMap<Person, PersonDTO>()
+                .ForMember(s => s.EmployeeType, s => s.MapFrom(s => s.role.ToString()));
 
         }
 

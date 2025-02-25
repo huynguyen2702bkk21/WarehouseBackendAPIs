@@ -40,6 +40,12 @@ namespace WMS.APIs.Controllers
             return await CommandAsync(request);
         }
 
+        [HttpPut("Persons/Update Person")]
+        public async Task<IActionResult> UpdatePerson([FromBody] UpdatePersonCommand request)
+        {
+            return await CommandAsync(request);
+        }
+
 
     }
 }
