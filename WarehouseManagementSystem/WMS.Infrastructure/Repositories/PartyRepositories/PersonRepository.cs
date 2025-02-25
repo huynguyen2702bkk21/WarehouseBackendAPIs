@@ -7,9 +7,24 @@
 
         }
 
-        public Task<List<Person>> GetAll()
+        public void Create(Person person)
         {
-            return _context.Persons.ToListAsync();
+            _context.Add(person);
+        }
+
+        public async Task<List<Person>> GetAll()
+        {
+            return await _context.Persons.ToListAsync();
+        }
+
+        public async Task<Person> GetPersonById(string id)
+        {
+            return await _context.Persons.FirstOrDefaultAsync(x => x.personId== id);
+        }
+
+        public void Update(Person person)
+        {
+            _context.Persons.Update(person);
         }
     }
 }

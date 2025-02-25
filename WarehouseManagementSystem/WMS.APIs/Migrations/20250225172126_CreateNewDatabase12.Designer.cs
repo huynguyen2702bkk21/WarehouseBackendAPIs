@@ -12,8 +12,8 @@ using WMS.Infrastructure;
 namespace WMS.APIs.Migrations
 {
     [DbContext(typeof(WMSDbContext))]
-    [Migration("20250225122009_CreateNewDatabase")]
-    partial class CreateNewDatabase
+    [Migration("20250225172126_CreateNewDatabase12")]
+    partial class CreateNewDatabase12
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

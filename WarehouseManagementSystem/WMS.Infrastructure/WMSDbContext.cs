@@ -116,6 +116,7 @@ namespace WMS.Infrastructure
 
             return true;
         }
+
         public async Task<IDbContextTransaction?> BeginTransactionAsync()
         {
             if (_currentTransaction != null) return null;

@@ -1,4 +1,4 @@
-﻿namespace WMS.Application.Queries.PartyQueries.PersonQueries
+﻿namespace WMS.Application.Queries.PartyQueries.Person
 {
     public class GetAllPersonQueryHandler : IRequestHandler<GetAllPersonQuery, IEnumerable<PersonDTO>>
     {

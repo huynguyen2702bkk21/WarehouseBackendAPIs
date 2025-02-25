@@ -1,4 +1,10 @@
-﻿global using Microsoft.EntityFrameworkCore;
+﻿global using MediatR;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.EntityFrameworkCore;
+global using WMS.Application.ErrorNotifications;
+global using WMS.Application.Exceptions;
 global using WMS.Application.Mapping;
 global using WMS.Infrastructure;
-global using Microsoft.AspNetCore.Mvc;
+global using WMS.Application.DTOs.PartyDTOs;
+global using WMS.Application.Queries.PartyQueries.Person;
+global using WMS.Domain.InterfaceRepositories.IParty;
