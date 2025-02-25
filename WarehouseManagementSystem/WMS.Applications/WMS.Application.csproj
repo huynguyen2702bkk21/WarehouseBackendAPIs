@@ -12,9 +12,10 @@
     <Folder Include="DomainEventHandlers\" />
     <Folder Include="ErrorNotifications\" />
     <Folder Include="Exceptions\" />
-    <Folder Include="Mapping\" />
-    <Folder Include="DTOs\" />
-    <Folder Include="Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
   </ItemGroup>
 
   <ItemGroup>

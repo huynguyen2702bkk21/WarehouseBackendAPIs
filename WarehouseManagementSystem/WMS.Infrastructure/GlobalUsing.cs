@@ -18,6 +18,6 @@ global using WMS.Infrastructure.EFConfigurations.InventoryReceiptConfigurations;
 global using WMS.Infrastructure.EFConfigurations.InventoryIssueConfigurations;
 global using WMS.Domain.AggregateModels.InventoryLogAggregate;
 global using WMS.Domain.AggregateModels.MaterialLotAdjustmentAggregate;
-
+global using WMS.Domain.InterfaceRepositories.IParty;
 
 

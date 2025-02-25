@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WMS.Application
-{
-    internal class GlobalUsing
-    {
-    }
-}
+﻿global using AutoMapper;
+global using MediatR;
+global using WMS.Application.DTOs.PartyDTOs;
+global using WMS.Domain.InterfaceRepositories.IParty;
+global using WMS.Domain.Enum;

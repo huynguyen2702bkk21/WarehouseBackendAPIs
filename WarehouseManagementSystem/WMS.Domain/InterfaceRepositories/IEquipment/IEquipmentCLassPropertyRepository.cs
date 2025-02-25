@@ -2,5 +2,6 @@
 {
     public interface IEquipmentCLassPropertyRepository : IRepository<EquipmentClassProperty>
     {
+
     }
 }

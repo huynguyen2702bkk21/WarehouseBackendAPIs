@@ -26,4 +26,14 @@
     <ProjectReference Include="..\WMS.Domain\WMS.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repositories\EquipmentRepositories\" />
+    <Folder Include="Repositories\InventoryIssueRepositories\" />
+    <Folder Include="Repositories\InventoryLogRepositories\" />
+    <Folder Include="Repositories\InventoryReceiptRepositories\" />
+    <Folder Include="Repositories\MaterialRepositories\" />
+    <Folder Include="Repositories\MaterialLotAdjustmentRepositories\" />
+    <Folder Include="Repositories\StogareRepositories\" />
+  </ItemGroup>
+
 </Project>

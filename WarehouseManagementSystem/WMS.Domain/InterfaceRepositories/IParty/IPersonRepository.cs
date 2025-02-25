@@ -2,6 +2,6 @@
 {
     public interface IPersonRepository : IRepository<Person>
     {
-
+        Task<List<Person>> GetAll();
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace WMS.APIs
+﻿using WMS.Domain.InterfaceRepositories.IParty;
+using WMS.Infrastructure.Repositories.PartyRepositories;
+
+namespace WMS.APIs
 {
     public class Program
     {
@@ -7,14 +10,24 @@
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            // Đọc chuỗi kết nối từ appsettings.json
+
+            // Add the connection string to the container
             var connectionString = builder.Configuration.GetConnectionString("PostgreSqlConnection");
 
-            // Cấu hình DbContext sử dụng PostgreSQL
+            // Add the DbContext to the container with the connection string
             builder.Services.AddDbContext<WMSDbContext>(options =>
                 options.UseNpgsql(connectionString, b => b.MigrationsAssembly("WMS.APIs")));
 
-            builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(Program).Assembly));
+            // Register the AutoMapper services with the assembly
+            builder.Services.AddAutoMapper(typeof(ModelToViewModelProfile).Assembly);
+            // Register the MediatR services with the assembly
+            builder.Services.AddMediatR(config =>
+                config.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
+
+
+            // Register the repositories with scoped lifetime
+            builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+
 
 
             builder.Services.AddControllers();
