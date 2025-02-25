@@ -9,7 +9,7 @@
             builder.Property(s => s.importedQuantity)
                 .IsRequired();
 
-            builder.Property(s => s.lotStatus)
+            builder.Property(s => s.receiptLotStatus)
                 .HasConversion(
                     v => v.ToString(),
                     v => (LotStatus)Enum.Parse(typeof(LotStatus), v))

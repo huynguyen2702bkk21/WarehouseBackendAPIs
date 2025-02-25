@@ -9,18 +9,24 @@
             builder.Property(s => s.requestedQuantity)
                 .IsRequired();
             
-            builder.Property(s => s.lotStatus)
+            builder.Property(s => s.issueLotStatus)
                 .HasConversion(
                     v => v.ToString(),
                     v => (LotStatus)Enum.Parse(typeof(LotStatus), v))
                 .IsRequired();
+            
+            builder.HasOne(s => s.materialLot)
+                .WithMany(s => s.issueLots)
+                .HasForeignKey(s => s.materialLotId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(s => s.inventoryIssueEntry)
                 .WithOne(s => s.issueLot)
                 .HasForeignKey<IssueLot>(s => s.inventoryIssueEntryId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
-
+            
 
         }
     }

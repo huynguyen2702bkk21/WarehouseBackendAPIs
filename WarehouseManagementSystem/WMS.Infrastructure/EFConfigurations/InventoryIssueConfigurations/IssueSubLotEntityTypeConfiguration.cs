@@ -10,21 +10,9 @@
             builder.Property(s => s.requestedQuantity)
                 .IsRequired();
 
-            builder.Property(s => s.subLotStatus)
-                .HasConversion(
-                    v => v.ToString(),
-                    v => (LotStatus)Enum.Parse(typeof(LotStatus), v))
-                .IsRequired();
-
-            builder.Property(s => s.unitOfMeasure)
-                .HasConversion(
-                    v => v.ToString(),
-                    v => (UnitOfMeasure)Enum.Parse(typeof(UnitOfMeasure), v))
-                .IsRequired();
-
-            builder.HasOne(s => s.location)
+            builder.HasOne(s => s.materialSublot)
                 .WithMany(s => s.issueSublots)
-                .HasForeignKey(s => s.locationId)
+                .HasForeignKey(s => s.sublotId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 

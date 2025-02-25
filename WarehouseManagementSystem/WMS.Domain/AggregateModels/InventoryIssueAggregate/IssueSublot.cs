@@ -6,12 +6,10 @@
         public string issueSublotId { get; set; }
 
         public double requestedQuantity { get; set; }
-        public LotStatus subLotStatus { get; set; }
-        public UnitOfMeasure unitOfMeasure { get; set; }
 
-        [ForeignKey("locationId")]
-        public string locationId { get; set; }
-        public Location location { get; set; }
+        [ForeignKey("materialSublotId")]
+        public string sublotId { get; set; }
+        public MaterialSubLot materialSublot { get; set; }
 
         [ForeignKey("issueLotId")]
         public string issueLotId { get; set; }

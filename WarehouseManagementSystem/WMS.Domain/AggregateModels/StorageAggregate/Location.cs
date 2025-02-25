@@ -9,7 +9,6 @@ namespace WMS.Domain.AggregateModels.StorageAggregate
 
         public List<MaterialSubLot> materialSubLots { get; set; }
         public List<ReceiptSublot> receiptSublots { get; set; }
-        public List<IssueSublot> issueSublots { get; set; }
 
         [ForeignKey("warehouseId")]
         public string warehouseId { get; set; }

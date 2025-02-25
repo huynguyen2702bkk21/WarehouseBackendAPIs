@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WMS.APIs.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateNewDataaBase : Migration
+    public partial class CreateNewDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -519,7 +519,8 @@ namespace WMS.APIs.Migrations
                 {
                     issueLotId = table.Column<string>(type: "text", nullable: false),
                     requestedQuantity = table.Column<double>(type: "double precision", nullable: false),
-                    lotStatus = table.Column<string>(type: "text", nullable: false),
+                    issueLotStatus = table.Column<string>(type: "text", nullable: false),
+                    materialLotId = table.Column<string>(type: "text", nullable: false),
                     inventoryIssueEntryId = table.Column<string>(type: "text", nullable: false),
                     Id = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -532,6 +533,12 @@ namespace WMS.APIs.Migrations
                         principalTable: "InventoryIssueEntries",
                         principalColumn: "inventoryIssueEntryId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_IssueLots_MaterialLots_materialLotId",
+                        column: x => x.materialLotId,
+                        principalTable: "MaterialLots",
+                        principalColumn: "lotNumber",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -540,7 +547,7 @@ namespace WMS.APIs.Migrations
                 {
                     receiptLotId = table.Column<string>(type: "text", nullable: false),
                     importedQuantity = table.Column<double>(type: "double precision", nullable: false),
-                    lotStatus = table.Column<string>(type: "text", nullable: false),
+                    receiptLotStatus = table.Column<string>(type: "text", nullable: false),
                     InventoryReceiptEntryId = table.Column<string>(type: "text", nullable: false),
                     Id = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -561,9 +568,7 @@ namespace WMS.APIs.Migrations
                 {
                     issueSublotId = table.Column<string>(type: "text", nullable: false),
                     requestedQuantity = table.Column<double>(type: "double precision", nullable: false),
-                    subLotStatus = table.Column<string>(type: "text", nullable: false),
-                    unitOfMeasure = table.Column<string>(type: "text", nullable: false),
-                    locationId = table.Column<string>(type: "text", nullable: false),
+                    sublotId = table.Column<string>(type: "text", nullable: false),
                     issueLotId = table.Column<string>(type: "text", nullable: false),
                     Id = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -577,10 +582,10 @@ namespace WMS.APIs.Migrations
                         principalColumn: "issueLotId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_IssueSublots_Locations_locationId",
-                        column: x => x.locationId,
-                        principalTable: "Locations",
-                        principalColumn: "locationId",
+                        name: "FK_IssueSublots_MaterialSubLots_sublotId",
+                        column: x => x.sublotId,
+                        principalTable: "MaterialSubLots",
+                        principalColumn: "subLotId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -695,14 +700,19 @@ namespace WMS.APIs.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_IssueLots_materialLotId",
+                table: "IssueLots",
+                column: "materialLotId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_IssueSublots_issueLotId",
                 table: "IssueSublots",
                 column: "issueLotId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IssueSublots_locationId",
+                name: "IX_IssueSublots_sublotId",
                 table: "IssueSublots",
-                column: "locationId");
+                column: "sublotId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Locations_warehouseId",
@@ -799,9 +809,6 @@ namespace WMS.APIs.Migrations
                 name: "MaterialProperties");
 
             migrationBuilder.DropTable(
-                name: "MaterialSubLots");
-
-            migrationBuilder.DropTable(
                 name: "ReceiptSublots");
 
             migrationBuilder.DropTable(
@@ -811,10 +818,7 @@ namespace WMS.APIs.Migrations
                 name: "IssueLots");
 
             migrationBuilder.DropTable(
-                name: "MaterialLots");
-
-            migrationBuilder.DropTable(
-                name: "Locations");
+                name: "MaterialSubLots");
 
             migrationBuilder.DropTable(
                 name: "ReceiptLots");
@@ -824,6 +828,12 @@ namespace WMS.APIs.Migrations
 
             migrationBuilder.DropTable(
                 name: "InventoryIssueEntries");
+
+            migrationBuilder.DropTable(
+                name: "Locations");
+
+            migrationBuilder.DropTable(
+                name: "MaterialLots");
 
             migrationBuilder.DropTable(
                 name: "InventoryReceiptEntries");

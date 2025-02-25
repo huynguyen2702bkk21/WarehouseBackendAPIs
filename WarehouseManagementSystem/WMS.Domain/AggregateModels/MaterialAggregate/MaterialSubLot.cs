@@ -15,5 +15,7 @@
         [ForeignKey("lotNumber")]
         public string lotNumber { get; set; }
         public MaterialLot materialLot { get; set; }
+
+        public List<IssueSublot> issueSublots { get; set; }
     }
 }

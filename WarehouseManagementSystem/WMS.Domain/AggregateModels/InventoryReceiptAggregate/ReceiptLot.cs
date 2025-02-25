@@ -7,7 +7,7 @@
         
         public double importedQuantity { get; set; }
         public List<ReceiptSublot> receiptSublots { get; set; }
-        public LotStatus lotStatus { get; set; }
+        public LotStatus receiptLotStatus { get; set; }
 
         [ForeignKey("inventoryReceiptEntryId")]
         public string InventoryReceiptEntryId { get; set; }

@@ -217,7 +217,11 @@ namespace WMS.APIs.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("lotStatus")
+                    b.Property<string>("issueLotStatus")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("materialLotId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -228,6 +232,8 @@ namespace WMS.APIs.Migrations
 
                     b.HasIndex("inventoryIssueEntryId")
                         .IsUnique();
+
+                    b.HasIndex("materialLotId");
 
                     b.ToTable("IssueLots");
                 });
@@ -244,18 +250,10 @@ namespace WMS.APIs.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("locationId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<double>("requestedQuantity")
                         .HasColumnType("double precision");
 
-                    b.Property<string>("subLotStatus")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("unitOfMeasure")
+                    b.Property<string>("sublotId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -263,7 +261,7 @@ namespace WMS.APIs.Migrations
 
                     b.HasIndex("issueLotId");
 
-                    b.HasIndex("locationId");
+                    b.HasIndex("sublotId");
 
                     b.ToTable("IssueSublots");
                 });
@@ -404,7 +402,7 @@ namespace WMS.APIs.Migrations
                     b.Property<double>("importedQuantity")
                         .HasColumnType("double precision");
 
-                    b.Property<string>("lotStatus")
+                    b.Property<string>("receiptLotStatus")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -903,7 +901,15 @@ namespace WMS.APIs.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("WMS.Domain.AggregateModels.MaterialAggregate.MaterialLot", "materialLot")
+                        .WithMany("issueLots")
+                        .HasForeignKey("materialLotId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("inventoryIssueEntry");
+
+                    b.Navigation("materialLot");
                 });
 
             modelBuilder.Entity("WMS.Domain.AggregateModels.InventoryIssueAggregate.IssueSublot", b =>
@@ -914,15 +920,15 @@ namespace WMS.APIs.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WMS.Domain.AggregateModels.StorageAggregate.Location", "location")
+                    b.HasOne("WMS.Domain.AggregateModels.MaterialAggregate.MaterialSubLot", "materialSublot")
                         .WithMany("issueSublots")
-                        .HasForeignKey("locationId")
+                        .HasForeignKey("sublotId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("issueLot");
 
-                    b.Navigation("location");
+                    b.Navigation("materialSublot");
                 });
 
             modelBuilder.Entity("WMS.Domain.AggregateModels.InventoryLogAggregate.InventoryLog", b =>
@@ -1198,11 +1204,18 @@ namespace WMS.APIs.Migrations
                 {
                     b.Navigation("inventoryLogs");
 
+                    b.Navigation("issueLots");
+
                     b.Navigation("materialLotAdjustments");
 
                     b.Navigation("properties");
 
                     b.Navigation("subLots");
+                });
+
+            modelBuilder.Entity("WMS.Domain.AggregateModels.MaterialAggregate.MaterialSubLot", b =>
+                {
+                    b.Navigation("issueSublots");
                 });
 
             modelBuilder.Entity("WMS.Domain.AggregateModels.PartyAggregate.Customer", b =>
@@ -1226,8 +1239,6 @@ namespace WMS.APIs.Migrations
 
             modelBuilder.Entity("WMS.Domain.AggregateModels.StorageAggregate.Location", b =>
                 {
-                    b.Navigation("issueSublots");
-
                     b.Navigation("materialSubLots");
 
                     b.Navigation("receiptSublots");
