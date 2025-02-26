@@ -46,6 +46,13 @@ namespace WMS.APIs.Controllers
             return await CommandAsync(request);
         }
 
+        [HttpDelete("Persons/Delete Person/{id}")]
+        public async Task<IActionResult> DeletePerson(string id)
+        {
+            var request= new DeletePersonCommand(id);
+            
+            return await CommandAsync(request);
+        }
 
     }
 }

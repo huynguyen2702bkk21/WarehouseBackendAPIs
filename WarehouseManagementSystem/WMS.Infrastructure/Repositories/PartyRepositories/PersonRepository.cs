@@ -26,5 +26,11 @@
         {
             _context.Persons.Update(person);
         }
+
+        public void Delete(Person person)
+        {
+            _context.Persons.Remove(person);
+        }
+
     }
 }

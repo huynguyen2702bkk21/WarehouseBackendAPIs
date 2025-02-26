@@ -6,5 +6,6 @@
         Task<Person> GetPersonById(string id);
         void Create(Person person);
         void Update(Person person);
+        void Delete(Person person);
     }
 }

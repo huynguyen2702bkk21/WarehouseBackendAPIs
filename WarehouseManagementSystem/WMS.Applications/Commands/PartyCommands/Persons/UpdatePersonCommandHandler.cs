@@ -1,6 +1,5 @@
-﻿using WMS.Domain.AggregateModels.PartyAggregate;
+﻿namespace WMS.Application.Commands.PartyCommands.Persons
 
-namespace WMS.Application.Commands.PartyCommands.Persons
 {
     public class UpdatePersonCommandHandler : IRequestHandler<UpdatePersonCommand,bool>
     {
