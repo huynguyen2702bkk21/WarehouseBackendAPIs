@@ -12,5 +12,22 @@ namespace WMS.Domain.AggregateModels.PartyAggregate
         public string contactDetails { get; set; }
 
         public List<InventoryReceipt> inventoryReceipts { get; set; }
+
+        public Supplier(string supplierId, string supplierName, string address, string contactDetails)
+        {
+            this.supplierId = supplierId;
+            this.supplierName = supplierName;
+            this.address = address;
+            this.contactDetails = contactDetails;
+        }
+
+        public void UpdateSupplier(string supplierName, string address, string contactDetails)
+        {
+            this.supplierName = supplierName;
+            this.address = address;
+            this.contactDetails = contactDetails;
+        }
+
+
     }
 }

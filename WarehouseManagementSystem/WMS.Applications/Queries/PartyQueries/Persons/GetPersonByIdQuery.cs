@@ -1,4 +1,4 @@
-﻿namespace WMS.Application.Queries.PartyQueries.Person
+﻿namespace WMS.Application.Queries.PartyQueries.Persons
 {
     public class GetPersonByIdQuery : IRequest<PersonDTO>
     {

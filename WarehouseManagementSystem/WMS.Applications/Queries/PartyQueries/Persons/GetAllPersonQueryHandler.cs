@@ -1,9 +1,9 @@
-﻿namespace WMS.Application.Queries.PartyQueries.Person
+﻿namespace WMS.Application.Queries.PartyQueries.Persons
 {
     public class GetAllPersonQueryHandler : IRequestHandler<GetAllPersonQuery, IEnumerable<PersonDTO>>
     {
         private readonly IPersonRepository _personRepository;
-        private IMapper  _mapper;
+        private readonly IMapper  _mapper;
 
         public GetAllPersonQueryHandler(IPersonRepository personRepository, IMapper mapper)
         {
@@ -13,7 +13,7 @@
 
         public async Task<IEnumerable<PersonDTO>> Handle(GetAllPersonQuery request, CancellationToken cancellationToken)
         {
-            var persons = await _personRepository.GetAll();
+            var persons = await _personRepository.GetAllAsync();
 
             if (persons == null)
             {

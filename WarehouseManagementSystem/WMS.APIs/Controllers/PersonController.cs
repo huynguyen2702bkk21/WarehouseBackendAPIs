@@ -6,12 +6,10 @@ namespace WMS.APIs.Controllers
     [Route("api/[controller]")]
     public class PersonController : ApiControllerBase
     {
-        private readonly IPersonRepository _personRepository;
         private readonly IMediator _mediator;
 
-        public PersonController(IPersonRepository personRepository, IMediator mediator) : base(mediator)
+        public PersonController(IMediator mediator) : base(mediator)
         {
-            _personRepository = personRepository;
             _mediator = mediator;
         }
 
@@ -34,25 +32,26 @@ namespace WMS.APIs.Controllers
             return result;
         }
 
-        [HttpPost("Persons/Create New Person")]
+        [HttpPost("Persons/CreateSupplier New Persons")]
         public async Task<IActionResult> CreatePerson([FromBody] CreatePersonCommand request)
         {
             return await CommandAsync(request);
         }
 
-        [HttpPut("Persons/Update Person")]
+        [HttpPut("Persons/Update Persons")]
         public async Task<IActionResult> UpdatePerson([FromBody] UpdatePersonCommand request)
         {
             return await CommandAsync(request);
         }
 
-        [HttpDelete("Persons/Delete Person/{id}")]
+        [HttpDelete("Persons/Delete Persons/{id}")]
         public async Task<IActionResult> DeletePerson(string id)
         {
             var request= new DeletePersonCommand(id);
             
             return await CommandAsync(request);
         }
+
 
     }
 }

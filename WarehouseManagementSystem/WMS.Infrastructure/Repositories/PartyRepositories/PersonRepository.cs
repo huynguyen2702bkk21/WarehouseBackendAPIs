@@ -12,7 +12,7 @@
             _context.Add(person);
         }
 
-        public async Task<List<Person>> GetAll()
+        public async Task<List<Person>> GetAllAsync()
         {
             return await _context.Persons.ToListAsync();
         }

@@ -734,7 +734,7 @@ namespace WMS.APIs.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("WMS.Domain.AggregateModels.PartyAggregate.Person", b =>
+            modelBuilder.Entity("WMS.Domain.AggregateModels.PartyAggregate.Persons", b =>
                 {
                     b.Property<string>("personId")
                         .HasColumnType("text");
@@ -858,7 +858,7 @@ namespace WMS.APIs.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WMS.Domain.AggregateModels.PartyAggregate.Person", "issuedBy")
+                    b.HasOne("WMS.Domain.AggregateModels.PartyAggregate.Persons", "issuedBy")
                         .WithMany("inventoryIssues")
                         .HasForeignKey("pesonId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -955,7 +955,7 @@ namespace WMS.APIs.Migrations
 
             modelBuilder.Entity("WMS.Domain.AggregateModels.InventoryReceiptAggregate.InventoryReceipt", b =>
                 {
-                    b.HasOne("WMS.Domain.AggregateModels.PartyAggregate.Person", "receivedBy")
+                    b.HasOne("WMS.Domain.AggregateModels.PartyAggregate.Persons", "receivedBy")
                         .WithMany("inventoryReceipts")
                         .HasForeignKey("personId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1111,7 +1111,7 @@ namespace WMS.APIs.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("WMS.Domain.AggregateModels.PartyAggregate.Person", "adjustedBy")
+                    b.HasOne("WMS.Domain.AggregateModels.PartyAggregate.Persons", "adjustedBy")
                         .WithMany("materialLotAdjustments")
                         .HasForeignKey("personId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -1226,7 +1226,7 @@ namespace WMS.APIs.Migrations
                     b.Navigation("inventoryIssues");
                 });
 
-            modelBuilder.Entity("WMS.Domain.AggregateModels.PartyAggregate.Person", b =>
+            modelBuilder.Entity("WMS.Domain.AggregateModels.PartyAggregate.Persons", b =>
                 {
                     b.Navigation("inventoryIssues");
 

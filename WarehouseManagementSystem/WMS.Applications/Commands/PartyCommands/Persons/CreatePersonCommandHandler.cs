@@ -13,18 +13,18 @@
 
         public async Task<bool> Handle(CreatePersonCommand request, CancellationToken cancellationToken)
         {
-            var personExisited = await _personRepository.GetPersonById(request.PersonId);
+            var person = await _personRepository.GetPersonById(request.PersonId);
 
-            if (personExisited != null)
+            if (person != null)
             {
                 throw new DuplicateRecordException("Persons", request.PersonId);
             }
 
-            var person = new Person(personId: request.PersonId, 
+            var newPerson = new Person(personId: request.PersonId, 
                                     personName: request.PersonName, 
                                     role: request.Role);
 
-            _personRepository.Create(person);
+            _personRepository.Create(newPerson);
 
             return await _personRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
         }

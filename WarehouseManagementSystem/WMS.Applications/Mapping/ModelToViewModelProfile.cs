@@ -5,6 +5,8 @@
         public ModelToViewModelProfile()
         {
             MapPersonViewModel();
+            MapCustomerViewModel();
+            MapSupplierViewModel();
         }
 
         public void MapPersonViewModel()
@@ -14,7 +16,15 @@
 
         }
 
+        public void MapCustomerViewModel()
+        {
+            CreateMap<Customer, CustomerDTO>();
+        }
 
+        public void MapSupplierViewModel()
+        {
+            CreateMap<Supplier, SupplierDTO>();
+        }
 
 
     }

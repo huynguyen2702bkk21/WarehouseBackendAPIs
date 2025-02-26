@@ -6,5 +6,5 @@ global using WMS.Application.Exceptions;
 global using WMS.Application.Mapping;
 global using WMS.Infrastructure;
 global using WMS.Application.DTOs.PartyDTOs;
-global using WMS.Application.Queries.PartyQueries.Person;
+global using WMS.Application.Queries.PartyQueries.Persons;
 global using WMS.Domain.InterfaceRepositories.IParty;

@@ -12,8 +12,8 @@ using WMS.Infrastructure;
 namespace WMS.APIs.Migrations
 {
     [DbContext(typeof(WMSDbContext))]
-    [Migration("20250225172020_CreateNewDatabase")]
-    partial class CreateNewDatabase
+    [Migration("20250226072743_Update_PartyAPIs")]
+    partial class Update_PartyAPIs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -734,7 +734,7 @@ namespace WMS.APIs.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("WMS.Domain.AggregateModels.PartyAggregate.Persons", b =>
+            modelBuilder.Entity("WMS.Domain.AggregateModels.PartyAggregate.Person", b =>
                 {
                     b.Property<string>("personId")
                         .HasColumnType("text");
@@ -858,7 +858,7 @@ namespace WMS.APIs.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WMS.Domain.AggregateModels.PartyAggregate.Persons", "issuedBy")
+                    b.HasOne("WMS.Domain.AggregateModels.PartyAggregate.Person", "issuedBy")
                         .WithMany("inventoryIssues")
                         .HasForeignKey("pesonId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -955,7 +955,7 @@ namespace WMS.APIs.Migrations
 
             modelBuilder.Entity("WMS.Domain.AggregateModels.InventoryReceiptAggregate.InventoryReceipt", b =>
                 {
-                    b.HasOne("WMS.Domain.AggregateModels.PartyAggregate.Persons", "receivedBy")
+                    b.HasOne("WMS.Domain.AggregateModels.PartyAggregate.Person", "receivedBy")
                         .WithMany("inventoryReceipts")
                         .HasForeignKey("personId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1111,7 +1111,7 @@ namespace WMS.APIs.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("WMS.Domain.AggregateModels.PartyAggregate.Persons", "adjustedBy")
+                    b.HasOne("WMS.Domain.AggregateModels.PartyAggregate.Person", "adjustedBy")
                         .WithMany("materialLotAdjustments")
                         .HasForeignKey("personId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -1226,7 +1226,7 @@ namespace WMS.APIs.Migrations
                     b.Navigation("inventoryIssues");
                 });
 
-            modelBuilder.Entity("WMS.Domain.AggregateModels.PartyAggregate.Persons", b =>
+            modelBuilder.Entity("WMS.Domain.AggregateModels.PartyAggregate.Person", b =>
                 {
                     b.Navigation("inventoryIssues");
 

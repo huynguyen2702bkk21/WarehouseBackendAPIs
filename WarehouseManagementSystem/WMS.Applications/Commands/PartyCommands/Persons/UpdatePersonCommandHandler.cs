@@ -1,5 +1,4 @@
 ﻿namespace WMS.Application.Commands.PartyCommands.Persons
-
 {
     public class UpdatePersonCommandHandler : IRequestHandler<UpdatePersonCommand,bool>
     {

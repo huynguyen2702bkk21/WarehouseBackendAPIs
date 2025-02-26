@@ -1,5 +1,4 @@
-﻿using WMS.Domain.InterfaceRepositories.IParty;
-using WMS.Infrastructure.Repositories.PartyRepositories;
+﻿using WMS.Infrastructure.Repositories.PartyRepositories;
 
 namespace WMS.APIs
 {
@@ -27,6 +26,8 @@ namespace WMS.APIs
 
             // Register the repositories with scoped lifetime
             builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+            builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+            builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
 
 
 
