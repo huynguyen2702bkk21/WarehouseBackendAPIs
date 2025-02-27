@@ -20,7 +20,7 @@ namespace WMS.Infrastructure.Repositories.PartyRepositories
 
         public void Create(Supplier supplier)
         {
-            _context.Add(supplier);
+            _context.Suppliers.Add(supplier);
         }
 
         public void Delete(Supplier supplier)

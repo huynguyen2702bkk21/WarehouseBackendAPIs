@@ -2,7 +2,7 @@
 using WMS.Application.Commands.PartyCommands.Suppliers;
 using WMS.Application.Queries.PartyQueries.Suppliers;
 
-namespace WMS.APIs.Controllers
+namespace WMS.APIs.Controllers.PartyControllers
 {
     [ApiController]
     [Route("api/[controller]")]

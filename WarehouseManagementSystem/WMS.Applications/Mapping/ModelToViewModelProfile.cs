@@ -1,4 +1,7 @@
-﻿namespace WMS.Application.Mapping
+﻿using WMS.Application.DTOs.StorageDTOs;
+using WMS.Domain.AggregateModels.StorageAggregate;
+
+namespace WMS.Application.Mapping
 {
     public class ModelToViewModelProfile : Profile
     {
@@ -7,6 +10,8 @@
             MapPersonViewModel();
             MapCustomerViewModel();
             MapSupplierViewModel();
+            MapLocationViewModel();
+            MapWarehouseViewModel();
         }
 
         public void MapPersonViewModel()
@@ -26,6 +31,15 @@
             CreateMap<Supplier, SupplierDTO>();
         }
 
+        public void MapLocationViewModel()
+        {
+            CreateMap<Location, LocationDTO>();
+        }
+
+        public void MapWarehouseViewModel()
+        {
+            CreateMap<Warehouse, WarehouseDTO>();
+        }
 
     }
 }

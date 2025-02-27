@@ -8,7 +8,7 @@
 
         public void Create(Customer customer)
         {
-            _context.Add(customer);
+            _context.Customers.Add(customer);
         }
 
         public void Delete(Customer customer)

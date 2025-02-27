@@ -20,9 +20,9 @@
                 return null;
             }
 
-            var customerDTO =  _mapper.Map<IEnumerable<CustomerDTO>>(customers);
+            var customerDTOs =  _mapper.Map<IEnumerable<CustomerDTO>>(customers);
 
-            return customerDTO;
+            return customerDTOs;
         }
     }
 }

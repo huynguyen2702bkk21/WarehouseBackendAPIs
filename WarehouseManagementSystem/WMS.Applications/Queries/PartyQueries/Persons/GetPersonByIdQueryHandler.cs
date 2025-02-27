@@ -20,7 +20,9 @@
                 throw new EntityNotFoundException("Persons", request.PersonId);
             }
 
-            return _mapper.Map<PersonDTO>(person);
+            var personDTO =  _mapper.Map<PersonDTO>(person);
+
+            return personDTO;
         }
 
 

@@ -1,4 +1,6 @@
-﻿using WMS.Infrastructure.Repositories.PartyRepositories;
+﻿using WMS.Domain.InterfaceRepositories.IStorage;
+using WMS.Infrastructure.Repositories.PartyRepositories;
+using WMS.Infrastructure.Repositories.StogareRepositories;
 
 namespace WMS.APIs
 {
@@ -28,6 +30,9 @@ namespace WMS.APIs
             builder.Services.AddScoped<IPersonRepository, PersonRepository>();
             builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
             builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
+            builder.Services.AddScoped<ILocationRepository, LocationRepository>();
+            builder.Services.AddScoped<IWarehouseRepository, WarehouseRepository>();
+
 
 
 

@@ -8,3 +8,5 @@ global using WMS.Infrastructure;
 global using WMS.Application.DTOs.PartyDTOs;
 global using WMS.Application.Queries.PartyQueries.Persons;
 global using WMS.Domain.InterfaceRepositories.IParty;
+global using WMS.Application.DTOs.StorageDTOs;
+global using WMS.Domain.InterfaceRepositories.IStorage;

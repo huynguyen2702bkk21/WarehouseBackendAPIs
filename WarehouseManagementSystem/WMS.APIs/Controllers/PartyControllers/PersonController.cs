@@ -1,6 +1,6 @@
 ﻿using WMS.Application.Commands.PartyCommands.Persons;
 
-namespace WMS.APIs.Controllers
+namespace WMS.APIs.Controllers.PartyControllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -47,8 +47,8 @@ namespace WMS.APIs.Controllers
         [HttpDelete("Persons/Delete Persons/{id}")]
         public async Task<IActionResult> DeletePerson(string id)
         {
-            var request= new DeletePersonCommand(id);
-            
+            var request = new DeletePersonCommand(id);
+
             return await CommandAsync(request);
         }
 

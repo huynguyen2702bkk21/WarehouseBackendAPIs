@@ -13,5 +13,17 @@ namespace WMS.Domain.AggregateModels.StorageAggregate
         [ForeignKey("warehouseId")]
         public string warehouseId { get; set; }
         public Warehouse warehouse { get; set; }
+
+        public Location(string locationId, string warehouseId)
+        {
+            this.locationId = locationId;
+            this.warehouseId = warehouseId;
+        }
+
+        public void UpdateLocation(string wareHouseId)
+        {
+            warehouseId = wareHouseId;
+        }
+
     }
 }

@@ -9,7 +9,7 @@
 
         public void Create(Person person)
         {
-            _context.Add(person);
+            _context.Persons.Add(person);
         }
 
         public async Task<List<Person>> GetAllAsync()
