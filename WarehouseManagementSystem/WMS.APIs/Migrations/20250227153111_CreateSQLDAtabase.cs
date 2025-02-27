@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WMS.APIs.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateNewDatabase : Migration
+    public partial class CreateSQLDAtabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,11 +15,11 @@ namespace WMS.APIs.Migrations
                 name: "Customers",
                 columns: table => new
                 {
-                    customerId = table.Column<string>(type: "text", nullable: false),
-                    customerName = table.Column<string>(type: "text", nullable: false),
-                    address = table.Column<string>(type: "text", nullable: false),
-                    contactDetails = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    customerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    customerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    contactDetails = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,9 +30,9 @@ namespace WMS.APIs.Migrations
                 name: "EquipmentClasses",
                 columns: table => new
                 {
-                    equipmentClassId = table.Column<string>(type: "text", nullable: false),
-                    className = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    equipmentClassId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    className = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,9 +43,9 @@ namespace WMS.APIs.Migrations
                 name: "MaterialClasses",
                 columns: table => new
                 {
-                    materialClassId = table.Column<string>(type: "text", nullable: false),
-                    className = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    materialClassId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    className = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -56,10 +56,10 @@ namespace WMS.APIs.Migrations
                 name: "Persons",
                 columns: table => new
                 {
-                    personId = table.Column<string>(type: "text", nullable: false),
-                    personName = table.Column<string>(type: "text", nullable: false),
-                    role = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    personId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    personName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    role = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,11 +70,11 @@ namespace WMS.APIs.Migrations
                 name: "Suppliers",
                 columns: table => new
                 {
-                    supplierId = table.Column<string>(type: "text", nullable: false),
-                    supplierName = table.Column<string>(type: "text", nullable: false),
-                    address = table.Column<string>(type: "text", nullable: false),
-                    contactDetails = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    supplierId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    supplierName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    contactDetails = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -85,9 +85,9 @@ namespace WMS.APIs.Migrations
                 name: "Warehouses",
                 columns: table => new
                 {
-                    warehouseId = table.Column<string>(type: "text", nullable: false),
-                    warehouseName = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    warehouseId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    warehouseName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -98,12 +98,12 @@ namespace WMS.APIs.Migrations
                 name: "EquipmentClassProperties",
                 columns: table => new
                 {
-                    propertyId = table.Column<string>(type: "text", nullable: false),
-                    propertyName = table.Column<string>(type: "text", nullable: false),
-                    propertyValue = table.Column<string>(type: "text", nullable: false),
-                    unitOfMeasure = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    equipmentClassId = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    propertyId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    propertyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    propertyValue = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    unitOfMeasure = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    equipmentClassId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -113,17 +113,17 @@ namespace WMS.APIs.Migrations
                         column: x => x.equipmentClassId,
                         principalTable: "EquipmentClasses",
                         principalColumn: "equipmentClassId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Equipments",
                 columns: table => new
                 {
-                    equipmentId = table.Column<string>(type: "text", nullable: false),
-                    equipmentName = table.Column<string>(type: "text", nullable: false),
-                    equipmentClassId = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    equipmentId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    equipmentName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    equipmentClassId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -133,19 +133,19 @@ namespace WMS.APIs.Migrations
                         column: x => x.equipmentClassId,
                         principalTable: "EquipmentClasses",
                         principalColumn: "equipmentClassId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "MaterialClassProperties",
                 columns: table => new
                 {
-                    propertyId = table.Column<string>(type: "text", nullable: false),
-                    propertyName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    propertyValue = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    unitOfMeasure = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    materialClassId = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    propertyId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    propertyName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    propertyValue = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    unitOfMeasure = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    materialClassId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -155,17 +155,17 @@ namespace WMS.APIs.Migrations
                         column: x => x.materialClassId,
                         principalTable: "MaterialClasses",
                         principalColumn: "materialClassId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Materials",
                 columns: table => new
                 {
-                    materialId = table.Column<string>(type: "text", nullable: false),
-                    materialName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    materialClassId = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    materialId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    materialName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    materialClassId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -175,20 +175,20 @@ namespace WMS.APIs.Migrations
                         column: x => x.materialClassId,
                         principalTable: "MaterialClasses",
                         principalColumn: "materialClassId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "InventoryIssues",
                 columns: table => new
                 {
-                    inventoryIssueId = table.Column<string>(type: "text", nullable: false),
-                    issueDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    issueStatus = table.Column<string>(type: "text", nullable: false),
-                    customerId = table.Column<string>(type: "text", nullable: false),
-                    pesonId = table.Column<string>(type: "text", nullable: false),
-                    warehouseId = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    inventoryIssueId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    issueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    issueStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    customerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    pesonId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    warehouseId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -198,32 +198,32 @@ namespace WMS.APIs.Migrations
                         column: x => x.customerId,
                         principalTable: "Customers",
                         principalColumn: "customerId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_InventoryIssues_Persons_pesonId",
                         column: x => x.pesonId,
                         principalTable: "Persons",
                         principalColumn: "personId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_InventoryIssues_Warehouses_warehouseId",
                         column: x => x.warehouseId,
                         principalTable: "Warehouses",
                         principalColumn: "warehouseId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "InventoryReceipts",
                 columns: table => new
                 {
-                    inventoryReceiptId = table.Column<string>(type: "text", nullable: false),
-                    receiptDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    receiptStatus = table.Column<string>(type: "text", nullable: false),
-                    supplierId = table.Column<string>(type: "text", nullable: false),
-                    personId = table.Column<string>(type: "text", nullable: false),
-                    warehouseId = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    inventoryReceiptId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    receiptDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    receiptStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    supplierId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    personId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    warehouseId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -233,7 +233,7 @@ namespace WMS.APIs.Migrations
                         column: x => x.personId,
                         principalTable: "Persons",
                         principalColumn: "personId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_InventoryReceipts_Suppliers_supplierId",
                         column: x => x.supplierId,
@@ -245,16 +245,16 @@ namespace WMS.APIs.Migrations
                         column: x => x.warehouseId,
                         principalTable: "Warehouses",
                         principalColumn: "warehouseId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Locations",
                 columns: table => new
                 {
-                    locationId = table.Column<string>(type: "text", nullable: false),
-                    warehouseId = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    locationId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    warehouseId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -264,19 +264,19 @@ namespace WMS.APIs.Migrations
                         column: x => x.warehouseId,
                         principalTable: "Warehouses",
                         principalColumn: "warehouseId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "EquipmentProperties",
                 columns: table => new
                 {
-                    propertyId = table.Column<string>(type: "text", nullable: false),
-                    propertyName = table.Column<string>(type: "text", nullable: false),
-                    propertyValue = table.Column<string>(type: "text", nullable: false),
-                    unitOfMeasure = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    equipmentId = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    propertyId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    propertyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    propertyValue = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    unitOfMeasure = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    equipmentId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -286,18 +286,18 @@ namespace WMS.APIs.Migrations
                         column: x => x.equipmentId,
                         principalTable: "Equipments",
                         principalColumn: "equipmentId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "MaterialLots",
                 columns: table => new
                 {
-                    lotNumber = table.Column<string>(type: "text", nullable: false),
-                    lotStatus = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    materialId = table.Column<string>(type: "text", nullable: false),
-                    exisitingQuantity = table.Column<double>(type: "double precision", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    lotNumber = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    lotStatus = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    materialId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    exisitingQuantity = table.Column<double>(type: "float", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -307,19 +307,19 @@ namespace WMS.APIs.Migrations
                         column: x => x.materialId,
                         principalTable: "Materials",
                         principalColumn: "materialId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "MaterialProperties",
                 columns: table => new
                 {
-                    propertyId = table.Column<string>(type: "text", nullable: false),
-                    propertyName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    propertyValue = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    unitOfMeasure = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    materialId = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    propertyId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    propertyName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    propertyValue = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    unitOfMeasure = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    materialId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -329,21 +329,21 @@ namespace WMS.APIs.Migrations
                         column: x => x.materialId,
                         principalTable: "Materials",
                         principalColumn: "materialId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "InventoryIssueEntries",
                 columns: table => new
                 {
-                    inventoryIssueEntryId = table.Column<string>(type: "text", nullable: false),
-                    purchaseOrderNumber = table.Column<string>(type: "text", nullable: false),
-                    requestedQuantity = table.Column<double>(type: "double precision", nullable: false),
-                    note = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
-                    materialId = table.Column<string>(type: "text", nullable: false),
-                    issueLotId = table.Column<string>(type: "text", nullable: false),
-                    inventoryIssueId = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    inventoryIssueEntryId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    purchaseOrderNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    requestedQuantity = table.Column<double>(type: "float", nullable: false),
+                    note = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    materialId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    issueLotId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    inventoryIssueId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -353,26 +353,26 @@ namespace WMS.APIs.Migrations
                         column: x => x.inventoryIssueId,
                         principalTable: "InventoryIssues",
                         principalColumn: "inventoryIssueId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_InventoryIssueEntries_Materials_materialId",
                         column: x => x.materialId,
                         principalTable: "Materials",
                         principalColumn: "materialId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "InventoryReceiptEntries",
                 columns: table => new
                 {
-                    inventoryReceiptEntryId = table.Column<string>(type: "text", nullable: false),
-                    purchaseOrderNumber = table.Column<string>(type: "text", nullable: false),
-                    materialId = table.Column<string>(type: "text", nullable: false),
-                    note = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
-                    lotNumber = table.Column<string>(type: "text", nullable: false),
-                    InventoryReceiptId = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    inventoryReceiptEntryId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    purchaseOrderNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    materialId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    note = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    lotNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    InventoryReceiptId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -382,29 +382,29 @@ namespace WMS.APIs.Migrations
                         column: x => x.InventoryReceiptId,
                         principalTable: "InventoryReceipts",
                         principalColumn: "inventoryReceiptId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_InventoryReceiptEntries_Materials_materialId",
                         column: x => x.materialId,
                         principalTable: "Materials",
                         principalColumn: "materialId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "InventoryLogs",
                 columns: table => new
                 {
-                    inventoryLogId = table.Column<string>(type: "text", nullable: false),
-                    transactionType = table.Column<string>(type: "text", nullable: false),
-                    transactionDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    previousQuantity = table.Column<double>(type: "double precision", nullable: false),
-                    changedQuantity = table.Column<double>(type: "double precision", nullable: false),
-                    afterQuantity = table.Column<double>(type: "double precision", nullable: false),
-                    note = table.Column<string>(type: "text", nullable: false),
-                    lotNumber = table.Column<string>(type: "text", nullable: false),
-                    warehouseId = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    inventoryLogId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    transactionType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    transactionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    previousQuantity = table.Column<double>(type: "float", nullable: false),
+                    changedQuantity = table.Column<double>(type: "float", nullable: false),
+                    afterQuantity = table.Column<double>(type: "float", nullable: false),
+                    note = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    lotNumber = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    warehouseId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -427,17 +427,17 @@ namespace WMS.APIs.Migrations
                 name: "MaterialLotAdjustments",
                 columns: table => new
                 {
-                    materialLotAdjustmentId = table.Column<string>(type: "text", nullable: false),
-                    adjustmentDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    previousQuantity = table.Column<double>(type: "double precision", nullable: false),
-                    adjustedQuantity = table.Column<double>(type: "double precision", nullable: false),
-                    reason = table.Column<string>(type: "text", nullable: false),
-                    status = table.Column<string>(type: "text", nullable: false),
-                    note = table.Column<string>(type: "text", nullable: false),
-                    lotNumber = table.Column<string>(type: "text", nullable: false),
-                    warehouseId = table.Column<string>(type: "text", nullable: false),
-                    personId = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    materialLotAdjustmentId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    adjustmentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    previousQuantity = table.Column<double>(type: "float", nullable: false),
+                    adjustedQuantity = table.Column<double>(type: "float", nullable: false),
+                    reason = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    note = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    lotNumber = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    warehouseId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    personId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -466,12 +466,12 @@ namespace WMS.APIs.Migrations
                 name: "MaterialLotProperties",
                 columns: table => new
                 {
-                    propertyId = table.Column<string>(type: "text", nullable: false),
-                    propertyName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    propertyValue = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    lotNumber = table.Column<string>(type: "text", nullable: false),
-                    unitOfMeasure = table.Column<int>(type: "integer", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    propertyId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    propertyName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    propertyValue = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    lotNumber = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    unitOfMeasure = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -481,20 +481,20 @@ namespace WMS.APIs.Migrations
                         column: x => x.lotNumber,
                         principalTable: "MaterialLots",
                         principalColumn: "lotNumber",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "MaterialSubLots",
                 columns: table => new
                 {
-                    subLotId = table.Column<string>(type: "text", nullable: false),
-                    subLotStatus = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    existingQuality = table.Column<double>(type: "double precision", nullable: false),
-                    unitOfMeasure = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    locationId = table.Column<string>(type: "text", nullable: false),
-                    lotNumber = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    subLotId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    subLotStatus = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    existingQuality = table.Column<double>(type: "float", nullable: false),
+                    unitOfMeasure = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    locationId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    lotNumber = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -504,25 +504,25 @@ namespace WMS.APIs.Migrations
                         column: x => x.locationId,
                         principalTable: "Locations",
                         principalColumn: "locationId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_MaterialSubLots_MaterialLots_lotNumber",
                         column: x => x.lotNumber,
                         principalTable: "MaterialLots",
                         principalColumn: "lotNumber",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "IssueLots",
                 columns: table => new
                 {
-                    issueLotId = table.Column<string>(type: "text", nullable: false),
-                    requestedQuantity = table.Column<double>(type: "double precision", nullable: false),
-                    issueLotStatus = table.Column<string>(type: "text", nullable: false),
-                    materialLotId = table.Column<string>(type: "text", nullable: false),
-                    inventoryIssueEntryId = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    issueLotId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    requestedQuantity = table.Column<double>(type: "float", nullable: false),
+                    issueLotStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    materialLotId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    inventoryIssueEntryId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -532,24 +532,24 @@ namespace WMS.APIs.Migrations
                         column: x => x.inventoryIssueEntryId,
                         principalTable: "InventoryIssueEntries",
                         principalColumn: "inventoryIssueEntryId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_IssueLots_MaterialLots_materialLotId",
                         column: x => x.materialLotId,
                         principalTable: "MaterialLots",
                         principalColumn: "lotNumber",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "ReceiptLots",
                 columns: table => new
                 {
-                    receiptLotId = table.Column<string>(type: "text", nullable: false),
-                    importedQuantity = table.Column<double>(type: "double precision", nullable: false),
-                    receiptLotStatus = table.Column<string>(type: "text", nullable: false),
-                    InventoryReceiptEntryId = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    receiptLotId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    importedQuantity = table.Column<double>(type: "float", nullable: false),
+                    receiptLotStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    InventoryReceiptEntryId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -559,18 +559,18 @@ namespace WMS.APIs.Migrations
                         column: x => x.InventoryReceiptEntryId,
                         principalTable: "InventoryReceiptEntries",
                         principalColumn: "inventoryReceiptEntryId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "IssueSublots",
                 columns: table => new
                 {
-                    issueSublotId = table.Column<string>(type: "text", nullable: false),
-                    requestedQuantity = table.Column<double>(type: "double precision", nullable: false),
-                    sublotId = table.Column<string>(type: "text", nullable: false),
-                    issueLotId = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    issueSublotId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    requestedQuantity = table.Column<double>(type: "float", nullable: false),
+                    sublotId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    issueLotId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -580,26 +580,26 @@ namespace WMS.APIs.Migrations
                         column: x => x.issueLotId,
                         principalTable: "IssueLots",
                         principalColumn: "issueLotId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_IssueSublots_MaterialSubLots_sublotId",
                         column: x => x.sublotId,
                         principalTable: "MaterialSubLots",
                         principalColumn: "subLotId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "ReceiptSublots",
                 columns: table => new
                 {
-                    receiptLotId = table.Column<string>(type: "text", nullable: false),
-                    receiptSublotId = table.Column<string>(type: "text", nullable: true),
-                    importedQuantity = table.Column<double>(type: "double precision", nullable: false),
-                    subLotStatus = table.Column<string>(type: "text", nullable: false),
-                    unitOfMeasure = table.Column<string>(type: "text", nullable: false),
-                    locationId = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    receiptLotId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    receiptSublotId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    importedQuantity = table.Column<double>(type: "float", nullable: false),
+                    subLotStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    unitOfMeasure = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    locationId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -609,13 +609,13 @@ namespace WMS.APIs.Migrations
                         column: x => x.locationId,
                         principalTable: "Locations",
                         principalColumn: "locationId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ReceiptSublots_ReceiptLots_receiptLotId",
                         column: x => x.receiptLotId,
                         principalTable: "ReceiptLots",
                         principalColumn: "receiptLotId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

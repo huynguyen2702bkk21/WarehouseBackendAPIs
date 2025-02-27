@@ -2,8 +2,8 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WMS.Infrastructure;
 
 #nullable disable
@@ -18,25 +18,25 @@ namespace WMS.APIs.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "9.0.2")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("WMS.Domain.AggregateModels.EquipmentAggregate.Equipment", b =>
                 {
                     b.Property<string>("equipmentId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("equipmentClassId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("equipmentName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("equipmentId");
 
@@ -48,14 +48,14 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.EquipmentAggregate.EquipmentClass", b =>
                 {
                     b.Property<string>("equipmentClassId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("className")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("equipmentClassId");
 
@@ -65,27 +65,27 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.EquipmentAggregate.EquipmentClassProperty", b =>
                 {
                     b.Property<string>("propertyId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("equipmentClassId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("propertyName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("propertyValue")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("unitOfMeasure")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("propertyId");
 
@@ -97,27 +97,27 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.EquipmentAggregate.EquipmentProperty", b =>
                 {
                     b.Property<string>("propertyId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("equipmentId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("propertyName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("propertyValue")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("unitOfMeasure")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("propertyId");
 
@@ -129,29 +129,29 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.InventoryIssueAggregate.InventoryIssue", b =>
                 {
                     b.Property<string>("inventoryIssueId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("customerId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("issueDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("issueStatus")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("pesonId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("warehouseId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("inventoryIssueId");
 
@@ -167,34 +167,34 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.InventoryIssueAggregate.InventoryIssueEntry", b =>
                 {
                     b.Property<string>("inventoryIssueEntryId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("inventoryIssueId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("issueLotId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("materialId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("note")
                         .IsRequired()
                         .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("purchaseOrderNumber")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("requestedQuantity")
-                        .HasColumnType("double precision");
+                        .HasColumnType("float");
 
                     b.HasKey("inventoryIssueEntryId");
 
@@ -208,25 +208,25 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.InventoryIssueAggregate.IssueLot", b =>
                 {
                     b.Property<string>("issueLotId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("inventoryIssueEntryId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("issueLotStatus")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("materialLotId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<double>("requestedQuantity")
-                        .HasColumnType("double precision");
+                        .HasColumnType("float");
 
                     b.HasKey("issueLotId");
 
@@ -241,21 +241,21 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.InventoryIssueAggregate.IssueSublot", b =>
                 {
                     b.Property<string>("issueSublotId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("issueLotId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<double>("requestedQuantity")
-                        .HasColumnType("double precision");
+                        .HasColumnType("float");
 
                     b.Property<string>("sublotId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("issueSublotId");
 
@@ -269,38 +269,38 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.InventoryLogAggregate.InventoryLog", b =>
                 {
                     b.Property<string>("inventoryLogId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<double>("afterQuantity")
-                        .HasColumnType("double precision");
+                        .HasColumnType("float");
 
                     b.Property<double>("changedQuantity")
-                        .HasColumnType("double precision");
+                        .HasColumnType("float");
 
                     b.Property<string>("lotNumber")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("note")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("previousQuantity")
-                        .HasColumnType("double precision");
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("transactionDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("transactionType")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("warehouseId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("inventoryLogId");
 
@@ -314,29 +314,29 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.InventoryReceiptAggregate.InventoryReceipt", b =>
                 {
                     b.Property<string>("inventoryReceiptId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("personId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("receiptDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("receiptStatus")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("supplierId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("warehouseId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("inventoryReceiptId");
 
@@ -352,31 +352,31 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.InventoryReceiptAggregate.InventoryReceiptEntry", b =>
                 {
                     b.Property<string>("inventoryReceiptEntryId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("InventoryReceiptId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("lotNumber")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("materialId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("note")
                         .IsRequired()
                         .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("purchaseOrderNumber")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("inventoryReceiptEntryId");
 
@@ -390,21 +390,21 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.InventoryReceiptAggregate.ReceiptLot", b =>
                 {
                     b.Property<string>("receiptLotId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("InventoryReceiptEntryId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<double>("importedQuantity")
-                        .HasColumnType("double precision");
+                        .HasColumnType("float");
 
                     b.Property<string>("receiptLotStatus")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("receiptLotId");
 
@@ -417,28 +417,28 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.InventoryReceiptAggregate.ReceiptSublot", b =>
                 {
                     b.Property<string>("receiptLotId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<double>("importedQuantity")
-                        .HasColumnType("double precision");
+                        .HasColumnType("float");
 
                     b.Property<string>("locationId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("receiptSublotId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("subLotStatus")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("unitOfMeasure")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("receiptLotId");
 
@@ -450,19 +450,19 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.MaterialAggregate.Material", b =>
                 {
                     b.Property<string>("materialId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("materialClassId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("materialName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("materialId");
 
@@ -474,15 +474,15 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.MaterialAggregate.MaterialClass", b =>
                 {
                     b.Property<string>("materialClassId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("className")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("materialClassId");
 
@@ -492,29 +492,29 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.MaterialAggregate.MaterialClassProperty", b =>
                 {
                     b.Property<string>("propertyId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("materialClassId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("propertyName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("propertyValue")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("unitOfMeasure")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("propertyId");
 
@@ -526,22 +526,22 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.MaterialAggregate.MaterialLot", b =>
                 {
                     b.Property<string>("lotNumber")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<double>("exisitingQuantity")
-                        .HasColumnType("double precision");
+                        .HasColumnType("float");
 
                     b.Property<string>("lotStatus")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("materialId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("lotNumber");
 
@@ -553,27 +553,28 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.MaterialAggregate.MaterialLotProperty", b =>
                 {
                     b.Property<string>("propertyId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("lotNumber")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("propertyName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("propertyValue")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("unitOfMeasure")
-                        .HasColumnType("integer");
+                    b.Property<string>("unitOfMeasure")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("propertyId");
 
@@ -585,29 +586,29 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.MaterialAggregate.MaterialProperty", b =>
                 {
                     b.Property<string>("propertyId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("materialId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("propertyName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("propertyValue")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("unitOfMeasure")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("propertyId");
 
@@ -619,31 +620,31 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.MaterialAggregate.MaterialSubLot", b =>
                 {
                     b.Property<string>("subLotId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<double>("existingQuality")
-                        .HasColumnType("double precision");
+                        .HasColumnType("float");
 
                     b.Property<string>("locationId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("lotNumber")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("subLotStatus")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("unitOfMeasure")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("subLotId");
 
@@ -657,43 +658,43 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.MaterialLotAdjustmentAggregate.MaterialLotAdjustment", b =>
                 {
                     b.Property<string>("materialLotAdjustmentId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<double>("adjustedQuantity")
-                        .HasColumnType("double precision");
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("adjustmentDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("lotNumber")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("note")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("personId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<double>("previousQuantity")
-                        .HasColumnType("double precision");
+                        .HasColumnType("float");
 
                     b.Property<string>("reason")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("status")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("warehouseId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("materialLotAdjustmentId");
 
@@ -709,22 +710,22 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.PartyAggregate.Customer", b =>
                 {
                     b.Property<string>("customerId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("address")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("contactDetails")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("customerName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("customerId");
 
@@ -734,19 +735,19 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.PartyAggregate.Person", b =>
                 {
                     b.Property<string>("personId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("personName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("role")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("personId");
 
@@ -756,22 +757,22 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.PartyAggregate.Supplier", b =>
                 {
                     b.Property<string>("supplierId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("address")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("contactDetails")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("supplierName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("supplierId");
 
@@ -781,14 +782,14 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.StorageAggregate.Location", b =>
                 {
                     b.Property<string>("locationId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("warehouseId")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("locationId");
 
@@ -800,14 +801,14 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.StorageAggregate.Warehouse", b =>
                 {
                     b.Property<string>("warehouseId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("warehouseName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("warehouseId");
 
@@ -819,7 +820,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.EquipmentAggregate.EquipmentClass", "equipmentClass")
                         .WithMany("equipments")
                         .HasForeignKey("equipmentClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("equipmentClass");
@@ -830,7 +831,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.EquipmentAggregate.EquipmentClass", "equipmentClass")
                         .WithMany("properties")
                         .HasForeignKey("equipmentClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("equipmentClass");
@@ -841,7 +842,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.EquipmentAggregate.Equipment", "equipment")
                         .WithMany("properties")
                         .HasForeignKey("equipmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("equipment");
@@ -852,19 +853,19 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.PartyAggregate.Customer", "customer")
                         .WithMany("inventoryIssues")
                         .HasForeignKey("customerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WMS.Domain.AggregateModels.PartyAggregate.Person", "issuedBy")
                         .WithMany("inventoryIssues")
                         .HasForeignKey("pesonId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WMS.Domain.AggregateModels.StorageAggregate.Warehouse", "warehouse")
                         .WithMany("inventoryIssues")
                         .HasForeignKey("warehouseId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("customer");
@@ -879,13 +880,13 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.InventoryIssueAggregate.InventoryIssue", "inventoryIssue")
                         .WithMany("entries")
                         .HasForeignKey("inventoryIssueId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WMS.Domain.AggregateModels.MaterialAggregate.Material", "material")
                         .WithMany("issueEntries")
                         .HasForeignKey("materialId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("inventoryIssue");
@@ -898,13 +899,13 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.InventoryIssueAggregate.InventoryIssueEntry", "inventoryIssueEntry")
                         .WithOne("issueLot")
                         .HasForeignKey("WMS.Domain.AggregateModels.InventoryIssueAggregate.IssueLot", "inventoryIssueEntryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WMS.Domain.AggregateModels.MaterialAggregate.MaterialLot", "materialLot")
                         .WithMany("issueLots")
                         .HasForeignKey("materialLotId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("inventoryIssueEntry");
@@ -917,13 +918,13 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.InventoryIssueAggregate.IssueLot", "issueLot")
                         .WithMany("issueSublots")
                         .HasForeignKey("issueLotId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WMS.Domain.AggregateModels.MaterialAggregate.MaterialSubLot", "materialSublot")
                         .WithMany("issueSublots")
                         .HasForeignKey("sublotId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("issueLot");
@@ -955,7 +956,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.PartyAggregate.Person", "receivedBy")
                         .WithMany("inventoryReceipts")
                         .HasForeignKey("personId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WMS.Domain.AggregateModels.PartyAggregate.Supplier", "supplier")
@@ -967,7 +968,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.StorageAggregate.Warehouse", "warehouse")
                         .WithMany("inventoryReceipts")
                         .HasForeignKey("warehouseId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("receivedBy");
@@ -982,13 +983,13 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.InventoryReceiptAggregate.InventoryReceipt", "inventoryReceipt")
                         .WithMany("entries")
                         .HasForeignKey("InventoryReceiptId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WMS.Domain.AggregateModels.MaterialAggregate.Material", "material")
                         .WithMany("receiptEntries")
                         .HasForeignKey("materialId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("inventoryReceipt");
@@ -1001,7 +1002,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.InventoryReceiptAggregate.InventoryReceiptEntry", "inventoryReceiptEntry")
                         .WithOne("receiptLot")
                         .HasForeignKey("WMS.Domain.AggregateModels.InventoryReceiptAggregate.ReceiptLot", "InventoryReceiptEntryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("inventoryReceiptEntry");
@@ -1012,13 +1013,13 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.StorageAggregate.Location", "location")
                         .WithMany("receiptSublots")
                         .HasForeignKey("locationId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WMS.Domain.AggregateModels.InventoryReceiptAggregate.ReceiptLot", "receiptLot")
                         .WithMany("receiptSublots")
                         .HasForeignKey("receiptLotId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("location");
@@ -1031,7 +1032,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.MaterialAggregate.MaterialClass", "materialClass")
                         .WithMany("materials")
                         .HasForeignKey("materialClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("materialClass");
@@ -1042,7 +1043,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.MaterialAggregate.MaterialClass", "materialClass")
                         .WithMany("properties")
                         .HasForeignKey("materialClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("materialClass");
@@ -1053,7 +1054,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.MaterialAggregate.Material", "material")
                         .WithMany("lots")
                         .HasForeignKey("materialId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("material");
@@ -1064,7 +1065,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.MaterialAggregate.MaterialLot", "materialLot")
                         .WithMany("properties")
                         .HasForeignKey("lotNumber")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("materialLot");
@@ -1075,7 +1076,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.MaterialAggregate.Material", "material")
                         .WithMany("porperties")
                         .HasForeignKey("materialId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("material");
@@ -1086,13 +1087,13 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.StorageAggregate.Location", "location")
                         .WithMany("materialSubLots")
                         .HasForeignKey("locationId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WMS.Domain.AggregateModels.MaterialAggregate.MaterialLot", "materialLot")
                         .WithMany("subLots")
                         .HasForeignKey("lotNumber")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("location");
@@ -1132,7 +1133,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.StorageAggregate.Warehouse", "warehouse")
                         .WithMany("locations")
                         .HasForeignKey("warehouseId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("warehouse");

@@ -1,6 +1,8 @@
-﻿using WMS.Domain.InterfaceRepositories.IStorage;
+﻿using WMS.Domain.InterfaceRepositories.IMaterial;
+using WMS.Infrastructure.Repositories.MaterialRepositories;
 using WMS.Infrastructure.Repositories.PartyRepositories;
 using WMS.Infrastructure.Repositories.StogareRepositories;
+
 
 namespace WMS.APIs
 {
@@ -13,11 +15,11 @@ namespace WMS.APIs
             // Add services to the container.
 
             // Add the connection EmployeeType to the container
-            var connectionString = builder.Configuration.GetConnectionString("PostgreSqlConnection");
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
             // Add the DbContext to the container with the connection EmployeeType
             builder.Services.AddDbContext<WMSDbContext>(options =>
-                options.UseNpgsql(connectionString, b => b.MigrationsAssembly("WMS.APIs")));
+                options.UseSqlServer(connectionString, b => b.MigrationsAssembly("WMS.APIs")));
 
             // Register the AutoMapper services with the assembly
             builder.Services.AddAutoMapper(typeof(ModelToViewModelProfile).Assembly);
@@ -27,11 +29,21 @@ namespace WMS.APIs
 
 
             // Register the repositories with scoped lifetime
+
             builder.Services.AddScoped<IPersonRepository, PersonRepository>();
             builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
             builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
             builder.Services.AddScoped<ILocationRepository, LocationRepository>();
             builder.Services.AddScoped<IWarehouseRepository, WarehouseRepository>();
+
+            builder.Services.AddScoped<IMaterialClassRepository, MaterialCLassRepository>();
+            builder.Services.AddScoped<IMaterialClassPropertyRepository, MaterialClassPropertyRepository>();
+            builder.Services.AddScoped<IMaterialRepository, MaterialRepository>();
+            builder.Services.AddScoped<IMaterialPropertyRepository, MaterialPropertyRepository>();
+            builder.Services.AddScoped<IMaterialLotRepository, MaterialLotRepository>();
+            builder.Services.AddScoped<IMaterialLotPropertyRepository, MaterialLotPropertyRepository>();
+            builder.Services.AddScoped<IMaterialSubLotRepository, MaterialSubLotRepository>();
+
 
 
 
