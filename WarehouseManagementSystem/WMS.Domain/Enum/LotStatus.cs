@@ -6,7 +6,11 @@
         Approved,
         Blocked,
         InProgress,
-        InQualityCheck
+        InQualityCheck,
+        Available,
+        Reserved,
+        Quarantine,
+        Expired
     }
 
 }
