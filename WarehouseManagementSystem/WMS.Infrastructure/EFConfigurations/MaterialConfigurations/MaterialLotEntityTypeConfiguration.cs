@@ -20,7 +20,7 @@
                 .WithMany(s => s.lots)
                 .HasForeignKey(s => s.materialId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
 
 

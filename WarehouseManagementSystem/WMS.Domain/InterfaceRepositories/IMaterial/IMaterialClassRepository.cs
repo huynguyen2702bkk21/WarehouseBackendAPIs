@@ -2,6 +2,7 @@
 {
     public interface IMaterialClassRepository : IRepository<MaterialClass>
     {
+        Task<List<MaterialClass>> GetAllAsync();
 
     }
 }

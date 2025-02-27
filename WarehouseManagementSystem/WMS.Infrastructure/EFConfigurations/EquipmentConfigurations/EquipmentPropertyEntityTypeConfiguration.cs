@@ -23,7 +23,7 @@
                 .WithMany(b => b.properties)
                 .HasForeignKey(b => b.equipmentId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
         }
     }

@@ -24,13 +24,13 @@
                 .WithMany(s => s.inventoryReceipts)
                 .HasForeignKey(s => s.personId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(s => s.warehouse)
                 .WithMany(s => s.inventoryReceipts)
                 .HasForeignKey(s => s.warehouseId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
 
         }

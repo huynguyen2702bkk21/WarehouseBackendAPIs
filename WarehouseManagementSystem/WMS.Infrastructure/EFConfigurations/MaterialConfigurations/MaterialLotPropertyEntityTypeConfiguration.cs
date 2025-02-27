@@ -14,11 +14,17 @@
                 .IsRequired()             
                 .HasMaxLength(50);
 
+            builder.Property(b => b.unitOfMeasure)
+                .HasConversion(
+                    v => v.ToString(),
+                    v => (UnitOfMeasure)Enum.Parse(typeof(UnitOfMeasure), v))
+                .IsRequired();
+
             builder.HasOne(s => s.materialLot)
                 .WithMany(s => s.properties)
                 .HasForeignKey(s => s.lotNumber)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
     

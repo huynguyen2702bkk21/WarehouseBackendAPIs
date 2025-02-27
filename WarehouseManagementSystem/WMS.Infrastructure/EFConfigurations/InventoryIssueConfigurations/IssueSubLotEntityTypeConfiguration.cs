@@ -14,13 +14,13 @@
                 .WithMany(s => s.issueSublots)
                 .HasForeignKey(s => s.sublotId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(s => s.issueLot)
                 .WithMany(s => s.issueSublots)
                 .HasForeignKey(s => s.issueLotId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             
         }

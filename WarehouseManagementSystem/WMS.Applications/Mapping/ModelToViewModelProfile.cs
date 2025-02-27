@@ -1,5 +1,5 @@
-﻿using WMS.Application.DTOs.StorageDTOs;
-using WMS.Domain.AggregateModels.StorageAggregate;
+﻿using WMS.Application.DTOs.MaterialDTOs;
+using WMS.Domain.AggregateModels.MaterialAggregate;
 
 namespace WMS.Application.Mapping
 {
@@ -12,6 +12,8 @@ namespace WMS.Application.Mapping
             MapSupplierViewModel();
             MapLocationViewModel();
             MapWarehouseViewModel();
+            MapMaterialClassViewModel();
+            MapMaterialClassPropertyViewModel();
         }
 
         public void MapPersonViewModel()
@@ -39,6 +41,17 @@ namespace WMS.Application.Mapping
         public void MapWarehouseViewModel()
         {
             CreateMap<Warehouse, WarehouseDTO>();
+        }
+
+        public void MapMaterialClassViewModel()
+        {
+            CreateMap<MaterialClass, MaterialClassDTO>();
+        }
+
+        public void MapMaterialClassPropertyViewModel()
+        {
+            CreateMap<MaterialClassProperty, MaterialClassPropertyDTO>()
+                .ForMember(s => s.UnitOfMeasure, s => s.MapFrom(s => s.unitOfMeasure.ToString()));
         }
 
     }

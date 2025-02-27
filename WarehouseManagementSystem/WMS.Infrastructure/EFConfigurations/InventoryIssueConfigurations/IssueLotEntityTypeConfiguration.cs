@@ -19,13 +19,13 @@
                 .WithMany(s => s.issueLots)
                 .HasForeignKey(s => s.materialLotId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(s => s.inventoryIssueEntry)
                 .WithOne(s => s.issueLot)
                 .HasForeignKey<IssueLot>(s => s.inventoryIssueEntryId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
             
 
         }

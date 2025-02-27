@@ -19,19 +19,19 @@
                 .WithMany(s => s.issueEntries)
                 .HasForeignKey(s => s.materialId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(s => s.inventoryIssue)
                 .WithMany(s => s.entries)
                 .HasForeignKey(s => s.inventoryIssueId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(s => s.issueLot)
                 .WithOne(s => s.inventoryIssueEntry)
                 .HasForeignKey<InventoryIssueEntry>(s => s.issueLotId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
         }
     }

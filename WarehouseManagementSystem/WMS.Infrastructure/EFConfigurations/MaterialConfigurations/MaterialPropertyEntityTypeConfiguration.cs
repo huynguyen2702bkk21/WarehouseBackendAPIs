@@ -25,7 +25,7 @@
                 .WithMany(b => b.porperties)
                 .HasForeignKey(b => b.materialId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
         }
     }

@@ -19,7 +19,7 @@
                 .WithOne(s => s.receiptLot)
                 .HasForeignKey<ReceiptLot>(s => s.InventoryReceiptEntryId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
         }
     }

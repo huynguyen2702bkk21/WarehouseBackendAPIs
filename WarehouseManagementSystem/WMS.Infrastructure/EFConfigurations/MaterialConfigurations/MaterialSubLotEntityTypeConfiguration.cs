@@ -27,13 +27,13 @@
                 .WithMany(s => s.subLots)
                 .HasForeignKey(s => s.lotNumber)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(s => s.location)
                 .WithMany(s => s.materialSubLots)
                 .HasForeignKey(s => s.locationId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

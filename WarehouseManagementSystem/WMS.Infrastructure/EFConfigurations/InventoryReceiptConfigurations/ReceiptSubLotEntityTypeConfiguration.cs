@@ -26,13 +26,13 @@
                 .WithMany(s => s.receiptSublots)
                 .HasForeignKey(s => s.locationId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(s => s.receiptLot)
                 .WithMany(s => s.receiptSublots)
                 .HasForeignKey(s => s.receiptLotId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

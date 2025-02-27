@@ -12,7 +12,9 @@
         Tonne,
         Liter,
         Centimeter,
-        Inch
+        Inch,
+        Mililiter,
+        Percent
     }
 
 }
