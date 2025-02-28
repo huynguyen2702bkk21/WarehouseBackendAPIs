@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WMS.Application.Queries.MaterialQueries.MaterialClasses
+﻿namespace WMS.Application.Queries.MaterialQueries.MaterialClasses
 {
-    internal class GetMaterialClassPropertyByIdQuerry
+    public class GetMaterialClassPropertyByIdQuerry : IRequest<MaterialClassPropertyDTO>
     {
+        public string MaterialClassPropertyId { get; set; }
+
+        public GetMaterialClassPropertyByIdQuerry(string materialClassPropertyId)
+        {
+            MaterialClassPropertyId = materialClassPropertyId;
+        }
     }
 }

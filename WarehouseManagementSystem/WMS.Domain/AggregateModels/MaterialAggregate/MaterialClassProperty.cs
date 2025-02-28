@@ -12,5 +12,14 @@
         [ForeignKey("materialClassId")]
         public string materialClassId { get; set; }
         public MaterialClass materialClass { get; set; }
+
+        public MaterialClassProperty(string propertyId, string propertyName, string propertyValue, UnitOfMeasure unitOfMeasure, string materialClassId)
+        {
+            this.propertyId = propertyId;
+            this.propertyName = propertyName;
+            this.propertyValue = propertyValue;
+            this.unitOfMeasure = unitOfMeasure;
+            this.materialClassId = materialClassId;
+        }
     }
 }

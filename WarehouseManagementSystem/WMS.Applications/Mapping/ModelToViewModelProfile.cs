@@ -1,7 +1,4 @@
-﻿using WMS.Application.DTOs.MaterialDTOs;
-using WMS.Domain.AggregateModels.MaterialAggregate;
-
-namespace WMS.Application.Mapping
+﻿namespace WMS.Application.Mapping
 {
     public class ModelToViewModelProfile : Profile
     {
@@ -45,7 +42,8 @@ namespace WMS.Application.Mapping
 
         public void MapMaterialClassViewModel()
         {
-            CreateMap<MaterialClass, MaterialClassDTO>();
+            CreateMap<MaterialClass, MaterialClassDTO>()
+                .ForMember(s => s.Properties, s => s.MapFrom(s => s.properties));
         }
 
         public void MapMaterialClassPropertyViewModel()

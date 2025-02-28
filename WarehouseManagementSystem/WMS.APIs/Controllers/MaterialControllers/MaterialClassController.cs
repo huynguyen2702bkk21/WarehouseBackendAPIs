@@ -1,7 +1,4 @@
-﻿using WMS.Application.DTOs.MaterialDTOs;
-using WMS.Application.Queries.MaterialQueries.MaterialClasses;
-
-namespace WMS.APIs.Controllers.MaterialControllers
+﻿namespace WMS.APIs.Controllers.MaterialControllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -29,6 +26,30 @@ namespace WMS.APIs.Controllers.MaterialControllers
             var result = await _mediator.Send(query);
 
             return result;
+        }
+
+        [HttpGet("MaterialClasses/GetMaterialClassById")]
+        public async Task<MaterialClassDTO> GetById(string materialClassId)
+        {
+            var query = new GetMaterialClassByIdQuery(materialClassId);
+            var result = await _mediator.Send(query);
+
+            return result;
+        }
+
+        [HttpGet("MaterialClasses/GetMaterialClassPropertyById")]
+        public async Task<MaterialClassPropertyDTO> GetPropertyById(string materialClassPropertyId)
+        {
+            var query = new GetMaterialClassPropertyByIdQuerry(materialClassPropertyId);
+            var result = await _mediator.Send(query);
+
+            return result;
+        }
+
+        [HttpPost("MaterialClasses/CreateMaterialClass")]
+        public async Task<IActionResult> CreateMaterialClass([FromBody] CreateMaterialClassCommand command)
+        {
+            return await CommandAsync(command);
         }
 
 

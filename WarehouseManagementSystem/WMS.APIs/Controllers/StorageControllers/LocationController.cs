@@ -1,7 +1,4 @@
-﻿using WMS.Application.Commands.StorageCommands.Locations;
-using WMS.Application.Queries.StorageQueries.Locations;
-
-namespace WMS.APIs.Controllers.StorageControllers
+﻿namespace WMS.APIs.Controllers.StorageControllers
 {
     [ApiController]
     [Route("api/[controller]")]

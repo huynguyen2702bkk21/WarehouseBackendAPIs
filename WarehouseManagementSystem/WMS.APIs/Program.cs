@@ -1,10 +1,4 @@
-﻿using WMS.Domain.InterfaceRepositories.IMaterial;
-using WMS.Infrastructure.Repositories.MaterialRepositories;
-using WMS.Infrastructure.Repositories.PartyRepositories;
-using WMS.Infrastructure.Repositories.StogareRepositories;
-
-
-namespace WMS.APIs
+﻿namespace WMS.APIs
 {
     public class Program
     {

@@ -5,7 +5,7 @@
         public void Configure(EntityTypeBuilder<ReceiptSublot> builder)
         {
 
-            builder.HasKey(s => s.receiptLotId);
+            builder.HasKey(s => s.receiptSublotId);
 
             builder.Property(s => s.importedQuantity)
                 .IsRequired();

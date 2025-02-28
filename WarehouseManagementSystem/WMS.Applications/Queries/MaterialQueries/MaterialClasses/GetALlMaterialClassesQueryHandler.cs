@@ -1,7 +1,4 @@
-﻿using WMS.Application.DTOs.MaterialDTOs;
-using WMS.Domain.InterfaceRepositories.IMaterial;
-
-namespace WMS.Application.Queries.MaterialQueries.MaterialClasses
+﻿namespace WMS.Application.Queries.MaterialQueries.MaterialClasses
 {
     public class GetALlMaterialClassesQueryHandler : IRequestHandler<GetALlMaterialClassesQuery,IEnumerable<MaterialClassDTO>>
     {

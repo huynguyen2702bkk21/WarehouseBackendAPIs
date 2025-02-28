@@ -42,6 +42,13 @@
         KiloPascal,
         MegaPascal,
         Bar,
-        PSI
+        PSI,
+        BoxesPerMinute,
+        Micrometer,
+        MeterPerSecond,
+        RevolutionsPerMinute,
+        AmpereHour
+
+
     }
 }

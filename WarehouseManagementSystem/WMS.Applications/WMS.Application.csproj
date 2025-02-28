@@ -8,6 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Commands\MaterialCommands\Materials\" />
+    <Folder Include="Commands\MaterialCommands\MaterialLots\" />
+    <Folder Include="Commands\MaterialCommands\MaterialSubLots\" />
     <Folder Include="DomainEventHandlers\" />
     <Folder Include="ErrorNotifications\" />
     <Folder Include="Exceptions\" />

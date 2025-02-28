@@ -7,7 +7,10 @@
         Approved,
         Rejected,
         Pending,
-        Completed
+        Completed,
+        Cancelled,
+        Accepted
+
 
     }
 }

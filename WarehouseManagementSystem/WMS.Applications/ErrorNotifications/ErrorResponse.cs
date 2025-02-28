@@ -1,7 +1,4 @@
-﻿using WMS.Application.ErrorNotifications.ErrorDetails;
-using WMS.Application.Exceptions;
-
-namespace WMS.Application.ErrorNotifications
+﻿namespace WMS.Application.ErrorNotifications
 {
     public class ErrorResponse
     {

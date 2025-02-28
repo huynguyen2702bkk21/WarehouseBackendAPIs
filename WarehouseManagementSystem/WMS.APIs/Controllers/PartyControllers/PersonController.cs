@@ -1,6 +1,4 @@
-﻿using WMS.Application.Commands.PartyCommands.Persons;
-
-namespace WMS.APIs.Controllers.PartyControllers
+﻿namespace WMS.APIs.Controllers.PartyControllers
 {
     [ApiController]
     [Route("api/[controller]")]

@@ -6,6 +6,10 @@
         public string ClassName { get; set; }
         public List<MaterialClassPropertyDTO> Properties { get; set; }
 
+        public MaterialClassDTO()
+        {
+        }
+
         public MaterialClassDTO(string materialClassId, string className, List<MaterialClassPropertyDTO> properties)
         {
             MaterialClassId = materialClassId;
