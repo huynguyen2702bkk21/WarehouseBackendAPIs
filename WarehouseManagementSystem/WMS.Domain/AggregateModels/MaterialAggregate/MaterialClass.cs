@@ -10,6 +10,11 @@
         public List<MaterialClassProperty> properties { get; set; }
         public List<Material> materials { get; set; }
 
+        public MaterialClass(string materialClassId, string className, List<MaterialClassProperty> properties) : this(materialClassId, className)
+        {
+            this.properties = properties;
+        }
+
         public MaterialClass(string materialClassId, string className)
         {
             this.materialClassId = materialClassId;
@@ -20,6 +25,11 @@
         public void AddProperty(MaterialClassProperty property)
         {
             properties.Add(property);
+        }
+
+        public void Update(string ClassName)
+        {
+            className = ClassName;
         }
 
 

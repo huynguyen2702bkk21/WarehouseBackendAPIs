@@ -25,7 +25,7 @@
                 .WithOne(s => s.issueLot)
                 .HasForeignKey<IssueLot>(s => s.inventoryIssueEntryId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
             
 
         }

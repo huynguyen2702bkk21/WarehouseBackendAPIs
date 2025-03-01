@@ -20,7 +20,7 @@
                 .WithMany(s => s.issueSublots)
                 .HasForeignKey(s => s.issueLotId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             
         }

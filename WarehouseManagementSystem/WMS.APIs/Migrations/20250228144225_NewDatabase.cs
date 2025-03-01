@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WMS.APIs.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateSQLDAtabase : Migration
+    public partial class NewDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -113,7 +113,7 @@ namespace WMS.APIs.Migrations
                         column: x => x.equipmentClassId,
                         principalTable: "EquipmentClasses",
                         principalColumn: "equipmentClassId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -133,7 +133,7 @@ namespace WMS.APIs.Migrations
                         column: x => x.equipmentClassId,
                         principalTable: "EquipmentClasses",
                         principalColumn: "equipmentClassId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -155,7 +155,7 @@ namespace WMS.APIs.Migrations
                         column: x => x.materialClassId,
                         principalTable: "MaterialClasses",
                         principalColumn: "materialClassId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -239,7 +239,7 @@ namespace WMS.APIs.Migrations
                         column: x => x.supplierId,
                         principalTable: "Suppliers",
                         principalColumn: "supplierId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_InventoryReceipts_Warehouses_warehouseId",
                         column: x => x.warehouseId,
@@ -264,7 +264,7 @@ namespace WMS.APIs.Migrations
                         column: x => x.warehouseId,
                         principalTable: "Warehouses",
                         principalColumn: "warehouseId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -286,7 +286,7 @@ namespace WMS.APIs.Migrations
                         column: x => x.equipmentId,
                         principalTable: "Equipments",
                         principalColumn: "equipmentId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -329,7 +329,7 @@ namespace WMS.APIs.Migrations
                         column: x => x.materialId,
                         principalTable: "Materials",
                         principalColumn: "materialId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -481,7 +481,7 @@ namespace WMS.APIs.Migrations
                         column: x => x.lotNumber,
                         principalTable: "MaterialLots",
                         principalColumn: "lotNumber",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -593,17 +593,17 @@ namespace WMS.APIs.Migrations
                 name: "ReceiptSublots",
                 columns: table => new
                 {
-                    receiptLotId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    receiptSublotId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    receiptSublotId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     importedQuantity = table.Column<double>(type: "float", nullable: false),
                     subLotStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     unitOfMeasure = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     locationId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    receiptLotId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ReceiptSublots", x => x.receiptLotId);
+                    table.PrimaryKey("PK_ReceiptSublots", x => x.receiptSublotId);
                     table.ForeignKey(
                         name: "FK_ReceiptSublots_Locations_locationId",
                         column: x => x.locationId,
@@ -779,6 +779,11 @@ namespace WMS.APIs.Migrations
                 name: "IX_ReceiptSublots_locationId",
                 table: "ReceiptSublots",
                 column: "locationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReceiptSublots_receiptLotId",
+                table: "ReceiptSublots",
+                column: "receiptLotId");
         }
 
         /// <inheritdoc />

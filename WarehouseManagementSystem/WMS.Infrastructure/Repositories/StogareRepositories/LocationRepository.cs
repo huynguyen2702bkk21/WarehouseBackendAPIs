@@ -29,6 +29,25 @@ namespace WMS.Infrastructure.Repositories.StogareRepositories
             return _context.Locations.FirstOrDefaultAsync(x => x.locationId== locationId);
         }
 
+        public async Task<Location> GetLocationByIdAsync(string locationId)
+        {
+            var location = await _context.Locations.FirstOrDefaultAsync(x => x.locationId == locationId);
+            if(location == null)
+            {
+                throw new Exception($"Location With Id: {locationId} not Found");
+            }
+
+            var materialSubLots = await _context.MaterialSubLots.Where(x => x.locationId == locationId).ToListAsync();
+            if(materialSubLots == null)
+            {
+                materialSubLots = new List<MaterialSubLot>();
+            }
+
+            location.materialSubLots = materialSubLots;
+
+            return location;
+        }
+
         public Task<List<Location>> GetLocationsByWarehouseId(string warehouseId)
         {
             return _context.Locations.Where(x => x.warehouseId == warehouseId).ToListAsync();

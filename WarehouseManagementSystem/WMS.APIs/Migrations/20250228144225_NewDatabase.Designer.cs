@@ -12,8 +12,8 @@ using WMS.Infrastructure;
 namespace WMS.APIs.Migrations
 {
     [DbContext(typeof(WMSDbContext))]
-    [Migration("20250227153111_CreateSQLDAtabase")]
-    partial class CreateSQLDAtabase
+    [Migration("20250228144225_NewDatabase")]
+    partial class NewDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -419,7 +419,7 @@ namespace WMS.APIs.Migrations
 
             modelBuilder.Entity("WMS.Domain.AggregateModels.InventoryReceiptAggregate.ReceiptSublot", b =>
                 {
-                    b.Property<string>("receiptLotId")
+                    b.Property<string>("receiptSublotId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id")
@@ -432,8 +432,9 @@ namespace WMS.APIs.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("receiptSublotId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("receiptLotId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("subLotStatus")
                         .IsRequired()
@@ -443,9 +444,11 @@ namespace WMS.APIs.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("receiptLotId");
+                    b.HasKey("receiptSublotId");
 
                     b.HasIndex("locationId");
+
+                    b.HasIndex("receiptLotId");
 
                     b.ToTable("ReceiptSublots");
                 });
@@ -823,7 +826,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.EquipmentAggregate.EquipmentClass", "equipmentClass")
                         .WithMany("equipments")
                         .HasForeignKey("equipmentClassId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("equipmentClass");
@@ -834,7 +837,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.EquipmentAggregate.EquipmentClass", "equipmentClass")
                         .WithMany("properties")
                         .HasForeignKey("equipmentClassId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("equipmentClass");
@@ -845,7 +848,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.EquipmentAggregate.Equipment", "equipment")
                         .WithMany("properties")
                         .HasForeignKey("equipmentId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("equipment");
@@ -965,7 +968,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.PartyAggregate.Supplier", "supplier")
                         .WithMany("inventoryReceipts")
                         .HasForeignKey("supplierId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WMS.Domain.AggregateModels.StorageAggregate.Warehouse", "warehouse")
@@ -1046,7 +1049,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.MaterialAggregate.MaterialClass", "materialClass")
                         .WithMany("properties")
                         .HasForeignKey("materialClassId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("materialClass");
@@ -1068,7 +1071,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.MaterialAggregate.MaterialLot", "materialLot")
                         .WithMany("properties")
                         .HasForeignKey("lotNumber")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("materialLot");
@@ -1079,7 +1082,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.MaterialAggregate.Material", "material")
                         .WithMany("porperties")
                         .HasForeignKey("materialId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("material");
@@ -1136,7 +1139,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.StorageAggregate.Warehouse", "warehouse")
                         .WithMany("locations")
                         .HasForeignKey("warehouseId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("warehouse");

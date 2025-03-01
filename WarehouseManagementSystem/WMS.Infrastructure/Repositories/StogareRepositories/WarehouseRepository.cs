@@ -1,4 +1,5 @@
-﻿using WMS.Domain.InterfaceRepositories.IStorage;
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using WMS.Domain.InterfaceRepositories.IStorage;
 
 namespace WMS.Infrastructure.Repositories.StogareRepositories
 {
@@ -23,9 +24,28 @@ namespace WMS.Infrastructure.Repositories.StogareRepositories
             return await _context.Warehouses.ToListAsync();
         }
 
-        public Task<Warehouse> GetWarehouseById(string warehouseId)
+        public async Task<Warehouse> GetWarehouseById(string warehouseId)
         {
-            return _context.Warehouses.FirstOrDefaultAsync(x => x.warehouseId == warehouseId);
+            return await _context.Warehouses.FirstOrDefaultAsync(x => x.warehouseId == warehouseId);
+        }
+
+        public async Task<Warehouse> GetWarehouseByIdAsync(string id)
+        {
+            var warehouse = await _context.Warehouses.FirstOrDefaultAsync(x => x.warehouseId== id);
+            if (warehouse == null)
+            {
+                throw new Exception($"Warehouse With Id: {id} not Found");
+            }
+
+            var locations = await _context.Locations.Where(x => x.warehouseId == id).ToListAsync();
+            if(locations == null)
+            {
+                locations = new List<Location>();
+            }
+
+            warehouse.locations = locations;
+
+            return warehouse;
         }
 
         public void Update(Warehouse warehouse)

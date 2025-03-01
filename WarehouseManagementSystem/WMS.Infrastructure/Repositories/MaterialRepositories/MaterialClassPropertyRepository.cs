@@ -7,9 +7,14 @@ namespace WMS.Infrastructure.Repositories.MaterialRepositories
         {
         }
 
-        public void AddAsync(MaterialClassProperty materialClassProperty)
+        public void Create(MaterialClassProperty materialClassProperty)
         {
             _context.MaterialClassProperties.Add(materialClassProperty);
+        }
+
+        public void Delete(MaterialClassProperty materialClassProperty)
+        {
+            _context.MaterialClassProperties.Remove(materialClassProperty);
         }
 
         public Task<List<MaterialClassProperty>> GetAllAsync()
@@ -20,6 +25,11 @@ namespace WMS.Infrastructure.Repositories.MaterialRepositories
         public Task<MaterialClassProperty> GetByIdAsync(string id)
         {
             return _context.MaterialClassProperties.FirstOrDefaultAsync(x => x.propertyId== id);
+        }
+
+        public void Update(MaterialClassProperty materialClassProperty)
+        {
+            _context.MaterialClassProperties.Update(materialClassProperty);
         }
     }
 }

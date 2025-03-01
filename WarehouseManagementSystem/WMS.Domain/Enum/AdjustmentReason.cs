@@ -2,10 +2,10 @@
 {
     public enum AdjustmentReason
     {
-        Damaged,
-        Expired,
-        Missing,
-        Overstock,
+        Damaged,                     
+        Expired,                   
+        Missing,                   
+        Overstock,                  
         Understock,
         Recount,
         QualityReassessment

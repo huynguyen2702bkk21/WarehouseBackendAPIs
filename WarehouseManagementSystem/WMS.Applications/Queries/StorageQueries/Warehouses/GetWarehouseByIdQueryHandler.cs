@@ -13,14 +13,19 @@
 
         public async Task<WarehouseDTO> Handle(GetWarehouseByIdQuery request, CancellationToken cancellationToken)
         {
-            var warehouse = await _warehouseRepository.GetWarehouseById(request.WarehouseId);
+            var warehouse = await _warehouseRepository.GetWarehouseByIdAsync(request.WarehouseId);
 
             if (warehouse == null)
             {
                 throw new EntityNotFoundException("Warehouses", request.WarehouseId);
             }
-
+           
             var warehouseDTO =  _mapper.Map<WarehouseDTO>(warehouse);
+
+            foreach (var location in warehouseDTO.Locations)
+            {
+                location.MapName(warehouseDTO.WarehouseName);
+            }
 
             return warehouseDTO;
         }

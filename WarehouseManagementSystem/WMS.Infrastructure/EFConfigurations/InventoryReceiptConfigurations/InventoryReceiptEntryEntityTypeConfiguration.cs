@@ -28,7 +28,7 @@
                 .WithMany(s => s.entries)
                 .HasForeignKey(s => s.InventoryReceiptId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

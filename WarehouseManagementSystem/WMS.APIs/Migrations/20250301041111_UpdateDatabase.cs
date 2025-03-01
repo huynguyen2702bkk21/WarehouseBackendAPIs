@@ -5,7 +5,7 @@
 namespace WMS.APIs.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdateMaterialClass_Queries : Migration
+    public partial class UpdateDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

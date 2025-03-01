@@ -21,5 +21,12 @@
             this.unitOfMeasure = unitOfMeasure;
             this.materialClassId = materialClassId;
         }
+
+        public void Update(string PropertyName, string PropertyValue, UnitOfMeasure UnitOfMeasure)
+        {
+            propertyName = PropertyName;
+            propertyValue = PropertyValue;
+            unitOfMeasure = UnitOfMeasure;
+        }
     }
 }

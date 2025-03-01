@@ -18,7 +18,8 @@
             builder.HasOne(s => s.supplier)
                 .WithMany(s => s.inventoryReceipts)
                 .HasForeignKey(s => s.supplierId)
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(s => s.receivedBy)
                 .WithMany(s => s.inventoryReceipts)

@@ -10,7 +10,12 @@
         Available,
         Reserved,
         Quarantine,
-        Expired
+        Expired,
+        Stored,
+        Rejected
+        
+
+
     }
 
 }

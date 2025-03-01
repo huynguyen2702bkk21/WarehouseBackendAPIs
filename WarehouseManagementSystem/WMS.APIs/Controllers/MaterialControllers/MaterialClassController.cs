@@ -51,7 +51,38 @@
         {
             return await CommandAsync(command);
         }
+        
+        [HttpPost("MaterialClasses/CreateMaterialClassProperty")]
+        public async Task<IActionResult> CreateMaterialClassProperty([FromBody] CreateMaterialClassPropertyCommand command)
+        {
+            return await CommandAsync(command);
+        }
 
+        [HttpDelete("MaterialClasses/DeleteMaterialClass")]
+        public async Task<IActionResult> DeleteMaterialClass(string materialClassId)
+        {
+            var command = new DeleteMaterialClassCommand(materialClassId);
+            return await CommandAsync(command);
+        }
+
+        [HttpDelete("MaterialClasses/DeleteMaterialClassProperty")]
+        public async Task<IActionResult> DeleteMaterialClassProperty(string materialClassPropertyId)
+        {
+            var command = new DeleteMaterialClassPropertyCommand(materialClassPropertyId);
+            return await CommandAsync(command);
+        }
+
+        [HttpPut("MaterialClasses/UpdateMaterialClass")]
+        public async Task<IActionResult> UpdateMaterialClass([FromBody] UpdateMaterialClassCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+        [HttpPut("MaterialClasses/UpdateMaterialClassProperty")]
+        public async Task<IActionResult> UpdateMaterialClassProperty([FromBody] UpdateMaterialClassPropertyCommand command)
+        {
+            return await CommandAsync(command);
+        }
 
     }
 }

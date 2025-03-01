@@ -1,12 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WMS.Application.Commands.MaterialCommands.MaterialClasses
+﻿namespace WMS.Application.Commands.MaterialCommands.MaterialClasses
 {
-    internal class DeleteMaterialClassCommandHandler
+    public class DeleteMaterialClassCommandHandler : IRequestHandler<DeleteMaterialClassCommand,bool>
     {
+        private readonly IMaterialClassRepository _materialClassRepository;
+        private readonly IMediator _mediator;
+
+        public DeleteMaterialClassCommandHandler(IMaterialClassRepository materialClassRepository, IMediator mediator)
+        {
+            _materialClassRepository = materialClassRepository;
+            _mediator = mediator;
+        }
+
+        public async Task<bool> Handle(DeleteMaterialClassCommand request, CancellationToken cancellationToken)
+        {
+            var materialClass = await _materialClassRepository.GetByIdAsync(request.MaterialClassId);
+            if (materialClass == null)
+            {
+                throw new Exception("Material class not found");
+            }
+
+            _materialClassRepository.Delete(materialClass);
+
+            return await _materialClassRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
+        }
+
+
+
+
     }
 }

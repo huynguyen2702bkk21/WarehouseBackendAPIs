@@ -12,8 +12,8 @@ using WMS.Infrastructure;
 namespace WMS.APIs.Migrations
 {
     [DbContext(typeof(WMSDbContext))]
-    [Migration("20250228040050_UpdateReceiptSublotTable")]
-    partial class UpdateReceiptSublotTable
+    [Migration("20250301041111_UpdateDatabase")]
+    partial class UpdateDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -826,7 +826,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.EquipmentAggregate.EquipmentClass", "equipmentClass")
                         .WithMany("equipments")
                         .HasForeignKey("equipmentClassId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("equipmentClass");
@@ -837,7 +837,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.EquipmentAggregate.EquipmentClass", "equipmentClass")
                         .WithMany("properties")
                         .HasForeignKey("equipmentClassId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("equipmentClass");
@@ -848,7 +848,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.EquipmentAggregate.Equipment", "equipment")
                         .WithMany("properties")
                         .HasForeignKey("equipmentId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("equipment");
@@ -968,7 +968,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.PartyAggregate.Supplier", "supplier")
                         .WithMany("inventoryReceipts")
                         .HasForeignKey("supplierId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WMS.Domain.AggregateModels.StorageAggregate.Warehouse", "warehouse")
@@ -1049,7 +1049,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.MaterialAggregate.MaterialClass", "materialClass")
                         .WithMany("properties")
                         .HasForeignKey("materialClassId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("materialClass");
@@ -1071,7 +1071,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.MaterialAggregate.MaterialLot", "materialLot")
                         .WithMany("properties")
                         .HasForeignKey("lotNumber")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("materialLot");
@@ -1082,7 +1082,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.MaterialAggregate.Material", "material")
                         .WithMany("porperties")
                         .HasForeignKey("materialId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("material");
@@ -1139,7 +1139,7 @@ namespace WMS.APIs.Migrations
                     b.HasOne("WMS.Domain.AggregateModels.StorageAggregate.Warehouse", "warehouse")
                         .WithMany("locations")
                         .HasForeignKey("warehouseId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("warehouse");

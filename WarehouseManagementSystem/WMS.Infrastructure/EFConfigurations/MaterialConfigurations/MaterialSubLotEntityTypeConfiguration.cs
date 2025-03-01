@@ -27,7 +27,7 @@
                 .WithMany(s => s.subLots)
                 .HasForeignKey(s => s.lotNumber)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(s => s.location)
                 .WithMany(s => s.materialSubLots)

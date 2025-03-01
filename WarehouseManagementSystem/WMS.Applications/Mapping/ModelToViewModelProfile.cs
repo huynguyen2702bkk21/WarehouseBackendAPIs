@@ -11,6 +11,7 @@
             MapWarehouseViewModel();
             MapMaterialClassViewModel();
             MapMaterialClassPropertyViewModel();
+            MapMaterialSubLotPropertyViewModel();
         }
 
         public void MapPersonViewModel()
@@ -32,12 +33,14 @@
 
         public void MapLocationViewModel()
         {
-            CreateMap<Location, LocationDTO>();
+            CreateMap<Location, LocationDTO>()
+                .ForMember(s => s.MaterialSubLotDTOs, s => s.MapFrom(s => s.materialSubLots));
         }
 
         public void MapWarehouseViewModel()
         {
-            CreateMap<Warehouse, WarehouseDTO>();
+            CreateMap<Warehouse, WarehouseDTO>()
+                .ForMember(s => s.Locations, s => s.MapFrom(s => s.locations));
         }
 
         public void MapMaterialClassViewModel()
@@ -50,6 +53,13 @@
         {
             CreateMap<MaterialClassProperty, MaterialClassPropertyDTO>()
                 .ForMember(s => s.UnitOfMeasure, s => s.MapFrom(s => s.unitOfMeasure.ToString()));
+        }
+
+        public void MapMaterialSubLotPropertyViewModel()
+        {
+            CreateMap<MaterialSubLot, MaterialSubLotDTO>()
+                .ForMember(s => s.UnitOfMeasure, s => s.MapFrom(s => s.unitOfMeasure.ToString()))
+                .ForMember(s => s.SubLotStatus, s => s.MapFrom(s => s.subLotStatus.ToString()));
         }
 
     }

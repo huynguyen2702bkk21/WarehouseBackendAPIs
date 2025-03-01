@@ -10,7 +10,7 @@
                 .WithMany(b => b.locations)
                 .HasForeignKey(b => b.warehouseId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
         }
     }

@@ -37,7 +37,7 @@
 
             newMaterialClass.AddProperty(newproperty);
             
-            _materialClassRepository.AddAsync(newMaterialClass);
+            _materialClassRepository.Create(newMaterialClass);
 
             return await _materialClassRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 

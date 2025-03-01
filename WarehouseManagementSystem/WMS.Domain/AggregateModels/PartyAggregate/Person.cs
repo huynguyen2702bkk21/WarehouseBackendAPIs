@@ -21,7 +21,6 @@
 
         public void UpdatePerson(string personName, EmployeeType role) 
         {
-            // Update the person
             this.personName = personName;
             this.role = role;
         }

@@ -4,7 +4,9 @@
     {
         Task<List<MaterialClassProperty>> GetAllAsync();
         Task<MaterialClassProperty> GetByIdAsync(string id);
-        void AddAsync(MaterialClassProperty materialClassProperty);
+        void Create(MaterialClassProperty materialClassProperty);
+        void Delete(MaterialClassProperty materialClassProperty);
+        void Update(MaterialClassProperty materialClassProperty);
 
     }
 }

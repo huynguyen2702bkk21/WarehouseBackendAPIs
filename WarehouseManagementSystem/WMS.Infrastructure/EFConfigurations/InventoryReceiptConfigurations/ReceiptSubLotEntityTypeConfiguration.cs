@@ -32,7 +32,7 @@
                 .WithMany(s => s.receiptSublots)
                 .HasForeignKey(s => s.receiptLotId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

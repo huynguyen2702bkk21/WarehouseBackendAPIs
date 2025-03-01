@@ -24,7 +24,7 @@
                 .WithMany(s => s.properties)
                 .HasForeignKey(s => s.lotNumber)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
     

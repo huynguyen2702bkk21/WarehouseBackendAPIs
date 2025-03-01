@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WMS.Application.Commands.MaterialCommands.MaterialClasses
+﻿namespace WMS.Application.Commands.MaterialCommands.MaterialClasses
 {
-    internal class DeleteMaterialClassCommand
+    public class DeleteMaterialClassCommand : IRequest<bool>
     {
+        public string MaterialClassId { get; set; }
+
+        public DeleteMaterialClassCommand(string materialClassId)
+        {
+            MaterialClassId = materialClassId;
+        }
     }
 }
