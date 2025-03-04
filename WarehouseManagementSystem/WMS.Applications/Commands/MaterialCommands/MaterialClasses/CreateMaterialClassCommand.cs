@@ -5,13 +5,13 @@
         public string MaterialClassId { get; set; }
         public string ClassName { get; set; }
 
-        public MaterialClassPropertyDTO PropertyDTO { get; set; }
+        public List<CreateMaterialClassPropertyCommand> Properties { get; set; }
 
-        public CreateMaterialClassCommand(string materialClassId, string className, MaterialClassPropertyDTO propertyDTO)
+        public CreateMaterialClassCommand(string materialClassId, string className, List<CreateMaterialClassPropertyCommand> properties)
         {
             MaterialClassId = materialClassId;
             ClassName = className;
-            PropertyDTO = propertyDTO;
+            Properties = properties;
         }
     }
 }

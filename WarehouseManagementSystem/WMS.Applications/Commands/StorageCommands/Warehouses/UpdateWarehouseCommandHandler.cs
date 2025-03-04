@@ -21,8 +21,6 @@
 
             warehouse.UpdateWarehouse(warehouseName: request.WarehouseName);
 
-            _warehouseRepository.Update(warehouse);
-
             return await _warehouseRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
         }
 

@@ -23,8 +23,6 @@
                                     address: request.Address,
                                     contactDetails: request.ContactDetails);
 
-            _supplierRepository.Update(supplier);
-
             return await _supplierRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
         }

@@ -32,12 +32,16 @@ namespace WMS.Application.Commands.MaterialCommands.MaterialClasses
                 {
                     throw new Exception("Material class property not found");
                 }
-                materialClassProperty.Update(property.PropertyName, property.PropertyValue, property.UnitOfMeasure);
+
+                if (!Enum.TryParse<UnitOfMeasure>(property.UnitOfMeasure, out var unit))
+                {
+                    throw new ArgumentException("Invalid status value", nameof(property.UnitOfMeasure));
+                }
+
+                materialClassProperty.Update(property.PropertyName, property.PropertyValue, unit);
             }
 
             materialClass.Update(request.ClassName);
-            
-            _materialClassRepository.Update(materialClass);
 
             return await _materialClassRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
         }

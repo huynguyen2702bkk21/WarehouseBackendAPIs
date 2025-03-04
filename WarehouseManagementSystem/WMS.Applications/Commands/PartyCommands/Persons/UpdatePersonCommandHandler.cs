@@ -21,9 +21,12 @@
                 throw new EntityNotFoundException(nameof(Person), request.PersonId);
             }
 
-            person.UpdatePerson(request.PersonName, request.Role);
+            if (!Enum.TryParse<EmployeeType>(request.Role, out var EmployeeRole))
+            {
+                throw new ArgumentException("Invalid status value", nameof(request.Role));
+            }
 
-            _personRepository.Update(person);
+            person.UpdatePerson(request.PersonName, EmployeeRole);
 
             return await _personRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 

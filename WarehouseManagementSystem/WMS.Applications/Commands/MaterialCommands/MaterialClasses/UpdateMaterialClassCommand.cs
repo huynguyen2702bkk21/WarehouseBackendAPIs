@@ -4,13 +4,13 @@
     {
         public string MaterialClassId { get; set; }
         public string ClassName { get; set; }
-        public List<MaterialClassPropertyDTO> Properties { get; set; }
+        public List<CreateMaterialClassPropertyCommand> Properties { get; set; }
 
         public UpdateMaterialClassCommand()
         {
         }
 
-        public UpdateMaterialClassCommand(string materialClassId, string className, List<MaterialClassPropertyDTO> properties)
+        public UpdateMaterialClassCommand(string materialClassId, string className, List<CreateMaterialClassPropertyCommand> properties)
         {
             MaterialClassId = materialClassId;
             ClassName = className;

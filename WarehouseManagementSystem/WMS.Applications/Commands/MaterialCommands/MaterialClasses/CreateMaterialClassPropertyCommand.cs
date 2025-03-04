@@ -8,10 +8,10 @@ namespace WMS.Application.Commands.MaterialCommands.MaterialClasses
 
         public string PropertyName { get; set; }
         public string PropertyValue { get; set; }
-        public UnitOfMeasure UnitOfMeasure { get; set; }
+        public string UnitOfMeasure { get; set; }
         public string MaterialClassId { get; set; }
 
-        public CreateMaterialClassPropertyCommand(string propertyId, string propertyName, string propertyValue, UnitOfMeasure unitOfMeasure, string materialClassId)
+        public CreateMaterialClassPropertyCommand(string propertyId, string propertyName, string propertyValue, string unitOfMeasure, string materialClassId)
         {
             PropertyId = propertyId;
             PropertyName = propertyName;

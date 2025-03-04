@@ -15,5 +15,26 @@
         public List<InventoryReceiptEntry> receiptEntries  { get; set; }
         public List<InventoryIssueEntry> issueEntries  { get; set; }
 
+        public Material(string materialId, string materialName, string materialClassId)
+        {
+            this.materialId = materialId;
+            this.materialName = materialName;
+            this.materialClassId = materialClassId;
+            this.properties = new List<MaterialProperty>();
+        }
+
+        public void AddProperty(MaterialProperty property)
+        {
+            properties.Add(property);
+        }
+
+        public void Update(string MaterialName, string MaterialClassId)
+        {
+            materialName = MaterialName;
+            materialClassId = MaterialClassId;
+        }
+        
+
+
     }
 }

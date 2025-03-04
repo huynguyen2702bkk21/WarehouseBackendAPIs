@@ -19,10 +19,15 @@
                 throw new Exception("Material class property already exists");
             }
 
+            if (!Enum.TryParse<UnitOfMeasure>(request.UnitOfMeasure, out var unit))
+            {
+                throw new ArgumentException("Invalid status value", nameof(request.UnitOfMeasure));
+            }
+
             var newMaterialClassProperty = new MaterialClassProperty(propertyId: request.PropertyId,
                                                                      propertyName: request.PropertyName,
                                                                      propertyValue: request.PropertyValue,
-                                                                     unitOfMeasure: request.UnitOfMeasure,
+                                                                     unitOfMeasure: unit,
                                                                      materialClassId: request.MaterialClassId);
 
             _materialClassPropertyRepository.Create(newMaterialClassProperty);

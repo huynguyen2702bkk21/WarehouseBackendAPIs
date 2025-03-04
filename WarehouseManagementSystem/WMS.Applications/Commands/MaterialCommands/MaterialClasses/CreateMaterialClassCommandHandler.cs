@@ -15,28 +15,38 @@
 
         public async Task<bool> Handle(CreateMaterialClassCommand request, CancellationToken cancellationToken)
         {
-            var materialCLass = await _materialClassRepository.GetById(request.MaterialClassId);
-            if (materialCLass != null)
+            var material = await _materialClassRepository.GetById(request.MaterialClassId);
+            if (material != null)
             {
-                throw new Exception("Material class already exists");
+                throw new Exception("MaterialClass already exists");
             }
 
-            var property = await _materialClassPropertyRepository.GetByIdAsync(request.PropertyDTO.PropertyId);
-            if(property != null)
+            var newMaterialClass = new MaterialClass(materialClassId: request.MaterialClassId,
+                                                className: request.ClassName);
+
+            foreach (var property in request.Properties)
             {
-                throw new Exception("Material class property already exists");
+                var checkProperty = await _materialClassPropertyRepository.GetByIdAsync(property.PropertyId);
+                if (checkProperty != null)
+                {
+                    throw new Exception("MaterialClass property already exists");
+                }
+
+                if (!Enum.TryParse<UnitOfMeasure>(property.UnitOfMeasure, out var unit))
+                {
+                    throw new ArgumentException("Invalid status value", nameof(property.UnitOfMeasure));
+                }
+
+                var newProperty = new MaterialClassProperty (propertyId: property.PropertyId,
+                                                             propertyName: property.PropertyName,
+                                                             propertyValue: property.PropertyValue,
+                                                             unitOfMeasure: unit,
+                                                             materialClassId: newMaterialClass.materialClassId);
+
+                newMaterialClass.AddProperty(newProperty);
+
             }
 
-            var newMaterialClass = new MaterialClass(request.MaterialClassId, request.ClassName);
-            
-            var newproperty = new MaterialClassProperty(propertyId: request.PropertyDTO.PropertyId,
-                                                        propertyName: request.PropertyDTO.PropertyName,
-                                                        propertyValue: request.PropertyDTO.PropertyValue,
-                                                        unitOfMeasure: request.PropertyDTO.UnitOfMeasure,
-                                                        materialClassId: newMaterialClass.materialClassId);
-
-            newMaterialClass.AddProperty(newproperty);
-            
             _materialClassRepository.Create(newMaterialClass);
 
             return await _materialClassRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);

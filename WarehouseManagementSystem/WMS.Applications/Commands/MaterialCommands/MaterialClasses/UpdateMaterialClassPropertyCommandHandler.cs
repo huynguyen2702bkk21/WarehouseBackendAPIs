@@ -19,9 +19,12 @@
                 throw new Exception("Material class property not found");
             }
 
-            materialClassProperty.Update(request.PropertyName, request.PropertyValue, request.UnitOfMeasure);
+            if (!Enum.TryParse<UnitOfMeasure>(request.UnitOfMeasure, out var unit))
+            {
+                throw new ArgumentException("Invalid status value", nameof(request.UnitOfMeasure));
+            }
 
-            _materialClassPropertyRepository.Update(materialClassProperty);
+            materialClassProperty.Update(request.PropertyName, request.PropertyValue, unit);
 
             return await _materialClassPropertyRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
         }

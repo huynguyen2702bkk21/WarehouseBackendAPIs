@@ -1,10 +1,10 @@
 ﻿namespace WMS.Application.Queries.MaterialQueries.Materials
 {
-    public class GetMaterialsByClassId : IRequest<MaterialClassDTO>
+    public class GetMaterialsByClassIdQuery : IRequest<MaterialClassDTO>
     {
         public string ClassId { get; set; }
 
-        public GetMaterialsByClassId(string classId)
+        public GetMaterialsByClassIdQuery(string classId)
         {
             ClassId = classId;
         }

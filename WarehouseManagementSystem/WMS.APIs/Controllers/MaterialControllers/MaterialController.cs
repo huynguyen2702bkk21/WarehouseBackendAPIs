@@ -1,4 +1,5 @@
-﻿using WMS.Application.Queries.MaterialQueries.Materials;
+﻿using WMS.Application.Commands.MaterialCommands.Materials;
+using WMS.Application.Queries.MaterialQueries.Materials;
 
 namespace WMS.APIs.Controllers.MaterialControllers
 {
@@ -49,13 +50,51 @@ namespace WMS.APIs.Controllers.MaterialControllers
             return result;
         }
 
-        [HttpGet("GetMaterialsByClassId/{classId}")]
+        [HttpGet("GetMaterialsByClassIdQuery/{classId}")]
         public async Task<MaterialClassDTO> GetMaterialsByClassId(string classId)
         {
-            var query = new GetMaterialsByClassId(classId);
+            var query = new GetMaterialsByClassIdQuery(classId);
             var result = await _mediator.Send(query);
 
             return result;
+        }
+
+        [HttpPost("CreateMaterial")]
+        public async Task<IActionResult> CreateMaterial([FromBody] CreateMaterialCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+        [HttpPost("CreateMaterialProperty")]
+        public async Task<IActionResult> CreateMaterialProperty([FromBody] CreateMaterialPropertyCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+        [HttpDelete("DeleteMaterial/{id}")]
+        public async Task<IActionResult> DeleteMaterial(string id)
+        {
+            var command = new DeleteMaterialCommand(id);
+            return await CommandAsync(command);
+        }
+
+        [HttpDelete("DeleteMaterialProperty/{id}")]
+        public async Task<IActionResult> DeleteMaterialProperty(string id)
+        {
+            var command = new DeleteMaterialPropertyCommand(id);
+            return await CommandAsync(command);
+        }
+
+        [HttpPut("UpdateMaterial")]
+        public async Task<IActionResult> UpdateMaterial([FromBody] UpdateMaterialCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+        [HttpPut("UpdateMaterialProperty")]
+        public async Task<IActionResult> UpdateMaterialProperty([FromBody] UpdateMaterialPropertyCommand command)
+        {
+            return await CommandAsync(command);
         }
 
     }

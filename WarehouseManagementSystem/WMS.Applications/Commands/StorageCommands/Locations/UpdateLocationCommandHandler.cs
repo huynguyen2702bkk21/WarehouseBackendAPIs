@@ -21,8 +21,6 @@
 
             location.UpdateLocation(request.WarehouseId);
 
-            _locationRepository.Update(location);
-
             return await _locationRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
         }
     }
