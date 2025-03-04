@@ -10,7 +10,6 @@
         [ForeignKey("equipmentClassId")]
         public string equipmentClassId { get; set; }
         public EquipmentClass equipmentClass { get; set; }
-        
         public List<EquipmentProperty> properties { get; set; }
     }
 }

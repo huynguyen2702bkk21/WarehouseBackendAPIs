@@ -2,6 +2,7 @@
 {
     public interface IInventoryReceiptRepository : IRepository<InventoryReceipt>
     {
-
+        Task<List<InventoryReceipt>> GetAllAsync();
+        Task<InventoryReceipt> GetByIdAsync(string inventoryReceiptId);
     }
 }

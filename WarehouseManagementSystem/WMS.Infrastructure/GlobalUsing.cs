@@ -11,6 +11,7 @@ global using WMS.Domain.AggregateModels.MaterialLotAdjustmentAggregate;
 global using WMS.Domain.AggregateModels.PartyAggregate;
 global using WMS.Domain.AggregateModels.StorageAggregate;
 global using WMS.Domain.Enum;
+global using WMS.Domain.InterfaceRepositories.IInventoryReceipt;
 global using WMS.Domain.InterfaceRepositories.IMaterial;
 global using WMS.Domain.InterfaceRepositories.IParty;
 global using WMS.Domain.Seedwork;
@@ -20,5 +21,7 @@ global using WMS.Infrastructure.EFConfigurations.InventoryReceiptConfigurations;
 global using WMS.Infrastructure.EFConfigurations.MaterialConfigurations;
 global using WMS.Infrastructure.EFConfigurations.PartyConfigurations;
 global using WMS.Infrastructure.EFConfigurations.StorageConfigurations;
+global using WMS.Domain.InterfaceRepositories.IInventoryIssue;
+
 
 

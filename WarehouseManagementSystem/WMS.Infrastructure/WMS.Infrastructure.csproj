@@ -29,9 +29,7 @@
 
   <ItemGroup>
     <Folder Include="Repositories\EquipmentRepositories\" />
-    <Folder Include="Repositories\InventoryIssueRepositories\" />
     <Folder Include="Repositories\InventoryLogRepositories\" />
-    <Folder Include="Repositories\InventoryReceiptRepositories\" />
     <Folder Include="Repositories\MaterialLotAdjustmentRepositories\" />
   </ItemGroup>
 

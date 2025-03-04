@@ -39,9 +39,15 @@
             builder.Services.AddScoped<IMaterialLotPropertyRepository, MaterialLotPropertyRepository>();
             builder.Services.AddScoped<IMaterialSubLotRepository, MaterialSubLotRepository>();
 
+            builder.Services.AddScoped<IInventoryReceiptRepository, InventoryReceiptRepository>();
+            builder.Services.AddScoped<IInventoryReceiptEntryRepository, InventoryReceiptEntryRepository>();
+            builder.Services.AddScoped<IReceiptLotRepository, ReceiptLotRepository>();
+            builder.Services.AddScoped<IReceiptSubLotRepository, ReceiptSubLotRepository>();
 
-
-
+            builder.Services.AddScoped<IInventoryIssueRepository, InventoryIssueRepository>();
+            builder.Services.AddScoped<IInventoryIssueEntryRepository, InventoryIssueEntryRepository>();
+            builder.Services.AddScoped<IIssueLotRepository, IssueLotRepository>();
+            builder.Services.AddScoped<IIssueSubLotRepository, IssueSubLotRepository>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

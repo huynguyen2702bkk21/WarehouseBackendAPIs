@@ -1,4 +1,7 @@
-﻿namespace WMS.Application.Mapping
+﻿using WMS.Application.DTOs.InventoryReceiptDTOs;
+using WMS.Domain.AggregateModels.InventoryReceiptAggregate;
+
+namespace WMS.Application.Mapping
 {
     public class ModelToViewModelProfile : Profile
     {
@@ -21,6 +24,12 @@
 
             MapMaterialLotViewModel();
             MapMaterialLotPropertyViewModel();
+
+            MapReceiptSublotViewModel();
+            MapReceiptLotViewModel();
+            MapInventoryReceiptEntryViewModel();
+            MapInventoryReceiptViewModel();
+
 
         }
 
@@ -99,6 +108,32 @@
         {
             CreateMap<MaterialLotProperty, MaterialLotPropertyDTO>()
                 .ForMember(s => s.UnitOfMeasure, s => s.MapFrom(s => s.unitOfMeasure.ToString()));
+        }
+
+        public void MapReceiptSublotViewModel()
+        {
+            CreateMap<ReceiptSublot, ReceiptSubLotDTO>()
+                .ForMember(s => s.UnitOfMeasure, s => s.MapFrom(s => s.unitOfMeasure.ToString()))
+                .ForMember(s => s.SubLotStatus, s => s.MapFrom(s => s.subLotStatus.ToString()));
+        }
+
+        public void MapReceiptLotViewModel()
+        {
+            CreateMap<ReceiptLot, ReceiptLotDTO>()
+                .ForMember(s => s.ReceiptSublots, s => s.MapFrom(s => s.receiptSublots))
+                .ForMember(s => s.ReceiptLotStatus, s => s.MapFrom(s => s.receiptLotStatus.ToString()));
+        }
+
+        public void MapInventoryReceiptEntryViewModel()
+        {
+            CreateMap<InventoryReceiptEntry, InventoryReceiptEntryDTO>();
+        }
+
+        public void MapInventoryReceiptViewModel()
+        {
+            CreateMap<InventoryReceipt, InventoryReceiptDTO>()
+                .ForMember(s => s.Entries, s => s.MapFrom(s => s.entries))
+                .ForMember(s => s.ReceiptStatus, s => s.MapFrom(s => s.receiptStatus.ToString()));
         }
 
     }
