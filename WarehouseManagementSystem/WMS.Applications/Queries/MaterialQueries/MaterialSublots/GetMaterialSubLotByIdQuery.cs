@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WMS.Application.Queries.MaterialQueries.MaterialSublots
+﻿namespace WMS.Application.Queries.MaterialQueries.MaterialSublots
 {
-    internal class GetMaterialSubLotByIdQuery
+    public class GetMaterialSubLotByIdQuery : IRequest<MaterialSubLotDTO>
     {
+        public string Id { get; set; }
+
+        public GetMaterialSubLotByIdQuery(string id)
+        {
+            Id = id;
+        }
     }
 }

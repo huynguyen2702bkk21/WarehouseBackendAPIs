@@ -1,5 +1,4 @@
-﻿
-namespace WMS.Infrastructure.Repositories.MaterialRepositories
+﻿namespace WMS.Infrastructure.Repositories.MaterialRepositories
 {
     public class MaterialSubLotRepository : BaseRepository, IMaterialSubLotRepository
     {
@@ -12,9 +11,30 @@ namespace WMS.Infrastructure.Repositories.MaterialRepositories
             return await _context.MaterialSubLots.ToListAsync();
         }
 
+        public async Task<MaterialSubLot> GetByIdAsync(string Id)
+        {
+            return await _context.MaterialSubLots.FirstOrDefaultAsync(x => x.subLotId== Id);
+        }
+
+        public Task<List<MaterialSubLot>> GetMaterialSubLotsByStatus(string Status)
+        {
+            if (!Enum.TryParse<LotStatus>(Status, out var outStatus))
+            {
+                throw new ArgumentException("Invalid status");
+            }
+
+            return _context.MaterialSubLots.Where(x => x.subLotStatus == outStatus).ToListAsync();    
+
+        }
+
         public async Task<List<MaterialSubLot>> GetMaterialSubLotsByLocationId(string locationId)
         {
             return await _context.MaterialSubLots.Where(x => x.locationId == locationId).ToListAsync();
+        }
+
+        public async Task<List<MaterialSubLot>> GetMaterialSubLotsByLotNumber(string lotNumber)
+        {
+            return await _context.MaterialSubLots.Where(x => x.lotNumber == lotNumber).ToListAsync();
         }
     }
 }
