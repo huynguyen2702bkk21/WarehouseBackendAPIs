@@ -22,7 +22,7 @@
                 .IsRequired();
 
             builder.HasOne(b => b.material)
-                .WithMany(b => b.porperties)
+                .WithMany(b => b.properties)
                 .HasForeignKey(b => b.materialId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);

@@ -14,9 +14,6 @@
     <Folder Include="DomainEventHandlers\" />
     <Folder Include="ErrorNotifications\" />
     <Folder Include="Exceptions\" />
-    <Folder Include="Queries\MaterialQueries\Materials\" />
-    <Folder Include="Queries\MaterialQueries\MaterialLots\" />
-    <Folder Include="Queries\MaterialQueries\MaterialSublots\" />
   </ItemGroup>
 
   <ItemGroup>

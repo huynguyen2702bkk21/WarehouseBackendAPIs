@@ -4,9 +4,9 @@
     {
         public string PersonId { get; set; }
         public string PersonName{ get; set; }
-        public EmployeeType Role{ get; set; }
+        public string Role{ get; set; }
 
-        public CreatePersonCommand(string personId, string personName, EmployeeType role)
+        public CreatePersonCommand(string personId, string personName, string role)
         {
             PersonId = personId;
             PersonName = personName;

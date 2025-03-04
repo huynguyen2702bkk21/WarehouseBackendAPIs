@@ -1,7 +1,7 @@
 ﻿namespace WMS.APIs.Controllers.PartyControllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("WarehouseAPI/[controller]")]
     public class PersonController : ApiControllerBase
     {
         private readonly IMediator _mediator;
@@ -11,7 +11,7 @@
             _mediator = mediator;
         }
 
-        [HttpGet("Persons/Getalll")]
+        [HttpGet("GetAllPeople")]
         public async Task<IEnumerable<PersonDTO>> GetAll()
         {
             var query = new GetAllPersonQuery();
@@ -21,7 +21,7 @@
 
         }
 
-        [HttpGet("Persons/GetPersonById/{id}")]
+        [HttpGet("GetPersonById/{id}")]
         public async Task<PersonDTO> GetById(string id)
         {
             var query = new GetPersonByIdQuery(id);
@@ -30,19 +30,19 @@
             return result;
         }
 
-        [HttpPost("Persons/CreateSupplier New Persons")]
+        [HttpPost("Create New Person")]
         public async Task<IActionResult> CreatePerson([FromBody] CreatePersonCommand request)
         {
             return await CommandAsync(request);
         }
 
-        [HttpPut("Persons/Update Persons")]
+        [HttpPut("Update Person")]
         public async Task<IActionResult> UpdatePerson([FromBody] UpdatePersonCommand request)
         {
             return await CommandAsync(request);
         }
 
-        [HttpDelete("Persons/Delete Persons/{id}")]
+        [HttpDelete("Delete Person/{id}")]
         public async Task<IActionResult> DeletePerson(string id)
         {
             var request = new DeletePersonCommand(id);

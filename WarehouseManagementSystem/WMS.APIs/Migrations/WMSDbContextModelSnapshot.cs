@@ -1077,7 +1077,7 @@ namespace WMS.APIs.Migrations
             modelBuilder.Entity("WMS.Domain.AggregateModels.MaterialAggregate.MaterialProperty", b =>
                 {
                     b.HasOne("WMS.Domain.AggregateModels.MaterialAggregate.Material", "material")
-                        .WithMany("porperties")
+                        .WithMany("properties")
                         .HasForeignKey("materialId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1192,7 +1192,7 @@ namespace WMS.APIs.Migrations
 
                     b.Navigation("lots");
 
-                    b.Navigation("porperties");
+                    b.Navigation("properties");
 
                     b.Navigation("receiptEntries");
                 });

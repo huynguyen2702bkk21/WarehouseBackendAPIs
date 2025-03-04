@@ -1,7 +1,7 @@
 ﻿namespace WMS.APIs.Controllers.PartyControllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("WarehouseAPI/[controller]")]
     public class SupplierController : ApiControllerBase
     {
         private readonly IMediator _mediator;
@@ -11,7 +11,7 @@
             _mediator = mediator;
         }
 
-        [HttpGet("Suppliers/GetAll")]
+        [HttpGet("GetAllSupplier")]
         public async Task<IEnumerable<SupplierDTO>> GetAll()
         {
             var query = new GetAllSupplierQuery();
@@ -20,7 +20,7 @@
             return result;
         }
 
-        [HttpGet("Suppliers/GetById")]
+        [HttpGet("GetSupplierById")]
         public async Task<SupplierDTO> GetById(string id)
         {
             var query = new GetSupplierByIdQuery(id);
@@ -29,13 +29,13 @@
             return result;
         }
 
-        [HttpPost("Suppliers/Create New Supplier")]
+        [HttpPost("Create New Supplier")]
         public async Task<IActionResult> CreateSupplier([FromBody] CreateSupplierCommand command)
         {
             return await CommandAsync(command);
         }
 
-        [HttpDelete("Suppliers/Delete Supplier/{id}")]
+        [HttpDelete("Delete Supplier/{id}")]
         public async Task<IActionResult> DeleteSupplier(string id)
         {
             var request = new DeleteSupplierCommand(id);
@@ -43,7 +43,7 @@
             return await CommandAsync(request);
         }
 
-        [HttpPut("Suppliers/Update Supplier")]
+        [HttpPut("Update Supplier")]
         public async Task<IActionResult> UpdateSupplier([FromBody] UpdateSupplierCommand command)
         {
             return await CommandAsync(command);

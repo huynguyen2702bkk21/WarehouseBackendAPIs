@@ -17,6 +17,7 @@
 
             // Register the AutoMapper services with the assembly
             builder.Services.AddAutoMapper(typeof(ModelToViewModelProfile).Assembly);
+
             // Register the MediatR services with the assembly
             builder.Services.AddMediatR(config =>
                 config.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));

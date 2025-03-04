@@ -1,4 +1,4 @@
-﻿namespace WMS.Application.Commands.MaterialCommands.MaterialClasses
+﻿    namespace WMS.Application.Commands.MaterialCommands.MaterialClasses
 {
     public class CreateMaterialClassPropertyCommandHandler : IRequestHandler<CreateMaterialClassPropertyCommand,bool>
     {
@@ -20,10 +20,10 @@
             }
 
             var newMaterialClassProperty = new MaterialClassProperty(propertyId: request.PropertyId,
-                                                                    propertyName: request.PropertyName,
-                                                                    propertyValue: request.PropertyValue,
-                                                                    unitOfMeasure: request.UnitOfMeasure,
-                                                                    materialClassId: request.MaterialClassId);
+                                                                     propertyName: request.PropertyName,
+                                                                     propertyValue: request.PropertyValue,
+                                                                     unitOfMeasure: request.UnitOfMeasure,
+                                                                     materialClassId: request.MaterialClassId);
 
             _materialClassPropertyRepository.Create(newMaterialClassProperty);
 

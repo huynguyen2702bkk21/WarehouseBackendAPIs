@@ -17,14 +17,14 @@ namespace WMS.Infrastructure.Repositories.MaterialRepositories
             _context.MaterialClassProperties.Remove(materialClassProperty);
         }
 
-        public Task<List<MaterialClassProperty>> GetAllAsync()
+        public async Task<List<MaterialClassProperty>> GetAllAsync()
         {
-            return _context.MaterialClassProperties.ToListAsync();
+            return await _context.MaterialClassProperties.ToListAsync();
         }
 
-        public Task<MaterialClassProperty> GetByIdAsync(string id)
+        public async Task<MaterialClassProperty> GetByIdAsync(string id)
         {
-            return _context.MaterialClassProperties.FirstOrDefaultAsync(x => x.propertyId== id);
+            return await _context.MaterialClassProperties.FirstOrDefaultAsync(x => x.propertyId== id);
         }
 
         public void Update(MaterialClassProperty materialClassProperty)

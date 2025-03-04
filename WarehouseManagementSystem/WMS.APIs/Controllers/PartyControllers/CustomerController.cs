@@ -1,7 +1,7 @@
 ﻿namespace WMS.APIs.Controllers.PartyControllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("WarehouseAPI/[controller]")]
     public class CustomerController : ApiControllerBase
     {
         private readonly IMediator _mediator;
@@ -11,7 +11,7 @@
             _mediator = mediator;
         }
 
-        [HttpGet("Customers/GetAll")]
+        [HttpGet("GetAllCustomers")]
         public async Task<IEnumerable<CustomerDTO>> GetAll()
         {
             var query = new GetAllCustomersQuery();
@@ -20,7 +20,7 @@
             return result;
         }
 
-        [HttpGet("Customers/GetCustomerById/{id}")]
+        [HttpGet("GetCustomerById/{id}")]
         public async Task<CustomerDTO> GetById(string id)
         {
             var query = new GetCustomerByIdQuery(id);
@@ -29,13 +29,13 @@
             return result;
         }
 
-        [HttpPost("Customers/CreateSupplier New Customer")]
+        [HttpPost("CreateSupplier New Customer")]
         public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerCommand request)
         {
             return await CommandAsync(request);
         }
 
-        [HttpDelete("Customers/Delete Customer/{id}")]
+        [HttpDelete("Delete Customer/{id}")]
         public async Task<IActionResult> DeleteCustomer(string id)
         {
             var request = new DeleteCustomerCommand(id);
@@ -43,7 +43,7 @@
             return await CommandAsync(request);
         }
 
-        [HttpPut("Customers/Update Customer")]
+        [HttpPut("Update Customer")]
         public async Task<IActionResult> UpdateCustomer([FromBody] UpdateCustomerCommand request)
         {
             return await CommandAsync(request);

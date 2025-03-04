@@ -1,7 +1,7 @@
 ﻿namespace WMS.APIs.Controllers.StorageControllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("WarehouseAPI/[controller]")]
     public class WarehouseController : ApiControllerBase
     {
         private readonly IMediator _mediator;
@@ -10,7 +10,7 @@
             _mediator = mediator;
         }
 
-        [HttpGet("Warehouses/GetAll")]
+        [HttpGet("GetAllWarehouses")]
         public async Task<IEnumerable<WarehouseDTO>> GetAll()
         {
             var query = new GetAllWarehouseQuery();
@@ -19,7 +19,7 @@
             return result;
         }
 
-        [HttpGet("Warehouses/GetById/{id}")]
+        [HttpGet("GetWarehouseById/{id}")]
         public async Task<WarehouseDTO> GetById(string id)
         {
             var query = new GetWarehouseByIdQuery(id);
@@ -28,13 +28,13 @@
             return result;
         }
 
-        [HttpPost("Warehouses/Create New Warehouse")]
+        [HttpPost("Create New Warehouse")]
         public async Task<IActionResult> CreateWarehouse([FromBody] CreateWarehouseCommand request)
         {
             return await CommandAsync(request);
         }
 
-        [HttpDelete("Warehouses/Delete Warehouse/{id}")]
+        [HttpDelete("Delete Warehouse/{id}")]
         public async Task<IActionResult> DeleteWarehouse(string id)
         {
             var request = new DeleteWarehouseCommand(id);
@@ -42,7 +42,7 @@
             return await CommandAsync(request);
         }
 
-        [HttpPut("Warehouses/Update Warehouse")]
+        [HttpPut("Update Warehouse")]
         public async Task<IActionResult> UpdateWarehouse([FromBody] UpdateWarehouseCommand request)
         {
             return await CommandAsync(request);

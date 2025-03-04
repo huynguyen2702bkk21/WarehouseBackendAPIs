@@ -1,7 +1,7 @@
 ﻿namespace WMS.APIs.Controllers.MaterialControllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("WarehouseAPI/[controller]")]
     public class MaterialClassController : ApiControllerBase
     {
         private readonly IMediator _mediator;
@@ -10,7 +10,7 @@
             _mediator = mediator;
         }
 
-        [HttpGet("MaterialClasses/GetAll")]
+        [HttpGet("GetAllMaterialClass")]
         public async Task<IEnumerable<MaterialClassDTO>> GetAll()
         {
             var query = new GetALlMaterialClassesQuery();
@@ -19,7 +19,7 @@
             return result;
         }
 
-        [HttpGet("MaterialClasses/GetAllProperties")]
+        [HttpGet("GetAllProperties")]
         public async Task<IEnumerable<MaterialClassPropertyDTO>> GetAllProperties()
         {
             var query = new GetAllMaterialClassPropertiesQuerry();
@@ -28,7 +28,7 @@
             return result;
         }
 
-        [HttpGet("MaterialClasses/GetMaterialClassById")]
+        [HttpGet("GetMaterialClassById")]
         public async Task<MaterialClassDTO> GetById(string materialClassId)
         {
             var query = new GetMaterialClassByIdQuery(materialClassId);
@@ -37,7 +37,7 @@
             return result;
         }
 
-        [HttpGet("MaterialClasses/GetMaterialClassPropertyById")]
+        [HttpGet("GetMaterialClassPropertyById")]
         public async Task<MaterialClassPropertyDTO> GetPropertyById(string materialClassPropertyId)
         {
             var query = new GetMaterialClassPropertyByIdQuerry(materialClassPropertyId);
@@ -46,39 +46,39 @@
             return result;
         }
 
-        [HttpPost("MaterialClasses/CreateMaterialClass")]
+        [HttpPost("CreateMaterialClass")]
         public async Task<IActionResult> CreateMaterialClass([FromBody] CreateMaterialClassCommand command)
         {
             return await CommandAsync(command);
         }
         
-        [HttpPost("MaterialClasses/CreateMaterialClassProperty")]
+        [HttpPost("CreateMaterialClassProperty")]
         public async Task<IActionResult> CreateMaterialClassProperty([FromBody] CreateMaterialClassPropertyCommand command)
         {
             return await CommandAsync(command);
         }
 
-        [HttpDelete("MaterialClasses/DeleteMaterialClass")]
+        [HttpDelete("DeleteMaterialClass")]
         public async Task<IActionResult> DeleteMaterialClass(string materialClassId)
         {
             var command = new DeleteMaterialClassCommand(materialClassId);
             return await CommandAsync(command);
         }
 
-        [HttpDelete("MaterialClasses/DeleteMaterialClassProperty")]
+        [HttpDelete("DeleteMaterialClassProperty")]
         public async Task<IActionResult> DeleteMaterialClassProperty(string materialClassPropertyId)
         {
             var command = new DeleteMaterialClassPropertyCommand(materialClassPropertyId);
             return await CommandAsync(command);
         }
 
-        [HttpPut("MaterialClasses/UpdateMaterialClass")]
+        [HttpPut("UpdateMaterialClass")]
         public async Task<IActionResult> UpdateMaterialClass([FromBody] UpdateMaterialClassCommand command)
         {
             return await CommandAsync(command);
         }
 
-        [HttpPut("MaterialClasses/UpdateMaterialClassProperty")]
+        [HttpPut("UpdateMaterialClassProperty")]
         public async Task<IActionResult> UpdateMaterialClassProperty([FromBody] UpdateMaterialClassPropertyCommand command)
         {
             return await CommandAsync(command);

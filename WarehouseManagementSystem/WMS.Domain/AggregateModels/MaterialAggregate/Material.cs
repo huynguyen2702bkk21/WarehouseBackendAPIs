@@ -10,7 +10,7 @@
         public string materialClassId { get; set; }
         public MaterialClass materialClass { get; set; }
 
-        public List<MaterialProperty> porperties { get; set; }
+        public List<MaterialProperty> properties { get; set; }
         public List<MaterialLot> lots { get; set; }
         public List<InventoryReceiptEntry> receiptEntries  { get; set; }
         public List<InventoryIssueEntry> issueEntries  { get; set; }

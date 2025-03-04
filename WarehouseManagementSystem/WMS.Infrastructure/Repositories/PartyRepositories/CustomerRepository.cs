@@ -21,9 +21,9 @@
             return await _context.Customers.ToListAsync();
         }
 
-        public Task<Customer> GetCustomerById(string Id)
+        public async Task<Customer> GetCustomerById(string Id)
         {
-            return _context.Customers.FirstOrDefaultAsync(x => x.customerId == Id);
+            return await _context.Customers.FirstOrDefaultAsync(x => x.customerId == Id);
         }
 
         public void Update(Customer customer)

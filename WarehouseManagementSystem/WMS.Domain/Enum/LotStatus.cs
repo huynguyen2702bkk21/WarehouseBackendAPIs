@@ -12,9 +12,9 @@
         Quarantine,
         Expired,
         Stored,
-        Rejected
-        
-
+        Rejected,
+        Accepted,
+        Pending
 
     }
 

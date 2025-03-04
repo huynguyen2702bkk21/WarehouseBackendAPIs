@@ -20,9 +20,14 @@
                 throw new DuplicateRecordException("Persons", request.PersonId);
             }
 
+            if (!Enum.TryParse<EmployeeType>(request.Role, out var EmployeeRole))
+            {
+                throw new ArgumentException("Invalid status value", nameof(request.Role));
+            }
+
             var newPerson = new Person(personId: request.PersonId, 
                                     personName: request.PersonName, 
-                                    role: request.Role);
+                                    role: EmployeeRole);
 
             _personRepository.Create(newPerson);
 

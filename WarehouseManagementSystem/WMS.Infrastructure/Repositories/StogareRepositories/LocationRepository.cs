@@ -24,9 +24,9 @@ namespace WMS.Infrastructure.Repositories.StogareRepositories
             return await _context.Locations.ToListAsync();  
         }
 
-        public Task<Location> GetLocationById(string locationId)
+        public async Task<Location> GetLocationById(string locationId)
         {
-            return _context.Locations.FirstOrDefaultAsync(x => x.locationId== locationId);
+            return await _context.Locations.FirstOrDefaultAsync(x => x.locationId== locationId);
         }
 
         public async Task<Location> GetLocationByIdAsync(string locationId)
@@ -48,9 +48,9 @@ namespace WMS.Infrastructure.Repositories.StogareRepositories
             return location;
         }
 
-        public Task<List<Location>> GetLocationsByWarehouseId(string warehouseId)
+        public async Task<List<Location>> GetLocationsByWarehouseId(string warehouseId)
         {
-            return _context.Locations.Where(x => x.warehouseId == warehouseId).ToListAsync();
+            return await _context.Locations.Where(x => x.warehouseId == warehouseId).ToListAsync();
         }
 
         public void Update(Location location)
