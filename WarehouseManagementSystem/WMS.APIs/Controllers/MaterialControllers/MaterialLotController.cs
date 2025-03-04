@@ -1,4 +1,5 @@
 ﻿
+using WMS.Application.Commands.MaterialCommands.MaterialLots;
 using WMS.Application.Queries.MaterialQueries.MaterialLots;
 
 namespace WMS.APIs.Controllers.MaterialControllers
@@ -31,19 +32,19 @@ namespace WMS.APIs.Controllers.MaterialControllers
             return result;
         }
 
-        [HttpGet("GetMaterialLotById/{id}")]
-        public async Task<MaterialLotDTO> GetMaterialLotById(string id)
+        [HttpGet("GetMaterialLotById/{lotNumber}")]
+        public async Task<MaterialLotDTO> GetMaterialLotById(string lotNumber)
         {
-            var query = new GetMaterialLotByIdQuery(id);
+            var query = new GetMaterialLotByIdQuery(lotNumber);
             var result = await _mediator.Send(query);
 
             return result;
         }
 
-        [HttpGet("GetMaterialLotPropertyById/{id}")]
-        public async Task<MaterialLotPropertyDTO> GetMaterialLotPropertyById(string id)
+        [HttpGet("GetMaterialLotPropertyById/{propertyId}")]
+        public async Task<MaterialLotPropertyDTO> GetMaterialLotPropertyById(string propertyId)
         {
-            var query = new GetMaterialLotPropertyByIdQuery(id);
+            var query = new GetMaterialLotPropertyByIdQuery(propertyId);
             var result = await _mediator.Send(query);
 
             return result;
@@ -65,6 +66,44 @@ namespace WMS.APIs.Controllers.MaterialControllers
             var result = await _mediator.Send(query);
 
             return result;
+        }
+
+        [HttpPost("CreateMaterialLotProperty")]
+        public async Task<IActionResult> CreateMaterialLotProperty([FromBody] CreateMaterialLotPropertyCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+        [HttpPost("CreateMaterialLot")]
+        public async Task<IActionResult> CreateMaterialLot([FromBody] CreateMaterialLotCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+        [HttpDelete("DeleteMaterialLotProperty/{propertyId}")]
+        public async Task<IActionResult> DeleteMaterialLotProperty(string propertyId)
+        {
+            var command = new DeleteMaterialLotPropertyCommand(propertyId); 
+            return await CommandAsync(command);
+        }
+
+        [HttpDelete("DeleteMaterialLot/{lotNumber}")]
+        public async Task<IActionResult> DeleteMaterialLot(string lotNumber)
+        {
+            var command = new DeleteMaterialLotCommand(lotNumber);
+            return await CommandAsync(command);
+        }
+
+        [HttpPut("UpdateMaterialLotProperty")]
+        public async Task<IActionResult> UpdateMaterialLotProperty([FromBody] UpdateMaterialLotPropertyCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+        [HttpPut("UpdateMaterialLot")]
+        public async Task<IActionResult> UpdateMaterialLot([FromBody] UpdateMaterialLotCommand command)
+        {
+            return await CommandAsync(command);
         }
 
     }

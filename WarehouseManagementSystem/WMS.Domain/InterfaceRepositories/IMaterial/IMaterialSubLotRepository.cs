@@ -7,5 +7,7 @@
         Task<MaterialSubLot> GetByIdAsync(string Id);
         Task<List<MaterialSubLot>> GetMaterialSubLotsByLotNumber(string lotNumber);
         Task<List<MaterialSubLot>> GetMaterialSubLotsByStatus(string Status);
+        void Create(MaterialSubLot materialSubLot);
+        void Delete(MaterialSubLot materialSubLot);
     }
 }

@@ -36,5 +36,15 @@
         {
             return await _context.MaterialSubLots.Where(x => x.lotNumber == lotNumber).ToListAsync();
         }
+
+        public void Create(MaterialSubLot materialSubLot)
+        {
+            _context.MaterialSubLots.Add(materialSubLot);
+        }
+
+        public void Delete(MaterialSubLot materialSubLot)
+        {
+            _context.MaterialSubLots.Remove(materialSubLot);
+        }
     }
 }

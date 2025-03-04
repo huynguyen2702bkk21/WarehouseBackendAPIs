@@ -28,7 +28,7 @@
             return result;
         }
 
-        [HttpGet("GetMaterialClassById")]
+        [HttpGet("GetMaterialClassById/{materialClassId}")]
         public async Task<MaterialClassDTO> GetById(string materialClassId)
         {
             var query = new GetMaterialClassByIdQuery(materialClassId);
@@ -37,7 +37,7 @@
             return result;
         }
 
-        [HttpGet("GetMaterialClassPropertyById")]
+        [HttpGet("GetMaterialClassPropertyById/{materialClassPropertyId}")]
         public async Task<MaterialClassPropertyDTO> GetPropertyById(string materialClassPropertyId)
         {
             var query = new GetMaterialClassPropertyByIdQuerry(materialClassPropertyId);
@@ -58,14 +58,14 @@
             return await CommandAsync(command);
         }
 
-        [HttpDelete("DeleteMaterialClass")]
+        [HttpDelete("DeleteMaterialClass/{materialClassId}")]
         public async Task<IActionResult> DeleteMaterialClass(string materialClassId)
         {
             var command = new DeleteMaterialClassCommand(materialClassId);
             return await CommandAsync(command);
         }
 
-        [HttpDelete("DeleteMaterialClassProperty")]
+        [HttpDelete("DeleteMaterialClassProperty/{materialClassPropertyId}")]
         public async Task<IActionResult> DeleteMaterialClassProperty(string materialClassPropertyId)
         {
             var command = new DeleteMaterialClassPropertyCommand(materialClassPropertyId);

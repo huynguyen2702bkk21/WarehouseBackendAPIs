@@ -32,19 +32,19 @@ namespace WMS.APIs.Controllers.MaterialControllers
             return result;
         }
 
-        [HttpGet("GetMaterialById/{id}")]
-        public async Task<MaterialDTO> GetById(string id)
+        [HttpGet("GetMaterialById/{materialId}")]
+        public async Task<MaterialDTO> GetById(string materialId)
         {
-            var query = new GetMaterialByIdQuery(id);
+            var query = new GetMaterialByIdQuery(materialId);
             var result = await _mediator.Send(query);
 
             return result;
         }
 
-        [HttpGet("GetMaterialPropertyById/{id}")]
-        public async Task<MaterialPropertyDTO> GetPropertyById(string id)
+        [HttpGet("GetMaterialPropertyById/{propertyId}")]
+        public async Task<MaterialPropertyDTO> GetPropertyById(string propertyId)
         {
-            var query = new GetMaterialPropertyByIdQuery(id);
+            var query = new GetMaterialPropertyByIdQuery(propertyId);
             var result = await _mediator.Send(query);
 
             return result;
@@ -71,17 +71,17 @@ namespace WMS.APIs.Controllers.MaterialControllers
             return await CommandAsync(command);
         }
 
-        [HttpDelete("DeleteMaterial/{id}")]
-        public async Task<IActionResult> DeleteMaterial(string id)
+        [HttpDelete("DeleteMaterial/{materialId}")]
+        public async Task<IActionResult> DeleteMaterial(string materialId)
         {
-            var command = new DeleteMaterialCommand(id);
+            var command = new DeleteMaterialCommand(materialId);
             return await CommandAsync(command);
         }
 
-        [HttpDelete("DeleteMaterialProperty/{id}")]
-        public async Task<IActionResult> DeleteMaterialProperty(string id)
+        [HttpDelete("DeleteMaterialProperty/{propertyId}")]
+        public async Task<IActionResult> DeleteMaterialProperty(string propertyId)
         {
-            var command = new DeleteMaterialPropertyCommand(id);
+            var command = new DeleteMaterialPropertyCommand(propertyId);
             return await CommandAsync(command);
         }
 

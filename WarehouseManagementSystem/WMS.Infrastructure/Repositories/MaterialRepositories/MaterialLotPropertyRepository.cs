@@ -7,6 +7,16 @@ namespace WMS.Infrastructure.Repositories.MaterialRepositories
         {
         }
 
+        public void Create(MaterialLotProperty materialLotProperty)
+        {
+            _context.MaterialLotProperties.Add(materialLotProperty);
+        }
+
+        public async Task Delete(MaterialLotProperty materialLotProperty)
+        {
+            _context.MaterialLotProperties.Remove(materialLotProperty);
+        }
+
         public Task<List<MaterialLotProperty>> GetAllAsync()
         {
             return _context.MaterialLotProperties.ToListAsync();

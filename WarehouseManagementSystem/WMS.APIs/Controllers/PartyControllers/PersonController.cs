@@ -21,10 +21,10 @@
 
         }
 
-        [HttpGet("GetPersonById/{id}")]
-        public async Task<PersonDTO> GetById(string id)
+        [HttpGet("GetPersonById/{personId}")]
+        public async Task<PersonDTO> GetById(string personId)
         {
-            var query = new GetPersonByIdQuery(id);
+            var query = new GetPersonByIdQuery(personId);
             var result = await _mediator.Send(query);
 
             return result;
@@ -42,10 +42,10 @@
             return await CommandAsync(request);
         }
 
-        [HttpDelete("Delete Person/{id}")]
-        public async Task<IActionResult> DeletePerson(string id)
+        [HttpDelete("Delete Person/{personId}")]
+        public async Task<IActionResult> DeletePerson(string personId)
         {
-            var request = new DeletePersonCommand(id);
+            var request = new DeletePersonCommand(personId);
 
             return await CommandAsync(request);
         }

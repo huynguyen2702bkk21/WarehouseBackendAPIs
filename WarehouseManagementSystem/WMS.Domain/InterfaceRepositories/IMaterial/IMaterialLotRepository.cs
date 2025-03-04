@@ -6,5 +6,7 @@
         Task<MaterialLot> GetMaterialLotById(string lotNumber);
         Task<List<MaterialLot>> GetMaterialLotsByMaterialId(string materialId);
         Task<List<MaterialLot>> GetMaterialLotsByStatus(string status);
+        void Create(MaterialLot materialLot);
+        void Delete(MaterialLot materialLot);
     }
 }

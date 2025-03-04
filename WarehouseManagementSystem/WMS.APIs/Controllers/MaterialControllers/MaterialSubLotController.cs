@@ -1,4 +1,5 @@
 ﻿
+using WMS.Application.Commands.MaterialCommands.MaterialSubLots;
 using WMS.Application.Queries.MaterialQueries.MaterialSublots;
 
 namespace WMS.APIs.Controllers.MaterialControllers
@@ -21,10 +22,10 @@ namespace WMS.APIs.Controllers.MaterialControllers
             return Ok(result);
         }
 
-        [HttpGet("GetMaterialSubLotById/{Id}")]
-        public async Task<IActionResult> GetMaterialSubLotById(string Id)
+        [HttpGet("GetMaterialSubLotById/{sublotId}")]
+        public async Task<IActionResult> GetMaterialSubLotById(string sublotId)
         {
-            var query = new GetMaterialSubLotByIdQuery(Id);
+            var query = new GetMaterialSubLotByIdQuery(sublotId);
             var result = await _mediator.Send(query);
             return Ok(result);
         }
@@ -51,6 +52,25 @@ namespace WMS.APIs.Controllers.MaterialControllers
             var query = new GetMaterialSubLotsByStatusQuery(status);
             var result = await _mediator.Send(query);
             return Ok(result);
+        }
+
+        [HttpPost("CreateMaterialSubLot")]
+        public async Task<IActionResult> CreateMaterialSubLot([FromBody] CreateMaterialSubLotCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+        [HttpPut("UpdateMaterialSubLot")]
+        public async Task<IActionResult> UpdateMaterialSubLot([FromBody] UpdateMaterialSubLotCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+        [HttpDelete("DeleteMaterialSubLot/{sublotId}")]
+        public async Task<IActionResult> DeleteMaterialSubLot(string sublotId)
+        {
+            var command = new DeleteMaterialSubLotCommand(sublotId);
+            return await CommandAsync(command);
         }
 
     }

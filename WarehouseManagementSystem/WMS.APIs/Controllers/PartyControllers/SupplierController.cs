@@ -20,10 +20,10 @@
             return result;
         }
 
-        [HttpGet("GetSupplierById")]
-        public async Task<SupplierDTO> GetById(string id)
+        [HttpGet("GetSupplierById/{supplierId}")]
+        public async Task<SupplierDTO> GetById(string supplierId)
         {
-            var query = new GetSupplierByIdQuery(id);
+            var query = new GetSupplierByIdQuery(supplierId);
             var result = await _mediator.Send(query);
 
             return result;
@@ -35,10 +35,10 @@
             return await CommandAsync(command);
         }
 
-        [HttpDelete("Delete Supplier/{id}")]
-        public async Task<IActionResult> DeleteSupplier(string id)
+        [HttpDelete("Delete Supplier/{supplierId}")]
+        public async Task<IActionResult> DeleteSupplier(string supplierId)
         {
-            var request = new DeleteSupplierCommand(id);
+            var request = new DeleteSupplierCommand(supplierId);
 
             return await CommandAsync(request);
         }

@@ -19,16 +19,16 @@
             return result;
         }
 
-        [HttpGet("GetLocationById")]
-        public async Task<LocationDTO> GetById(string id)
+        [HttpGet("GetLocationById/{locationId}")]
+        public async Task<LocationDTO> GetById(string locationId)
         {
-            var query = new GetLocationByIdQuery(id);
+            var query = new GetLocationByIdQuery(locationId);
             var result = await _mediator.Send(query);
 
             return result;
         }
 
-        [HttpGet("GetLocationsByWarehouseId")]
+        [HttpGet("GetLocationsByWarehouseId/{warehouseId}")]
         public async Task<IEnumerable<LocationDTO>> GetByWarehouseId(string warehouseId)
         {
             var query = new GetLocationsByWarehouseIdQuery(warehouseId);
@@ -43,10 +43,10 @@
             return await CommandAsync(command);
         }
 
-        [HttpDelete("Delete Location/{id}")]
-        public async Task<IActionResult> Delete(string id)
+        [HttpDelete("Delete Location/{locationId}")]
+        public async Task<IActionResult> Delete(string locationId)
         {
-            var command = new DeleteLocationCommand(id);
+            var command = new DeleteLocationCommand(locationId);
 
             return await CommandAsync(command);
         }
