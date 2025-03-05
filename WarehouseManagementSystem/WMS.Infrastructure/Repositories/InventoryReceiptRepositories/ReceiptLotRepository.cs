@@ -19,15 +19,9 @@ namespace WMS.Infrastructure.Repositories.InventoryReceiptRepositories
 
         public async Task<ReceiptLot> GetByIdAsnc(string lotNumber)
         {
-            var receiptLot = await _context.ReceiptLots.FirstOrDefaultAsync(x => x.receiptLotId == lotNumber);
-            if (receiptLot == null)
-            {
-                return null;
-            }
-
-            var sublotReceipts = await _context.ReceiptSublots.Where(x => x.receiptLotId == lotNumber).ToListAsync();  
-
-            receiptLot.receiptSublots= sublotReceipts;
+            var receiptLot = await _context.ReceiptLots
+                .Include(s => s.receiptSublots)
+                .FirstOrDefaultAsync(x => x.receiptLotId == lotNumber);
 
             return receiptLot;
 

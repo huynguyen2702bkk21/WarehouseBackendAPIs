@@ -24,23 +24,10 @@ namespace WMS.Infrastructure.Repositories.MaterialRepositories
 
         public async Task<MaterialLot> GetMaterialLotById(string lotNumber)
         {
-            var materialLot = await _context.MaterialLots.FirstOrDefaultAsync(x => x.lotNumber== lotNumber);
-            if (materialLot == null)
-            {
-                return null;
-            }
-
-            var properties = await _context.MaterialLotProperties.Where(x => x.lotNumber== materialLot.lotNumber).ToListAsync();
-            if (properties != null)
-            {
-                materialLot.properties= properties;
-            }
-
-            var sublots = await _context.MaterialSubLots.Where(x => x.lotNumber== materialLot.lotNumber).ToListAsync();
-            if (sublots != null)
-            {
-                materialLot.subLots= sublots;
-            }
+            var materialLot = await _context.MaterialLots
+                .Include(s => s.properties)
+                .Include(s => s.subLots)
+                .FirstOrDefaultAsync(x => x.lotNumber== lotNumber);
 
             return materialLot;
 
@@ -48,23 +35,7 @@ namespace WMS.Infrastructure.Repositories.MaterialRepositories
 
         public async Task<List<MaterialLot>> GetMaterialLotsByMaterialId(string materialId)
         {
-            var materialLots = await _context.MaterialLots.Where(x => x.materialId== materialId).ToListAsync();
-            if (materialLots == null)
-            {
-                return null;
-            }
-
-            //foreach (var materialLot in materialLots)
-            //{
-            //    var sublots = await _context.MaterialSubLots.Where(x => x.lotNumber == materialLot.lotNumber).ToListAsync();
-            //    if (sublots != null)
-            //    {
-            //        materialLot.subLots = sublots;
-            //    }
-
-            //}
-
-            return materialLots;
+            return await _context.MaterialLots.Where(x => x.materialId== materialId).ToListAsync();
 
         }
 

@@ -9,25 +9,16 @@ namespace WMS.Infrastructure.Repositories.InventoryIssueRepositories
 
         public async Task<IEnumerable<InventoryIssueEntry>> GetAllInventoryIssueEntriesAsync()
         {
-            var inventoryIssueEntries = await _context.InventoryIssueEntries.ToListAsync();
-            
-            foreach (var inventoryIssueEntry in inventoryIssueEntries)
-            {
-                if (inventoryIssueEntry != null)
-                {
-                    var issueLot = await _context.IssueLots.FirstOrDefaultAsync(x => x.issueLotId== inventoryIssueEntry.issueLotId);
-                    if (issueLot != null)
-                        inventoryIssueEntry.issueLot= issueLot;
-                }
-            }
+            var inventoryIssueEntries = await _context.InventoryIssueEntries
+                .Include(x => x.issueLot)
+                .ToListAsync();
 
             return inventoryIssueEntries;
         }
 
         public async Task<InventoryIssueEntry> GetInventoryIssueEntryByIdAsync(string InventoryIssueEntryId)
         {
-            var inventoryIssueEntry = await _context.InventoryIssueEntries.FirstOrDefaultAsync(x => x.inventoryIssueEntryId == InventoryIssueEntryId);
-            return inventoryIssueEntry;
+            return await _context.InventoryIssueEntries.FirstOrDefaultAsync(x => x.inventoryIssueEntryId == InventoryIssueEntryId);
         }
     }
 }

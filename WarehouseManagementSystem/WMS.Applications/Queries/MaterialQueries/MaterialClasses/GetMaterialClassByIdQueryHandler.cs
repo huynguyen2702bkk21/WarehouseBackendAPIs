@@ -18,7 +18,7 @@
             {
                 throw new EntityNotFoundException(nameof(MaterialClasses),request.MaterialClassId);
             }
-            
+
             var materialClassDTO = _mapper.Map<MaterialClassDTO>(materialClass);
 
             return materialClassDTO;

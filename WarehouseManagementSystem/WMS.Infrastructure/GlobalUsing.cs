@@ -22,6 +22,8 @@ global using WMS.Infrastructure.EFConfigurations.MaterialConfigurations;
 global using WMS.Infrastructure.EFConfigurations.PartyConfigurations;
 global using WMS.Infrastructure.EFConfigurations.StorageConfigurations;
 global using WMS.Domain.InterfaceRepositories.IInventoryIssue;
+global using WMS.Domain.InterfaceRepositories.IEquipment;
+
 
 
 

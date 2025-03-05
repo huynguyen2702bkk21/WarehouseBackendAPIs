@@ -11,12 +11,12 @@
         {
         }
 
-        public MaterialDTO(string materialId, string materialName, string materialClassId, List<MaterialPropertyDTO> properties)
+        public MaterialDTO(string materialId, string materialName, string materialClassId)
         {
             MaterialId = materialId;
             MaterialName = materialName;
             MaterialClassId = materialClassId;
-            Properties = properties;
+            Properties = new List<MaterialPropertyDTO>();
         }
     }
 }

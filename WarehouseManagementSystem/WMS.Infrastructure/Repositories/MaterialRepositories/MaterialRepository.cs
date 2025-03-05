@@ -24,17 +24,10 @@ namespace WMS.Infrastructure.Repositories.MaterialRepositories
 
         public async Task<MaterialClass> GetByClassIdAsync(string classId)
         {
-            var materialsCLass = await _context.MaterialClasses.FirstOrDefaultAsync(x => x.materialClassId== classId);
-            if (materialsCLass == null)
-            {
-                return null;
-            }
-
-            var materials = await _context.Materials.Where(x => x.materialClassId == classId).ToListAsync();
-            if (materials != null)
-            {
-                materialsCLass.materials = materials;
-            }
+            var materialsCLass = await _context.MaterialClasses
+                .Include(s => s.materials)
+                .Include(s => s.properties)
+                .FirstOrDefaultAsync(x => x.materialClassId== classId);
 
             return materialsCLass;
 
@@ -47,16 +40,9 @@ namespace WMS.Infrastructure.Repositories.MaterialRepositories
 
         public async Task<Material> GetByIdAsync(string materialId)
         {
-            var material = await _context.Materials.FirstOrDefaultAsync(x => x.materialId== materialId);
-            if (material == null)
-            {
-                return null;
-            }
-
-            var properties = await _context.MaterialProperties.Where(x => x.materialId== materialId).ToListAsync();
-
-            material.properties = properties;
-
+            var material = await _context.Materials
+                .Include(s => s.properties)
+                .FirstOrDefaultAsync(x => x.materialId== materialId);
             return material;
         }
 

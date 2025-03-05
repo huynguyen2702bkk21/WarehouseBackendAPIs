@@ -1,4 +1,5 @@
-﻿using WMS.Application.DTOs.InventoryIssueDTOs;
+﻿using WMS.Application.DTOs.EquipmentDTOs;
+using WMS.Application.DTOs.InventoryIssueDTOs;
 using WMS.Application.DTOs.InventoryReceiptDTOs;
 using WMS.Domain.AggregateModels.InventoryReceiptAggregate;
 
@@ -36,6 +37,11 @@ namespace WMS.Application.Mapping
             MapInventoryIssueEntryViewModel();
             MapInventoryIssueViewModel();
 
+            MapEquipmentClassViewModel();
+            MapEquipmentClassPropertyViewModel();
+            MapEquipmentViewModel();
+            MapEquipmentPropertyViewModel();
+
 
         }
 
@@ -72,7 +78,7 @@ namespace WMS.Application.Mapping
         {
             CreateMap<MaterialClass, MaterialClassDTO>()
                 .ForMember(s => s.Properties, s => s.MapFrom(s => s.properties))
-                .ForMember(s => s.MaterialDTOs, s => s.MapFrom(s => s.materials));
+                .ForMember(s => s.Materials, s => s.MapFrom(s => s.materials));
         }
 
         public void MapMaterialClassPropertyViewModel()
@@ -167,6 +173,31 @@ namespace WMS.Application.Mapping
             CreateMap<InventoryIssue, InventoryIssueDTO>()
                 .ForMember(s => s.Entries, s => s.MapFrom(s => s.entries))
                 .ForMember(s => s.IssueStatus, s => s.MapFrom(s => s.issueStatus.ToString()));
+        }
+
+        public void MapEquipmentClassViewModel()
+        {
+            CreateMap<EquipmentClass, EquipmentCLassDTO>()
+                .ForMember(s => s.Properties, s => s.MapFrom(s => s.properties))
+                .ForMember(s => s.Equipments, s => s.MapFrom(s => s.equipments));
+        }
+
+        public void MapEquipmentClassPropertyViewModel()
+        {
+            CreateMap<EquipmentClassProperty, EquipmentCLassPropertyDTO>()
+                .ForMember(s => s.UnitOfMeasure, s => s.MapFrom(s => s.unitOfMeasure.ToString()));
+        }
+        public void MapEquipmentViewModel()
+        {
+            CreateMap<Equipment, EquipmentDTO>()
+                .ForMember(s => s.Properties, s => s.MapFrom(s => s.properties));
+
+        }
+
+        public void MapEquipmentPropertyViewModel()
+        {
+            CreateMap<EquipmentProperty, EquipmentPropertyDTO>()
+                .ForMember(s => s.UnitOfMeasure, s => s.MapFrom(s => s.unitOfMeasure.ToString()));
         }
 
     }

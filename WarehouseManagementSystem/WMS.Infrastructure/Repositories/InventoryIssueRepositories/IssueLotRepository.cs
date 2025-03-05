@@ -14,26 +14,10 @@ namespace WMS.Infrastructure.Repositories.InventoryIssueRepositories
 
         public async Task<IssueLot> GetIssueLotByIdAsync(string id)
         {
-            var issueLot = await _context.IssueLots.FirstOrDefaultAsync(x => x.issueLotId== id);
-            if (issueLot == null)
-            {
-                return null;
-            }
-
-            var issueSubLots = await _context.IssueSublots.Where(x => x.issueLotId == issueLot.issueLotId).ToListAsync();
-            if (issueSubLots != null)
-            {
-                issueLot.issueSublots= issueSubLots;
-            }
-
-            foreach (var issueSubLot in issueLot.issueSublots)
-            {
-                var materialSubLot = await _context.MaterialSubLots.FirstOrDefaultAsync(x => x.subLotId== issueSubLot.sublotId);
-                if (materialSubLot != null)
-                {
-                    issueSubLot.materialSublot= materialSubLot;
-                }
-            }
+            var issueLot = await _context.IssueLots
+                .Include(x => x.issueSublots)
+                .ThenInclude(x => x.materialSublot)
+                .FirstOrDefaultAsync(x => x.issueLotId== id);
 
             return issueLot;
 
