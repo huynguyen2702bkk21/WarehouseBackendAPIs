@@ -29,10 +29,5 @@
             MaterialName = materialName;
         }
 
-        public void MapReceiptLot(ReceiptLotDTO receiptLot)
-        {
-            ReceiptLot = receiptLot;
-        }
-
     }
 }

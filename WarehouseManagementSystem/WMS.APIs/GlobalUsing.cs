@@ -7,6 +7,7 @@ global using WMS.Application.Commands.PartyCommands.Persons;
 global using WMS.Application.Commands.PartyCommands.Suppliers;
 global using WMS.Application.Commands.StorageCommands.Locations;
 global using WMS.Application.Commands.StorageCommands.Warehouses;
+global using WMS.Application.DTOs.InventoryIssueDTOs;
 global using WMS.Application.DTOs.InventoryReceiptDTOs;
 global using WMS.Application.DTOs.MaterialDTOs;
 global using WMS.Application.DTOs.PartyDTOs;
@@ -14,6 +15,8 @@ global using WMS.Application.DTOs.StorageDTOs;
 global using WMS.Application.ErrorNotifications;
 global using WMS.Application.Exceptions;
 global using WMS.Application.Mapping;
+global using WMS.Application.Queries.InventoryIssueQueries.IssueSubLots;
+global using WMS.Application.Queries.InventoryReceiptQueries.ReceiptLots;
 global using WMS.Application.Queries.InventoryReceiptQueries.ReceiptSubLots;
 global using WMS.Application.Queries.MaterialQueries.MaterialClasses;
 global using WMS.Application.Queries.PartyQueries.Customers;
@@ -32,5 +35,6 @@ global using WMS.Infrastructure.Repositories.InventoryReceiptRepositories;
 global using WMS.Infrastructure.Repositories.MaterialRepositories;
 global using WMS.Infrastructure.Repositories.PartyRepositories;
 global using WMS.Infrastructure.Repositories.StogareRepositories;
-global using WMS.Application.Queries.InventoryReceiptQueries.ReceiptLots;
+
+
 

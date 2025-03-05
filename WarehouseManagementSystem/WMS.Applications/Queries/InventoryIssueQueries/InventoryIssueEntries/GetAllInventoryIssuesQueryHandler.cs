@@ -1,0 +1,60 @@
+﻿namespace WMS.Application.Queries.InventoryIssueQueries.InventoryIssueEntries
+{
+    public class GetAllInventoryIssuesQueryHandler : IRequestHandler<GetAllInventoryIssuesQuery, IEnumerable<InventoryIssueDTO>>
+    {
+        private readonly IInventoryIssueRepository _inventoryIssueRepository;
+        private readonly IPersonRepository _personRepository;
+        private readonly ICustomerRepository _customerRepository;
+        private readonly IWarehouseRepository _warehouseRepository;
+        private readonly IMapper _mapper;
+
+        public GetAllInventoryIssuesQueryHandler(IInventoryIssueRepository inventoryIssueRepository, IPersonRepository personRepository, ICustomerRepository customerRepository, IWarehouseRepository warehouseRepository, IMapper mapper)
+        {
+            _inventoryIssueRepository = inventoryIssueRepository;
+            _personRepository = personRepository;
+            _customerRepository = customerRepository;
+            _warehouseRepository = warehouseRepository;
+            _mapper = mapper;
+        }
+
+        public async Task<IEnumerable<InventoryIssueDTO>> Handle(GetAllInventoryIssuesQuery request, CancellationToken cancellationToken)
+        {
+            var inventoryIssues = await _inventoryIssueRepository.GetAllAsync();
+            if (inventoryIssues == null) 
+            {
+                throw new Exception("No inventory issues found");
+            }
+
+            var inventoryIssueDTOs = new List<InventoryIssueDTO>();
+
+            foreach (var inventoryIssue in inventoryIssues)
+            {
+                var inventoryIssueDTO = _mapper.Map<InventoryIssueDTO>(inventoryIssue);
+
+                var person = await _personRepository.GetPersonById(inventoryIssue.pesonId);
+                if (person == null)
+                {
+                    throw new Exception("Person not found");
+                }
+
+                var customer = await _customerRepository.GetCustomerById(inventoryIssue.customerId);
+                if (customer == null)
+                {
+                    throw new Exception("Customer not found");
+                }
+
+                var warehouse = await _warehouseRepository.GetWarehouseById(inventoryIssue.warehouseId);
+                if (warehouse == null)
+                {
+                    throw new Exception("Warehouse not found");
+                }
+
+                inventoryIssueDTO.MapName(customer.customerName, person.personName, warehouse.warehouseName);
+
+                inventoryIssueDTOs.Add(inventoryIssueDTO);
+            }
+            return inventoryIssueDTOs;
+        }
+
+    }
+}

@@ -9,6 +9,7 @@
         Packed,
         Shipped,
         Completed,
-        Cancelled
+        Cancelled,
+        Pending
     }
 }

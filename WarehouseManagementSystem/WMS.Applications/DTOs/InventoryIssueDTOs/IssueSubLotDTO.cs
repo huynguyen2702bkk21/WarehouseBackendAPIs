@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WMS.Application.DTOs.InventoryIssueDTOs
+﻿namespace WMS.Application.DTOs.InventoryIssueDTOs
 {
-    internal class IssueSubLotDTO
+    public class IssueSubLotDTO
     {
+        public string IssueSublotId { get; set; }
+        public double RequestedQuantity { get; set; }
+        public MaterialSubLotDTO MaterialSublot { get; set; }
+        public string IssueLotId { get; set; }
+
+        public IssueSubLotDTO(string issueSublotId, double requestedQuantity, MaterialSubLotDTO materialSublot, string issueLotId)
+        {
+            IssueSublotId = issueSublotId;
+            RequestedQuantity = requestedQuantity;
+            MaterialSublot = materialSublot;
+            IssueLotId = issueLotId;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿namespace WMS.Infrastructure.Repositories.InventoryIssueRepositories
+﻿
+namespace WMS.Infrastructure.Repositories.InventoryIssueRepositories
 {
     public class InventoryIssueEntryRepository : BaseRepository, IInventoryIssueEntryRepository
     {
@@ -6,6 +7,27 @@
         {
         }
 
+        public async Task<IEnumerable<InventoryIssueEntry>> GetAllInventoryIssueEntriesAsync()
+        {
+            var inventoryIssueEntries = await _context.InventoryIssueEntries.ToListAsync();
+            
+            foreach (var inventoryIssueEntry in inventoryIssueEntries)
+            {
+                if (inventoryIssueEntry != null)
+                {
+                    var issueLot = await _context.IssueLots.FirstOrDefaultAsync(x => x.issueLotId== inventoryIssueEntry.issueLotId);
+                    if (issueLot != null)
+                        inventoryIssueEntry.issueLot= issueLot;
+                }
+            }
 
+            return inventoryIssueEntries;
+        }
+
+        public async Task<InventoryIssueEntry> GetInventoryIssueEntryByIdAsync(string InventoryIssueEntryId)
+        {
+            var inventoryIssueEntry = await _context.InventoryIssueEntries.FirstOrDefaultAsync(x => x.inventoryIssueEntryId == InventoryIssueEntryId);
+            return inventoryIssueEntry;
+        }
     }
 }

@@ -14,7 +14,9 @@
         Stored,
         Rejected,
         Accepted,
-        Pending
+        Pending,
+        Shipped,
+        Cancelled
 
     }
 

@@ -17,7 +17,5 @@
         public string inventoryIssueEntryId { get; set; }
         public InventoryIssueEntry inventoryIssueEntry { get; set; }
 
-
-
     }
 }
