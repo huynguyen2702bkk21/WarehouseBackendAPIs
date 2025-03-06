@@ -9,6 +9,10 @@ namespace WMS.Application.Commands.EquipmentCommands.Equipments
         public string EquipmentClassId { get; set; }
         public List<CreateEquipmentPropertyCommand> Properties { get; set; }
 
+        public CreateEquipmentCommand()
+        {
+        }
+
         public CreateEquipmentCommand(string equipmentId, string equipmentName, string equipmentClassId, List<CreateEquipmentPropertyCommand> properties)
         {
             EquipmentId = equipmentId;

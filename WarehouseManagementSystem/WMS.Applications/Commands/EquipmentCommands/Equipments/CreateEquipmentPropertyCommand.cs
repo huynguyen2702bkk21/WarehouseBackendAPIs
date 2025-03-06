@@ -1,19 +1,26 @@
-﻿namespace WMS.Application.Commands.EquipmentCommands.EquipmentProperties
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace WMS.Application.Commands.EquipmentCommands.EquipmentProperties
 {
     public class CreateEquipmentPropertyCommand : IRequest<bool>
     {
         public string PropertyId { get; set; }
         public string PropertyName { get; set; }
-        public string PropertyType { get; set; }
         public string PropertyValue { get; set; }
-        public string EquipmentClassId { get; set; }
-        public CreateEquipmentPropertyCommand(string equipmentPropertyId, string equipmentClassId, string propertyName, string propertyType, string propertyValue)
+        public string UnitOfMeasure { get; set; }
+        public string EquipmentId { get; set; }
+
+        public CreateEquipmentPropertyCommand()
         {
-            PropertyId = equipmentPropertyId;
-            EquipmentClassId = equipmentClassId;
+        }
+
+        public CreateEquipmentPropertyCommand(string propertyId, string propertyName, string propertyValue, string unitOfMeasure, string equipmentClassId)
+        {
+            PropertyId = propertyId;
             PropertyName = propertyName;
-            PropertyType = propertyType;
             PropertyValue = propertyValue;
+            UnitOfMeasure = unitOfMeasure;
+            EquipmentId = equipmentClassId;
         }
     }
 }

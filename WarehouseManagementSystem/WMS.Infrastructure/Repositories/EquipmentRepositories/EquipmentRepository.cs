@@ -7,6 +7,16 @@ namespace WMS.Infrastructure.Repositories.EquipmentRepositories
         {
         }
 
+        public void Create(Equipment equipment)
+        {
+            _context.Equipments.Add(equipment);
+        }
+
+        public void Delete(Equipment equipment)
+        {
+            _context.Equipments.Remove(equipment);
+        }
+
         public async Task<List<Equipment>> GetAllAsync()
         {
             return await _context.Equipments.ToListAsync();

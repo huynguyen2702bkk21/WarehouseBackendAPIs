@@ -15,8 +15,16 @@ namespace WMS.Infrastructure.Repositories.EquipmentRepositories
         public async Task<EquipmentProperty> GetByIdAsync(string id)
         {
             return await _context.EquipmentProperties.FirstOrDefaultAsync(x => x.propertyId == id);
+        }
 
+        public void Create(EquipmentProperty equipmentProperty)
+        {
+            _context.EquipmentProperties.Add(equipmentProperty);
+        }
 
+        public void Delete(EquipmentProperty equipmentProperty)
+        {
+            _context.EquipmentProperties.Remove(equipmentProperty);
         }
     }
 }

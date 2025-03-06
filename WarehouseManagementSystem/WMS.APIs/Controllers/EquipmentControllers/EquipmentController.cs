@@ -1,4 +1,6 @@
 ﻿using WMS.Application.Commands.EquipmentCommands.EquipmentCLasses;
+using WMS.Application.Commands.EquipmentCommands.EquipmentProperties;
+using WMS.Application.Commands.EquipmentCommands.Equipments;
 using WMS.Application.DTOs.EquipmentDTOs;
 using WMS.Application.Queries.EquipmentQueries.EquipmentProperties;
 using WMS.Application.Queries.EquipmentQueries.Equipments;
@@ -49,6 +51,44 @@ namespace WMS.APIs.Controllers.EquipmentControllers
             var result = await _mediator.Send(query);
 
             return result;
+        }
+
+        [HttpPost("CreateEquipment")]
+        public async Task<IActionResult> CreateEquipment([FromBody] CreateEquipmentCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+        [HttpPost("CreateEquipmentProperty")]
+        public async Task<IActionResult> CreateEquipmentProperty([FromBody] CreateEquipmentPropertyCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+        [HttpPut("UpdateEquipmentProperty")]
+        public async Task<IActionResult> UpdateEquipmentProperty([FromBody] UpdateEquipmentPropertyCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+        [HttpPut("UpdateEquipment")]
+        public async Task<IActionResult> UpdateEquipment([FromBody] UpdateEquipmentCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+        [HttpDelete("DeleteEquipmentProperty/{equipmentPropertyId}")]
+        public async Task<IActionResult> DeleteEquipmentProperty(string equipmentPropertyId)
+        {
+            var command = new DeleteEquipmentPropertyCommand(equipmentPropertyId);
+            return await CommandAsync(command);
+        }
+
+        [HttpDelete("DeleteEquipment/{equipmentId}")]
+        public async Task<IActionResult> DeleteEquipment(string equipmentId)
+        {
+            var command = new DeleteEquipmentCommand(equipmentId);
+            return await CommandAsync(command);
         }
 
     }

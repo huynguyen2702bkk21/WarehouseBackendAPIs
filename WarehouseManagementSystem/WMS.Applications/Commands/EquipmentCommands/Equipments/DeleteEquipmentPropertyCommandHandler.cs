@@ -1,12 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WMS.Application.Commands.EquipmentCommands.Equipments
+﻿namespace WMS.Application.Commands.EquipmentCommands.Equipments
 {
-    internal class DeleteEquipmentPropertyCommandHandler
+    public class DeleteEquipmentPropertyCommandHandler : IRequestHandler<DeleteEquipmentPropertyCommand, bool>
     {
+        private readonly IEquipmentPropertyRepository _equipmentPropertyRepository;
+
+        public DeleteEquipmentPropertyCommandHandler(IEquipmentPropertyRepository equipmentPropertyRepository)
+        {
+            _equipmentPropertyRepository = equipmentPropertyRepository;
+        }
+
+        public async Task<bool> Handle(DeleteEquipmentPropertyCommand request, CancellationToken cancellationToken)
+        {
+            var equipmentProperty = await _equipmentPropertyRepository.GetByIdAsync(request.EquipmentPropertyId);
+            if (equipmentProperty == null)
+            {
+                throw new EntityNotFoundException(nameof(EquipmentProperty), request.EquipmentPropertyId);
+            }
+
+            _equipmentPropertyRepository.Delete(equipmentProperty);
+
+            return await _equipmentPropertyRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
+        }
+
+
+
+
     }
 }

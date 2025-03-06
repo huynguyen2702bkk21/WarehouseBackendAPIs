@@ -4,17 +4,17 @@
     {
         public string PropertyId { get; set; }
         public string PropertyName { get; set; }
-        public string PropertyType { get; set; }
         public string PropertyValue { get; set; }
-        public string EquipmentClassId { get; set; }
+        public string UnitOfMeasure { get; set; }
+        public string EquipmentId { get; set; }
 
-        public UpdateEquipmentPropertyCommand(string propertyId, string propertyName, string propertyType, string propertyValue, string equipmentClassId)
+        public UpdateEquipmentPropertyCommand(string propertyId, string propertyName, string propertyValue, string unitOfMeasure, string equipmentId)
         {
             PropertyId = propertyId;
             PropertyName = propertyName;
-            PropertyType = propertyType;
             PropertyValue = propertyValue;
-            EquipmentClassId = equipmentClassId;
+            UnitOfMeasure = unitOfMeasure;
+            EquipmentId = equipmentId;
         }
     }
 }
