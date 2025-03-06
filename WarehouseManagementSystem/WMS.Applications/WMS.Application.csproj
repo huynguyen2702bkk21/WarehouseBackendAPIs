@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\EquipmentCommands\Equipments\" />
-    <Folder Include="Commands\EquipmentCommands\EquipmentProperties\" />
-    <Folder Include="Commands\EquipmentCommands\EquipmentCLasses\" />
-    <Folder Include="Commands\EquipmentCommands\EquipmentClassProperties\" />
     <Folder Include="Commands\InventoryReceiptCommands\" />
     <Folder Include="Commands\InventoryIssueCommands\" />
     <Folder Include="DomainEventHandlers\" />

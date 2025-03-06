@@ -4,5 +4,7 @@
     {
         Task<List<EquipmentClass>> GetAllAsync();
         Task<EquipmentClass> GetByIdAsync(string EquipmentClassId);
+        void Create(EquipmentClass equipmentClass);
+        void Delete(EquipmentClass equipmentClass);
     }
 }

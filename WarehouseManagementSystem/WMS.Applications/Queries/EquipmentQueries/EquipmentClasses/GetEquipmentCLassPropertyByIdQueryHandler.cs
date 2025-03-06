@@ -1,6 +1,8 @@
-﻿namespace WMS.Application.Queries.EquipmentQueries.EquipmentClassProperties
+﻿using WMS.Application.Queries.EquipmentQueries.EquipmentClassProperties;
+
+namespace WMS.Application.Queries.EquipmentQueries.EquipmentClasses
 {
-    public class GetEquipmentCLassPropertyByIdQueryHandler : IRequestHandler<GetEquipmentCLassPropertyByIdQuery,EquipmentCLassPropertyDTO>
+    public class GetEquipmentCLassPropertyByIdQueryHandler : IRequestHandler<GetEquipmentCLassPropertyByIdQuery, EquipmentCLassPropertyDTO>
     {
         private readonly IEquipmentCLassPropertyRepository _equipmentCLassPropertyRepository;
         private readonly IMapper _mapper;

@@ -1,4 +1,6 @@
-﻿using WMS.Application.DTOs.EquipmentDTOs;
+﻿using WMS.Application.Commands.EquipmentCommands.EquipmentCLasses;
+using WMS.Application.Commands.EquipmentCommands.EquipmentClassProperties;
+using WMS.Application.DTOs.EquipmentDTOs;
 using WMS.Application.Queries.EquipmentQueries.EquipmentClasses;
 using WMS.Application.Queries.EquipmentQueries.EquipmentClassProperties;
 
@@ -48,6 +50,44 @@ namespace WMS.APIs.Controllers.EquipmentControllers
             var result = await _mediator.Send(query);
 
             return result;
+        }
+
+        [HttpPost("CreateEquipmentClassProperty")]
+        public async Task<IActionResult> CreateEquipmentClassProperty([FromBody] CreateEquipmentClassPropertyCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+        [HttpPost("CreateEquipmentCLass")]
+        public async Task<IActionResult> CreateEquipmentCLass([FromBody] CreateEquipmentCLassCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+        [HttpDelete("DeleteEquipmentClassProperty/{equipmentClassPropertyId}")]
+        public async Task<IActionResult> DeleteEquipmentClassProperty(string equipmentClassPropertyId)
+        {
+            var command = new DeleteEquipmentClassPropertyCommand(equipmentClassPropertyId);
+            return await CommandAsync(command);
+        }
+
+        [HttpDelete("DeleteEquipmentClass/{EquipmentClassId}")]
+        public async Task<IActionResult> DeleteEquipmentClass(string EquipmentClassId)
+        {
+            var command = new DeleteEquipmentCLassCommand(EquipmentClassId);
+            return await CommandAsync(command);
+        }
+
+        [HttpPut("UpdateEquipmentClassProperty")]
+        public async Task<IActionResult> UpdateEquipmentClassProperty([FromBody] UpdateEquipmentClassPropertyCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+        [HttpPut("UpdateEquipmentClass")]
+        public async Task<IActionResult> UpdateEquipmentClass([FromBody] UpdateEquipmentCLassCommand command)
+        {
+            return await CommandAsync(command);
         }
 
 

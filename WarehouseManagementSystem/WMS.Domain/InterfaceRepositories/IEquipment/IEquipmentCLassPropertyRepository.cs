@@ -4,5 +4,7 @@
     {
         Task<IEnumerable<EquipmentClassProperty>> GetAllAsync();
         Task<EquipmentClassProperty> GetByIdAsync(string propertyId);
+        void Create(EquipmentClassProperty equipmentClassProperty);
+        void Delete(EquipmentClassProperty equipmentClassProperty);
     }
 }

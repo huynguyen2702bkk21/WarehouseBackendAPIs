@@ -6,6 +6,16 @@
         {
         }
 
+        public void Create(EquipmentClassProperty equipmentClassProperty)
+        {
+            _context.EquipmentClassProperties.Add(equipmentClassProperty);
+        }
+
+        public void Delete(EquipmentClassProperty equipmentClassProperty)
+        {
+            _context.EquipmentClassProperties.Remove(equipmentClassProperty);
+        }
+
         public async Task<IEnumerable<EquipmentClassProperty>> GetAllAsync()
         {
             return await _context.EquipmentClassProperties.ToListAsync();

@@ -1,4 +1,5 @@
-﻿using WMS.Application.DTOs.EquipmentDTOs;
+﻿using WMS.Application.Commands.EquipmentCommands.EquipmentCLasses;
+using WMS.Application.DTOs.EquipmentDTOs;
 using WMS.Application.Queries.EquipmentQueries.EquipmentProperties;
 using WMS.Application.Queries.EquipmentQueries.Equipments;
 
@@ -49,5 +50,6 @@ namespace WMS.APIs.Controllers.EquipmentControllers
 
             return result;
         }
+
     }
 }
