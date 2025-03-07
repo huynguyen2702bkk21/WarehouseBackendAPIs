@@ -1,4 +1,6 @@
-﻿namespace WMS.Application.Queries.InventoryReceiptQueries.ReceiptSubLots
+﻿using WMS.Domain.AggregateModels.InventoryReceiptAggregate;
+
+namespace WMS.Application.Queries.InventoryReceiptQueries.ReceiptSubLots
 {
     public class GetReceiptSubLotByIdQueryHandler : IRequestHandler<GetReceiptSubLotByIdQuery, ReceiptSubLotDTO>
     {
@@ -16,7 +18,7 @@
             var receiptSubLot = await _receiptSubLotRepository.GetByIdAsync(request.ReceiptSublotId);
             if (receiptSubLot == null)
             {
-                throw new Exception("No receipt sub lot found");
+                throw new EntityNotFoundException(nameof(ReceiptSublot), request.ReceiptSublotId);
             }
 
             var receiptSubLotDTO = _mapper.Map<ReceiptSubLotDTO>(receiptSubLot);

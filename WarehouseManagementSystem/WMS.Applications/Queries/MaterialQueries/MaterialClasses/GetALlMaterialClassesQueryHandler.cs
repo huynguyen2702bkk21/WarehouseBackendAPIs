@@ -16,7 +16,7 @@
             var materialClasses = await _materialClassRepository.GetAllAsync();
             if (materialClasses == null)
             {
-                return null;
+                throw new EntityNotFoundException("MaterialClasses", "No material classes found");
             }
             
             var materialClassDTOs = _mapper.Map<IEnumerable<MaterialClassDTO>>(materialClasses);

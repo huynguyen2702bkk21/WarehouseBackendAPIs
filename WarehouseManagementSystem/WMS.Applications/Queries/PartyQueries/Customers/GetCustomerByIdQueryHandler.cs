@@ -14,10 +14,9 @@
         public async Task<CustomerDTO> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
         {
             var customer = await _customerRepository.GetCustomerById(request.CustomerId);
-
             if (customer == null)
             {
-                throw new EntityNotFoundException("Customers", request.CustomerId);
+                throw new EntityNotFoundException(nameof(Customer),request.CustomerId);
             }
 
             var customerDTO =  _mapper.Map<CustomerDTO>(customer);

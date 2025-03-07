@@ -17,7 +17,7 @@
 
             if (warehouse == null)
             {
-                throw new EntityNotFoundException("Warehouses", request.WarehouseId);
+                throw new EntityNotFoundException(nameof(Warehouse) , request.WarehouseId);
             }
            
             var warehouseDTO =  _mapper.Map<WarehouseDTO>(warehouse);

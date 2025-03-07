@@ -16,7 +16,7 @@
             var materialClassProperty = await _materialClassPropertyRepository.GetByIdAsync(request.PropertyId);
             if (materialClassProperty != null)
             {
-                throw new Exception("Material class property already exists");
+                throw new DuplicateRecordException(nameof(MaterialClassProperty),request.PropertyId);
             }
 
             if (!Enum.TryParse<UnitOfMeasure>(request.UnitOfMeasure, out var unit))

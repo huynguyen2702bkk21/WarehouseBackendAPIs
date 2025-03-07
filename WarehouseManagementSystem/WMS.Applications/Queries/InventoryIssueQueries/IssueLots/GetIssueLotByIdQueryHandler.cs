@@ -16,7 +16,7 @@
             var issueLot = await _issueLotRepository.GetIssueLotByIdAsync(request.IssueLotId);
             if (issueLot == null)
             {
-                throw new Exception("No receipt lot found");
+                throw new EntityNotFoundException("IssueLot", request.IssueLotId);
             }
 
             var issueLotDTO = _mapper.Map<IssueLotDTO>(issueLot);

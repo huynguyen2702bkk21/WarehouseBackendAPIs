@@ -18,11 +18,10 @@
             var locations = await _locationRepository.GetAllLocations();
             if(locations == null)
             {
-                return null;
+                throw new EntityNotFoundException("Locations", "No locations found");
             }
 
             List<LocationDTO> locationDTOs = new List<LocationDTO>();
-
 
             foreach (var location in locations)
             {

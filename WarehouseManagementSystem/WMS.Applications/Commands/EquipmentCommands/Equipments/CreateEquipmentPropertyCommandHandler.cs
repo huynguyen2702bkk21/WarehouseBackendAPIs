@@ -18,7 +18,7 @@ namespace WMS.Application.Commands.EquipmentCommands.Equipments
             var equipmentProperty = await _equipmentPropertyRepository.GetByIdAsync(request.PropertyId);
             if (equipmentProperty != null)
             {
-                throw new Exception("Equipment property already exists");
+                throw new EntityNotFoundException(nameof(EquipmentProperty), request.PropertyId);
             }
 
             var equipment = await _equipmentRepository.GetByIdAsync(request.EquipmentId);

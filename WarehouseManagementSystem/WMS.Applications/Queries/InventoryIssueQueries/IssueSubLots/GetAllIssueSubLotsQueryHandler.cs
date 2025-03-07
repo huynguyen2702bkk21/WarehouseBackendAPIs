@@ -32,8 +32,9 @@ namespace WMS.Application.Queries.InventoryIssueQueries.IssueSubLots
                 var materialSubLot = await _mediator.Send(new GetMaterialSubLotByIdQuery(issueSubLot.sublotId));
                 if (materialSubLot == null)
                 {
-                    throw new Exception("Material sub lot not found");
+                    throw new EntityNotFoundException("MaterialSubLot", issueSubLot.sublotId);
                 }
+
                 var issueSubLotDTO = new IssueSubLotDTO(issueSublotId: issueSubLot.issueSublotId,
                                                         requestedQuantity: issueSubLot.requestedQuantity,
                                                         materialSublot: materialSubLot,

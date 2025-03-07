@@ -16,7 +16,7 @@
             var materialClass = await _materialClassRepository.GetByIdAsync(request.MaterialClassId);
             if (materialClass == null)
             {
-                throw new Exception("Material class not found");
+                throw new EntityNotFoundException(nameof(MaterialClass), request.MaterialClassId);
             }
 
             _materialClassRepository.Delete(materialClass);

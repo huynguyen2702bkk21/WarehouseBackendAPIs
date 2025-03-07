@@ -1,7 +1,4 @@
-﻿
-using WMS.Application.Queries.InventoryIssueQueries.InventoryIssues;
-
-namespace WMS.APIs.Controllers.InventoryIssueControllers
+﻿namespace WMS.APIs.Controllers.InventoryIssueControllers
 {
     [ApiController]
     [Route("WarehouseAPI/[controller]")]
@@ -16,7 +13,7 @@ namespace WMS.APIs.Controllers.InventoryIssueControllers
         [HttpGet("GetAllIssueEntries")]
         public async Task<IEnumerable<InventoryIssueEntryDTO>> GetAllIssueEntries()
         {
-            var query = new GetAllInventoryIssueEntriesQuery ();
+            var query = new GetAllInventoryIssueEntriesQuery();
             var result = await _mediator.Send(query);
 
             return result;

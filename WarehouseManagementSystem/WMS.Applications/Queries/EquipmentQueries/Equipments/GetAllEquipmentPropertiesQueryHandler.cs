@@ -16,7 +16,7 @@
             var equipmentProperties = await _equipmentPropertyRepository.GetAllAsync();
             if (equipmentProperties == null) 
             {
-                throw new EntityNotFoundException(nameof(EquipmentProperties));
+                throw new EntityNotFoundException("EquipmentProperties has not Existed");
             }
 
             var equipmentPropertiesDTO = _mapper.Map<IEnumerable<EquipmentPropertyDTO>>(equipmentProperties);

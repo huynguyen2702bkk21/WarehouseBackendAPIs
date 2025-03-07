@@ -5,6 +5,6 @@
         Task<List<MaterialLotProperty>> GetAllAsync();
         Task<MaterialLotProperty> GetMaterialLotPropertyById(string id);
         void Create(MaterialLotProperty materialLotProperty);
-        Task Delete(MaterialLotProperty materialLotProperty);
+        void Delete(MaterialLotProperty materialLotProperty);
     }
 }

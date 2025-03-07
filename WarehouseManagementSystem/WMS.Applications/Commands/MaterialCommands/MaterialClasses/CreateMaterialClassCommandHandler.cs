@@ -15,21 +15,21 @@
 
         public async Task<bool> Handle(CreateMaterialClassCommand request, CancellationToken cancellationToken)
         {
-            var material = await _materialClassRepository.GetById(request.MaterialClassId);
-            if (material != null)
+            var materialClass = await _materialClassRepository.GetById(request.MaterialClassId);
+            if (materialClass != null)
             {
-                throw new Exception("MaterialClass already exists");
+                throw new DuplicateRecordException(nameof(MaterialClass), request.MaterialClassId);
             }
 
             var newMaterialClass = new MaterialClass(materialClassId: request.MaterialClassId,
-                                                className: request.ClassName);
+                                                     className: request.ClassName);
 
             foreach (var property in request.Properties)
             {
                 var checkProperty = await _materialClassPropertyRepository.GetByIdAsync(property.PropertyId);
                 if (checkProperty != null)
                 {
-                    throw new Exception("MaterialClass property already exists");
+                    throw new DuplicateRecordException(nameof(MaterialClassProperty), property.PropertyId);
                 }
 
                 if (!Enum.TryParse<UnitOfMeasure>(property.UnitOfMeasure, out var unit))

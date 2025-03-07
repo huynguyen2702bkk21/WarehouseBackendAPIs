@@ -20,12 +20,13 @@
             var location = await _locationRepository.GetLocationByIdAsync(request.Id);
             if (location == null)
             {
-                throw new EntityNotFoundException("Locations", request.Id);
+                throw new EntityNotFoundException(nameof(Location), request.Id);
             }
 
             var warehouse = await _warehouseRepository.GetWarehouseByIdAsync(location.warehouseId); 
 
             var locationDTO = _mapper.Map<LocationDTO>(location);
+
             locationDTO.MapName(warehouse.warehouseName);
 
             return locationDTO;

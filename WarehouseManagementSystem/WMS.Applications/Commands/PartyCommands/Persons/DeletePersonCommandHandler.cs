@@ -16,10 +16,9 @@
             var persom = await _personRepository.GetPersonById(request.PersonId);
             if (persom == null)
             {
-                throw new EntityNotFoundException("Persons", request.PersonId);
+                throw new EntityNotFoundException(nameof(Person), request.PersonId);
             }
 
-            // removeperson
             _personRepository.Delete(persom);
 
 

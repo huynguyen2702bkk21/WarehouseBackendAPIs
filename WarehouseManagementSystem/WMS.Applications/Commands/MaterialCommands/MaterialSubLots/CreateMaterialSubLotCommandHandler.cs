@@ -14,7 +14,7 @@
             var materialSubLot = await _materialSubLotRepository.GetByIdAsync(request.SubLotId);
             if (materialSubLot != null)
             {
-                throw new Exception("Material sub lot already exists");
+                throw new DuplicateRecordException(nameof(MaterialSubLot), request.SubLotId);
             }
 
             if (!Enum.TryParse<LotStatus>(request.SubLotStatus, out var status))

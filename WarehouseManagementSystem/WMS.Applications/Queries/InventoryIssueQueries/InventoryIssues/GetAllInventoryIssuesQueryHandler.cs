@@ -1,4 +1,4 @@
-﻿namespace WMS.Application.Queries.InventoryIssueQueries.InventoryIssueEntries
+﻿namespace WMS.Application.Queries.InventoryIssueQueries.InventoryIssues
 {
     public class GetAllInventoryIssuesQueryHandler : IRequestHandler<GetAllInventoryIssuesQuery, IEnumerable<InventoryIssueDTO>>
     {
@@ -20,7 +20,7 @@
         public async Task<IEnumerable<InventoryIssueDTO>> Handle(GetAllInventoryIssuesQuery request, CancellationToken cancellationToken)
         {
             var inventoryIssues = await _inventoryIssueRepository.GetAllAsync();
-            if (inventoryIssues == null) 
+            if (inventoryIssues == null)
             {
                 throw new Exception("No inventory issues found");
             }
@@ -34,19 +34,19 @@
                 var person = await _personRepository.GetPersonById(inventoryIssue.pesonId);
                 if (person == null)
                 {
-                    throw new Exception("Person not found");
+                    throw new EntityNotFoundException(nameof(Person), inventoryIssue.pesonId);
                 }
 
                 var customer = await _customerRepository.GetCustomerById(inventoryIssue.customerId);
                 if (customer == null)
                 {
-                    throw new Exception("Customer not found");
+                    throw new EntityNotFoundException(nameof(Customer), inventoryIssue.customerId);
                 }
 
                 var warehouse = await _warehouseRepository.GetWarehouseById(inventoryIssue.warehouseId);
                 if (warehouse == null)
                 {
-                    throw new Exception("Warehouse not found");
+                    throw new EntityNotFoundException(nameof(Warehouse), inventoryIssue.pesonId);
                 }
 
                 inventoryIssueDTO.MapName(customer.customerName, person.personName, warehouse.warehouseName);

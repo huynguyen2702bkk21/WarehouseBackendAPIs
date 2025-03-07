@@ -14,7 +14,7 @@
             var euipmentClassProperty = await _equipmentCLassPropertyRepository.GetByIdAsync(request.PropertyId);
             if (euipmentClassProperty != null)
             {
-                throw new Exception("Equipment");
+                throw new DuplicateRecordException(nameof(EquipmentClassProperty), request.PropertyId);
             }
 
             if (!Enum.TryParse<UnitOfMeasure>(request.UnitOfMeasure, out var unitOfMeasure))

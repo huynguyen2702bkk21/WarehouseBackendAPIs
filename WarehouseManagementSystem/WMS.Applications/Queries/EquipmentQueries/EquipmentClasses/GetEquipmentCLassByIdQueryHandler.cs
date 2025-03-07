@@ -1,4 +1,6 @@
-﻿namespace WMS.Application.Queries.EquipmentQueries.EquipmentClasses
+﻿using WMS.Domain.AggregateModels.EquipmentAggregate;
+
+namespace WMS.Application.Queries.EquipmentQueries.EquipmentClasses
 {
     public class GetEquipmentCLassByIdQueryHandler : IRequestHandler<GetEquipmentCLassByIdQuery, EquipmentCLassDTO>
     {
@@ -16,7 +18,7 @@
             var equipmentClass = await _equipmentClassRepository.GetByIdAsync(request.EquipmentCLassId);
             if (equipmentClass == null)
             {
-                throw new Exception("No equipment class found");
+                throw new EntityNotFoundException(nameof(EquipmentClass), request.EquipmentCLassId);
             }
 
             var equipmentClassDTO = _mapper.Map<EquipmentCLassDTO>(equipmentClass);

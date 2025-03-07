@@ -1,4 +1,4 @@
-﻿namespace WMS.Application.Queries.InventoryIssueQueries.InventoryIssueEntries
+﻿namespace WMS.Application.Queries.InventoryIssueQueries.InventoryIssues
 {
     public class GetInventoryIssueByIdQuery : IRequest<InventoryIssueDTO>
     {

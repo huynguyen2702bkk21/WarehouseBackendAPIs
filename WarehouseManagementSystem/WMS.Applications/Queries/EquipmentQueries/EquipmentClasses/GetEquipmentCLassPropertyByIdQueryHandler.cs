@@ -18,7 +18,7 @@ namespace WMS.Application.Queries.EquipmentQueries.EquipmentClasses
             var equipmentCLassProperty = await _equipmentCLassPropertyRepository.GetByIdAsync(request.EquipmentClassPropertyId);
             if (equipmentCLassProperty == null)
             {
-                throw new Exception("No equipment class property found");
+                throw new EntityNotFoundException(nameof(EquipmentClassProperty), request.EquipmentClassPropertyId);
             }
 
             var equipmentClassPropertyDTO = _mapper.Map<EquipmentCLassPropertyDTO>(equipmentCLassProperty);

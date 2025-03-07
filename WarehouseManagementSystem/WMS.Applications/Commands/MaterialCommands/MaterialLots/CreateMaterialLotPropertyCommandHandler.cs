@@ -14,7 +14,7 @@
             var materialLotProperty = await _materialLotPropertyRepository.GetMaterialLotPropertyById(request.PropertyId);
             if (materialLotProperty != null)
             {
-                throw new Exception("Material lot property already exists");
+                throw new DuplicateRecordException(nameof(MaterialLotProperty),request.PropertyId);
             }
 
             if(!Enum.TryParse<UnitOfMeasure>(request.UnitOfMeasure,out var unit))

@@ -1,4 +1,6 @@
-﻿namespace WMS.Application.Queries.InventoryReceiptQueries.ReceiptLots
+﻿using WMS.Domain.AggregateModels.InventoryReceiptAggregate;
+
+namespace WMS.Application.Queries.InventoryReceiptQueries.ReceiptLots
 {
     public class GetReceiptLotByIdQueryHandler : IRequestHandler<GetReceiptLotByIdQuery, ReceiptLotDTO>
     {
@@ -16,7 +18,7 @@
             var receiptLot = await _receiptLotRepository.GetByIdAsnc(request.ReceiptLotId);
             if (receiptLot == null)
             {
-                throw new Exception("No receipt lot found");
+                throw new EntityNotFoundException(nameof(ReceiptLot), request.ReceiptLotId);
             }
 
             var receiptLotDTO = _mapper.Map<ReceiptLotDTO>(receiptLot);

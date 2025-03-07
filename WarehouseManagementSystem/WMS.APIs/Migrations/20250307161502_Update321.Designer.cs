@@ -12,8 +12,8 @@ using WMS.Infrastructure;
 namespace WMS.APIs.Migrations
 {
     [DbContext(typeof(WMSDbContext))]
-    [Migration("20250306145625_Update_Equipment_Commands")]
-    partial class Update_Equipment_Commands
+    [Migration("20250307161502_Update321")]
+    partial class Update321
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -205,7 +205,7 @@ namespace WMS.APIs.Migrations
 
                     b.HasIndex("materialId");
 
-                    b.ToTable("InventoryIssuess");
+                    b.ToTable("InventoryIssueEntries");
                 });
 
             modelBuilder.Entity("WMS.Domain.AggregateModels.InventoryIssueAggregate.IssueLot", b =>

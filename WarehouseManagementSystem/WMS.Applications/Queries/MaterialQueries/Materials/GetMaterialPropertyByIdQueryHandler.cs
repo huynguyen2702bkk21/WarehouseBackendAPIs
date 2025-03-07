@@ -16,7 +16,7 @@
             var materialProperties = await _materialPropertyRepository.GetByIdAsync(request.MaterialPropertyId);
             if (materialProperties == null)
             {
-                throw new Exception("Material property not found");
+                throw new EntityNotFoundException(nameof(MaterialProperty), request.MaterialPropertyId);
             }
 
             var materialPropertyDTO = _mapper.Map<MaterialPropertyDTO>(materialProperties);

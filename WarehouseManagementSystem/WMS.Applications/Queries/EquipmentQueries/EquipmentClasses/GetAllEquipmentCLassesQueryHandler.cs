@@ -16,7 +16,7 @@
             var equipmentCLasses = await _equipmentClassRepository.GetAllAsync();
             if (equipmentCLasses == null)
             {
-                throw new Exception("No equipment classes found");
+                throw new EntityNotFoundException("EquipmentClasses is Null");
             }
 
             var equipmentClassDTOs = _mapper.Map<IEnumerable<EquipmentCLassDTO>>(equipmentCLasses);

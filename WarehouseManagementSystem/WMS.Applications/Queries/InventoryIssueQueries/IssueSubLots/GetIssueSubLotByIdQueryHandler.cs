@@ -18,13 +18,13 @@
             var issueSubLot = await _issueSubLotRepository.GetByIdAsync(request.IssueSublotId);
             if (issueSubLot == null)
             {
-                throw new Exception("No issue sub lots found");
+                throw new EntityNotFoundException("IssueSubLot", request.IssueSublotId);
             }
 
             var materialSubLot = await _mediator.Send(new GetMaterialSubLotByIdQuery(issueSubLot.sublotId));
             if (materialSubLot == null)
             {
-                throw new Exception("Material sub lot not found");
+                throw new EntityNotFoundException("MaterialSubLot", issueSubLot.sublotId);
             }
             var issueSubLotDTO = new IssueSubLotDTO(issueSublotId: issueSubLot.issueSublotId,
                                                     requestedQuantity: issueSubLot.requestedQuantity,

@@ -18,7 +18,7 @@
             var equipmentClass = await _equipmentClassRepository.GetByIdAsync(request.EquipmentClassId);
             if (equipmentClass != null)
             {
-                throw new Exception("Equipment class already exists");
+                throw new DuplicateRecordException(nameof(EquipmentClass), request.EquipmentClassId);
             }
 
             var newEquipmentClass = new EquipmentClass(equipmentClassId: request.EquipmentClassId,
@@ -29,7 +29,7 @@
                 var equipmentClassProperty = await _equipmentCLassPropertyRepository.GetByIdAsync(property.PropertyId);
                 if (equipmentClassProperty != null)
                 {
-                    throw new Exception("Equipment class property already exists");
+                    throw new DuplicateRecordException(nameof(EquipmentClassProperty), property.PropertyId);
                 }
 
                 if (!Enum.TryParse<UnitOfMeasure>(property.UnitOfMeasure, out var unitOfMeasure))

@@ -1,6 +1,4 @@
-﻿using WMS.Application.Queries.InventoryIssueQueries.InventoryIssues;
-
-namespace WMS.Application.Queries.InventoryIssueQueries.InventoryIssueEntries
+﻿namespace WMS.Application.Queries.InventoryIssueQueries.InventoryIssues
 {
     public class GetInventoryIssueByIdQueryHandler : IRequestHandler<GetInventoryIssueByIdQuery, InventoryIssueDTO>
     {
@@ -24,25 +22,25 @@ namespace WMS.Application.Queries.InventoryIssueQueries.InventoryIssueEntries
             var inventoryIssue = await _inventoryIssueRepository.GetByIdAsync(request.InventoryIssueId);
             if (inventoryIssue == null)
             {
-                throw new Exception("No inventory receipt found");
+                throw new EntityNotFoundException(nameof(InventoryIssue), request.InventoryIssueId);
             }
 
             var person = await _personRepository.GetPersonById(inventoryIssue.pesonId);
             if (person == null)
             {
-                throw new Exception("Person not found");
+                throw new EntityNotFoundException(nameof(Person), inventoryIssue.pesonId);
             }
 
             var customer = await _customerRepository.GetCustomerById(inventoryIssue.customerId);
             if (customer == null)
             {
-                throw new Exception("Supplier not found");
+                throw new EntityNotFoundException(nameof(Customer), inventoryIssue.customerId);
             }
 
             var warehouse = await _warehouseRepository.GetWarehouseById(inventoryIssue.warehouseId);
             if (warehouse == null)
             {
-                throw new Exception("Warehouse not found");
+                throw new EntityNotFoundException(nameof(Warehouse), inventoryIssue.warehouseId);
             }
 
             var Entries = new List<InventoryIssueEntryDTO>();

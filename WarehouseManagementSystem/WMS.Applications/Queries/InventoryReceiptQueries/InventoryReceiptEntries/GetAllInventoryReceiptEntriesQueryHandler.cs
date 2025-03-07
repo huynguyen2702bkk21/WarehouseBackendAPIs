@@ -1,4 +1,4 @@
-﻿namespace WMS.Application.Queries.InventoryReceiptQueries.InventoryReceipts
+﻿namespace WMS.Application.Queries.InventoryReceiptQueries.InventoryReceiptEntries
 {
     public class GetAllInventoryReceiptEntriesQueryHandler : IRequestHandler<GetAllInventoryReceiptEntriesQuery, List<InventoryReceiptEntryDTO>>
     {
@@ -20,7 +20,7 @@
             var inventoryReceiptEntries = await _inventoryReceiptEntryRepository.GetAllAsync();
             if (inventoryReceiptEntries == null)
             {
-                   throw new Exception("No inventory receipt entries found");
+                throw new Exception("No inventory receipt entries found");
             }
 
             var inventoryReceiptEntriesDTOs = new List<InventoryReceiptEntryDTO>();
@@ -30,9 +30,19 @@
                 var inventoryReceiptEntryDTO = _mapper.Map<InventoryReceiptEntryDTO>(inventoryReceiptEntry);
 
                 var receiptLot = await _receiptLotRepository.GetById(inventoryReceiptEntry.lotNumber);
+                if (receiptLot == null)
+                {
+                    throw new EntityNotFoundException(nameof(ReceiptLot), inventoryReceiptEntry.lotNumber);
+                }
+
                 inventoryReceiptEntryDTO.ReceiptLot = _mapper.Map<ReceiptLotDTO>(receiptLot);
 
                 var material = await _materialRepository.GetByIdAsync(inventoryReceiptEntry.materialId);
+                if (material == null)
+                {
+                    throw new EntityNotFoundException(nameof(Material), inventoryReceiptEntry.materialId);
+                }
+
                 inventoryReceiptEntryDTO.MapName(material.materialName);
 
 

@@ -205,7 +205,7 @@ namespace WMS.APIs.Migrations
 
                     b.HasIndex("materialId");
 
-                    b.ToTable("InventoryIssueEntries");
+                    b.ToTable("InventoryIssuess");
                 });
 
             modelBuilder.Entity("WMS.Domain.AggregateModels.InventoryIssueAggregate.IssueLot", b =>

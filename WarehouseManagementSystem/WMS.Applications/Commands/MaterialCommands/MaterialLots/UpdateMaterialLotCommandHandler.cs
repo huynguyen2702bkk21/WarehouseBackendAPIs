@@ -20,7 +20,7 @@ namespace WMS.Application.Commands.MaterialCommands.MaterialLots
             var materialLot = await _materialLotRepository.GetMaterialLotById(request.LotNumber);
             if (materialLot == null)
             {
-                throw new Exception("Material lot does not exist");
+                throw new EntityNotFoundException(nameof(MaterialLot), request.LotNumber);
             }
 
             if (!Enum.TryParse<LotStatus>(request.LotStatus, out var lotStatus))
@@ -36,7 +36,7 @@ namespace WMS.Application.Commands.MaterialCommands.MaterialLots
                 var materialProperty = await _materialLotPropertyRepository.GetMaterialLotPropertyById(property.PropertyId);
                 if (materialProperty == null)
                 {
-                    throw new Exception("Material Property does not exists");
+                    throw new EntityNotFoundException(nameof(MaterialLotProperty), property.PropertyId);
                 }
 
                 if (!Enum.TryParse<UnitOfMeasure>(property.UnitOfMeasure, out var unitProperty))
@@ -55,7 +55,7 @@ namespace WMS.Application.Commands.MaterialCommands.MaterialLots
                 var materialSubLot = await _materialSubLotRepository.GetByIdAsync(subLot.SubLotId);
                 if (materialSubLot == null)
                 {
-                    throw new Exception("Material SubLot does not exists");
+                    throw new EntityNotFoundException(nameof(MaterialSubLot), subLot.SubLotId);
                 }
 
                 if (!Enum.TryParse<UnitOfMeasure>(subLot.UnitOfMeasure, out var subUnit))

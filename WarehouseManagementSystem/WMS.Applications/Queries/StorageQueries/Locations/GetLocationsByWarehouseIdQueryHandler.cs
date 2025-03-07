@@ -18,7 +18,7 @@
             var locations = await _locationRepository.GetLocationsByWarehouseId(request.WarehouseId);
             if (locations == null)
             {
-                 throw new EntityNotFoundException("Location",request.WarehouseId);
+                 throw new EntityNotFoundException("Locaitons Not Found");
             }
 
             List<LocationDTO> locationDTOs = new List<LocationDTO>();

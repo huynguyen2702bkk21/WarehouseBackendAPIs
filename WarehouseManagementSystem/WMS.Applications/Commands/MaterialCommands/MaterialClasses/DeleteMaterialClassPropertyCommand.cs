@@ -2,11 +2,11 @@
 {
     public class DeleteMaterialClassPropertyCommand : IRequest<bool>
     {
-        public string MaterialClassId { get; set; }
+        public string MaterialClassPropertyId { get; set; }
 
-        public DeleteMaterialClassPropertyCommand(string materialClassId)
+        public DeleteMaterialClassPropertyCommand(string materialClassPropertyId)
         {
-            MaterialClassId = materialClassId;
+            MaterialClassPropertyId = materialClassPropertyId;
         }
     }
 }

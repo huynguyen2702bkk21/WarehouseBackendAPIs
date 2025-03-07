@@ -31,19 +31,9 @@ namespace WMS.Infrastructure.Repositories.StogareRepositories
 
         public async Task<Warehouse> GetWarehouseByIdAsync(string id)
         {
-            var warehouse = await _context.Warehouses.FirstOrDefaultAsync(x => x.warehouseId== id);
-            if (warehouse == null)
-            {
-                throw new Exception($"Warehouse With Id: {id} not Found");
-            }
-
-            var locations = await _context.Locations.Where(x => x.warehouseId == id).ToListAsync();
-            if(locations == null)
-            {
-                locations = new List<Location>();
-            }
-
-            warehouse.locations = locations;
+            var warehouse = await _context.Warehouses
+                .Include(x => x.locations)
+                .FirstOrDefaultAsync(x => x.warehouseId== id);
 
             return warehouse;
         }

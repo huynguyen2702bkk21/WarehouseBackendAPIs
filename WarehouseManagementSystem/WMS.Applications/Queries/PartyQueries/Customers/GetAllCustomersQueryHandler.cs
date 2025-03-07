@@ -14,10 +14,9 @@
         public async Task<IEnumerable<CustomerDTO>> Handle(GetAllCustomersQuery request, CancellationToken cancellationToken)
         {
             var customers = await _customerRepository.GetAllAsync();
-
             if (customers == null)
             {
-                return null;
+                throw new EntityNotFoundException("Customers", "No customers found");
             }
 
             var customerDTOs =  _mapper.Map<IEnumerable<CustomerDTO>>(customers);

@@ -17,7 +17,7 @@
 
             if (persons == null)
             {
-                return null;
+                throw new EntityNotFoundException("Persons", "No persons found");
             }
 
             var personDTOs = _mapper.Map<IEnumerable<PersonDTO>>(persons);

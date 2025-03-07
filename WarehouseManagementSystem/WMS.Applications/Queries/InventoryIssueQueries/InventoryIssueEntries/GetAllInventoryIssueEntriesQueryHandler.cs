@@ -1,4 +1,4 @@
-﻿namespace WMS.Application.Queries.InventoryIssueQueries.InventoryIssues
+﻿namespace WMS.Application.Queries.InventoryIssueQueries.InventoryIssueEntries
 {
     public class GetAllInventoryIssueEntriesQueryHandler : IRequestHandler<GetAllInventoryIssueEntriesQuery, IEnumerable<InventoryIssueEntryDTO>>
     {
@@ -30,7 +30,7 @@
                 var material = await _materialRepository.GetByIdAsync(inventoryIssueEntry.materialId);
                 if (material == null)
                 {
-                    throw new Exception("Material not found");
+                    throw new EntityNotFoundException(nameof(Material), inventoryIssueEntry.materialId);
                 }
 
                 inventoryIssueEntryDTO.MapName(material.materialName);

@@ -16,7 +16,7 @@
             var material = await _materialRepository.GetByIdAsync(request.MaterialId);
             if (material == null)
             {
-                throw new Exception("Material not found");
+                throw new EntityNotFoundException(nameof(Material), request.MaterialId);
             }
 
             foreach (var materialProperty in request.Properties)
@@ -24,7 +24,7 @@
                 var materialPropertyEntity = await _materialPropertyRepository.GetByIdAsync(materialProperty.PropertyId);
                 if (materialPropertyEntity == null)
                 {
-                    throw new Exception("Material property not found");
+                    throw new EntityNotFoundException(nameof(MaterialProperty), materialProperty.PropertyId);
                 }
 
                 if(!Enum.TryParse<UnitOfMeasure>(materialProperty.UnitOfMeasure, out var unit))

@@ -18,7 +18,18 @@ namespace WMS.Infrastructure.Repositories.InventoryIssueRepositories
 
         public async Task<InventoryIssueEntry> GetInventoryIssueEntryByIdAsync(string InventoryIssueEntryId)
         {
-            return await _context.InventoryIssueEntries.FirstOrDefaultAsync(x => x.inventoryIssueEntryId == InventoryIssueEntryId);
+            var inventoryIssueEntry =  await _context.InventoryIssueEntries
+                .Include(x => x.issueLot)
+                .FirstOrDefaultAsync(x => x.inventoryIssueEntryId == InventoryIssueEntryId);
+
+            var issuSubLots = await _context.IssueSublots
+                .Where(x => x.issueLotId == inventoryIssueEntry.issueLotId)
+                .Include(s => s.materialSublot)
+                .ToListAsync();
+
+            inventoryIssueEntry.issueLot.issueSublots = issuSubLots;
+
+            return inventoryIssueEntry;
         }
     }
 }

@@ -16,7 +16,7 @@
             var equipment = await _equipmentRepository.GetByIdAsync(request.EquipmentId);
             if (equipment == null)
             {
-                throw new EntityNotFoundException(nameof(Equipment));
+                throw new EntityNotFoundException(nameof(Equipment), request.EquipmentId);
             }
 
             var equipmentDTO = _mapper.Map<EquipmentDTO>(equipment);

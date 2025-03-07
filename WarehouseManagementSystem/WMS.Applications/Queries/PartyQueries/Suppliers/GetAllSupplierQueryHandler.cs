@@ -17,7 +17,7 @@
 
             if (suppliers == null)
             {
-                return null;
+                throw new EntityNotFoundException("Suppliers", "No suppliers found");
             }
 
             var supplierDTOs = _mapper.Map<IEnumerable<SupplierDTO>>(suppliers);

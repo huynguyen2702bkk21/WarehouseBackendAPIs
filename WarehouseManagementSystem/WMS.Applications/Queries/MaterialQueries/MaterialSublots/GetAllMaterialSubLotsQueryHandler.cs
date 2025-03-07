@@ -16,7 +16,7 @@
             var materialSubLots = await _materialSubLotRepository.GetAllAsync();
             if (materialSubLots == null)
             {
-                return null;
+                throw new EntityNotFoundException("Material sublots not found");
             }
             
             var materialSubLotDTOs = _mapper.Map<IEnumerable<MaterialSubLotDTO>>(materialSubLots);

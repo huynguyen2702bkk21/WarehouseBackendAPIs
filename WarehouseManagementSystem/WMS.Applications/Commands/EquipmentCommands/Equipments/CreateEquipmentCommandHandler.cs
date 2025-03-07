@@ -18,7 +18,7 @@
             var equipment = await _equipmentRepository.GetByIdAsync(request.EquipmentId);
             if (equipment != null)
             {
-                throw new Exception("Equipment has already existed");
+                throw new EntityNotFoundException(nameof(Equipment), request.EquipmentId);
             }
 
             var equipmentClass = await _equipmentClassRepository.GetByIdAsync(request.EquipmentClassId);
@@ -36,7 +36,7 @@
                 var equipmentProperty = await _equipmentPropertyRepository.GetByIdAsync(property.PropertyId);
                 if (equipmentProperty != null)
                 {
-                    throw new Exception("Equipment property already exists");
+                    throw new EntityNotFoundException(nameof(EquipmentProperty), property.PropertyId);
                 }
 
                 if (!Enum.TryParse<UnitOfMeasure>(property.UnitOfMeasure, out var unitOfMeasure))

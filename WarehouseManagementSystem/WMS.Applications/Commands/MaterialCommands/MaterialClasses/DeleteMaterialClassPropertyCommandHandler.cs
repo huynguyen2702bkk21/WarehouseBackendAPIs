@@ -13,13 +13,13 @@
 
         public async Task<bool> Handle(DeleteMaterialClassPropertyCommand request, CancellationToken cancellationToken)
         {
-            var materialClass = await _materialClassPropertyRepository.GetByIdAsync(request.MaterialClassId);
-            if (materialClass == null)
+            var materialClassProperty = await _materialClassPropertyRepository.GetByIdAsync(request.MaterialClassPropertyId);
+            if (materialClassProperty == null)
             {
-                throw new Exception("Material class not found");
+                throw new EntityNotFoundException(nameof(MaterialClassProperty), request.MaterialClassPropertyId);
             }
 
-            _materialClassPropertyRepository.Delete(materialClass);
+            _materialClassPropertyRepository.Delete(materialClassProperty);
 
             return await _materialClassPropertyRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
         }

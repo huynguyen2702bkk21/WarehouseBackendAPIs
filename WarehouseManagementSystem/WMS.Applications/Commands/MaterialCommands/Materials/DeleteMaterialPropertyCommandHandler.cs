@@ -9,12 +9,12 @@
             _materialPropertyRepository = materialPropertyRepository;
         }
 
-        public async Task<bool> Handle(DeleteMaterialPropertyCommand deleteMaterialPropertyCommand, CancellationToken cancellationToken)
+        public async Task<bool> Handle(DeleteMaterialPropertyCommand request, CancellationToken cancellationToken)
         {
-            var materialProperty = await _materialPropertyRepository.GetByIdAsync(deleteMaterialPropertyCommand.PropertyId);
+            var materialProperty = await _materialPropertyRepository.GetByIdAsync(request.PropertyId);
             if (materialProperty == null)
             {
-                throw new Exception("Material Property not found"); 
+                throw new EntityNotFoundException(nameof(MaterialProperty), request.PropertyId);
             }
 
             _materialPropertyRepository.Delete(materialProperty);

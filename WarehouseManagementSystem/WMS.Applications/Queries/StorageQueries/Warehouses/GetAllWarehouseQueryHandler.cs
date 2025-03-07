@@ -17,7 +17,7 @@
 
             if (warehouses == null)
             {
-                return null;
+                throw new EntityNotFoundException("Warehouses", "No warehouses found");
             }
 
             var warehouseDTOs =  _mapper.Map<IEnumerable<WarehouseDTO>>(warehouses);

@@ -18,7 +18,7 @@
             var material = await _materialRepository.GetById(request.MaterialId);
             if (material != null)
             {
-                throw new Exception("Material already exists");
+                throw new DuplicateRecordException(nameof(Material), request.MaterialId);
             }
 
             var newMaterial = new Material(materialId: request.MaterialId,
@@ -30,7 +30,7 @@
                 var checkProperty = await _materialPropertyRepository.GetByIdAsync(property.PropertyId); 
                 if(checkProperty != null)
                 {
-                    throw new Exception("Material property already exists");
+                    throw new DuplicateRecordException(nameof(MaterialProperty), property.PropertyId);
                 }
 
                 if(!Enum.TryParse<UnitOfMeasure>(property.UnitOfMeasure, out var unit))

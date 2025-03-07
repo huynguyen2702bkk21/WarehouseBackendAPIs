@@ -12,7 +12,7 @@ namespace WMS.Infrastructure.Repositories.MaterialRepositories
             _context.MaterialLotProperties.Add(materialLotProperty);
         }
 
-        public async Task Delete(MaterialLotProperty materialLotProperty)
+        public void Delete(MaterialLotProperty materialLotProperty)
         {
             _context.MaterialLotProperties.Remove(materialLotProperty);
         }

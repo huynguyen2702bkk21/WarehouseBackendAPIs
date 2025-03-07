@@ -22,7 +22,7 @@ namespace WMS.Application.Commands.MaterialCommands.MaterialClasses
             var materialClass = await _materialClassRepository.GetByIdAsync(request.MaterialClassId);
             if (materialClass == null)
             {
-                throw new Exception("Material class not found");
+                throw new EntityNotFoundException(nameof(MaterialClass), request.MaterialClassId);
             }
 
             foreach(var property in request.Properties)
@@ -30,7 +30,7 @@ namespace WMS.Application.Commands.MaterialCommands.MaterialClasses
                 var materialClassProperty = await _materialClassPropertyRepository.GetByIdAsync(property.PropertyId);
                 if (materialClassProperty == null)
                 {
-                    throw new Exception("Material class property not found");
+                    throw new EntityNotFoundException(nameof(MaterialClassProperty), property.PropertyId);
                 }
 
                 if (!Enum.TryParse<UnitOfMeasure>(property.UnitOfMeasure, out var unit))
