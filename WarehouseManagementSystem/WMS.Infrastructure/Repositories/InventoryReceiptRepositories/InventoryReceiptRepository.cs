@@ -7,6 +7,11 @@ namespace WMS.Infrastructure.Repositories.InventoryReceiptRepositories
         {
         }
 
+        public void Create(InventoryReceipt inventoryReceipt)
+        {
+            _context.InventoryReceipts.Add(inventoryReceipt);
+        }
+
         public async Task<List<InventoryReceipt>> GetAllAsync()
         {
             return await _context.InventoryReceipts.ToListAsync();

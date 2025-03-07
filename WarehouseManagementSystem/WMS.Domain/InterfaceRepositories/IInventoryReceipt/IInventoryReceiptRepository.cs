@@ -4,5 +4,6 @@
     {
         Task<List<InventoryReceipt>> GetAllAsync();
         Task<InventoryReceipt> GetByIdAsync(string inventoryReceiptId);
+        void Create(InventoryReceipt inventoryReceipt);
     }
 }

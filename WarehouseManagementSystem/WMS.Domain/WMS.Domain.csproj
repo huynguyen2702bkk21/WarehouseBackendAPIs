@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <Folder Include="DomainEvents\" />
-    <Folder Include="Exceptions\" />
   </ItemGroup>
 
   <ItemGroup>

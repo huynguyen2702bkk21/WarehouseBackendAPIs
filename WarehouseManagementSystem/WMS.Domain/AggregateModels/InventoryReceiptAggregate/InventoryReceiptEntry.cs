@@ -24,6 +24,17 @@
         {
         }
 
+        public InventoryReceiptEntry(string inventoryReceiptEntryId, string purchaseOrderNumber, string materialId, string note, string lotNumber, string inventoryReceiptId)
+        {
+            this.inventoryReceiptEntryId = inventoryReceiptEntryId;
+            this.purchaseOrderNumber = purchaseOrderNumber;
+            this.materialId = materialId;
+            this.note = note;
+            this.lotNumber = lotNumber;
+            InventoryReceiptId = inventoryReceiptId;
+            this.receiptLot = new ReceiptLot();
+        }
+
         public InventoryReceiptEntry(string inventoryReceiptEntryId, string purchaseOrderNumber, string materialId, Material material, string note, string lotNumber, ReceiptLot receiptLot, string inventoryReceiptId, InventoryReceipt inventoryReceipt)
         {
             this.inventoryReceiptEntryId = inventoryReceiptEntryId;

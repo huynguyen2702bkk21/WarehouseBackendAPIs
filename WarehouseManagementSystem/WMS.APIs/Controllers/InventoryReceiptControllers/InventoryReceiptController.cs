@@ -1,4 +1,5 @@
-﻿using WMS.Application.Queries.InventoryReceiptQueries.InventoryReceiptEntries;
+﻿using WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts;
+using WMS.Application.Queries.InventoryReceiptQueries.InventoryReceiptEntries;
 
 namespace WMS.APIs.Controllers.InventoryReceiptControllers
 {
@@ -28,6 +29,12 @@ namespace WMS.APIs.Controllers.InventoryReceiptControllers
             var result = await _mediator.Send(query);
 
             return result;
+        }
+
+        [HttpPost("CreateReceipt")]
+        public async Task<IActionResult> CreateReceipt([FromBody] CreateInventoryReceiptCommand command)
+        {
+            return await CommandAsync(command);
         }
 
 
