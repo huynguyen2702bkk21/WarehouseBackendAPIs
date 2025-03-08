@@ -67,6 +67,11 @@ namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts
 
         }
 
+        private static DateTime GetVietnamTime()
+        {
+            return TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time"));
+        }
+
         public async Task<InventoryReceipt> CreateNewInventoryReceipt(CreateInventoryReceiptCommand request)
         {
             if (!Enum.TryParse<ReceiptStatus>(request.ReceiptStatus, out var Status))
@@ -75,11 +80,11 @@ namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts
             }
 
             var newInventoryReceipt = new InventoryReceipt(inventoryReceiptId: request.InventoryReceiptId,
-                                            receiptDate: request.ReceiptDate,
-                                            receiptStatus: Status,
-                                            supplierId: request.SupplierId,
-                                            personId: request.PersonId,
-                                            warehouseId: request.WarehouseId);
+                                                           receiptDate: GetVietnamTime(),
+                                                           receiptStatus: Status,
+                                                           supplierId: request.SupplierId,
+                                                           personId: request.PersonId,
+                                                           warehouseId: request.WarehouseId);
 
             foreach (var entry in request.Entries)
             {

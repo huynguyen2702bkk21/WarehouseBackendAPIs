@@ -49,7 +49,7 @@ namespace WMS.Domain.AggregateModels.InventoryReceiptAggregate
             {
 
                 AddDomainEvent(new InventoryLogAddedDomainEvent(transactionType: TransactionType.Receipt,
-                                                                transactionDate: DateTime.UtcNow,
+                                                                transactionDate: inventoryReceipt.receiptDate,
                                                                 previousQuantity: 0,
                                                                 changedQuantity: materialLot.exisitingQuantity,
                                                                 afterQuantity: materialLot.exisitingQuantity,
