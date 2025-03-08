@@ -9,7 +9,7 @@ namespace WMS.Infrastructure.Repositories.MaterialRepositories
 
         public void Create(MaterialLot materialLot)
         {
-            _context.MaterialLots.Add(materialLot);
+            _context.MaterialLots.AddRange(materialLot);
         }
 
         public void Delete(MaterialLot materialLot)

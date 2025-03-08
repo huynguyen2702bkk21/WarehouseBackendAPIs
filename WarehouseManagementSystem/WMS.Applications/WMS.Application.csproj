@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <Folder Include="Commands\InventoryIssueCommands\" />
-    <Folder Include="DomainEventHandlers\" />
     <Folder Include="ErrorNotifications\" />
     <Folder Include="Exceptions\" />
   </ItemGroup>

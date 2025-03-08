@@ -2,22 +2,28 @@
 {
     public class CreateInventoryReceiptCommandHandler : IRequestHandler<CreateInventoryReceiptCommand, bool>
     {
+        private readonly ReceiptStatus completedStatus = ReceiptStatus.Completed;
+        private readonly LotStatus available = LotStatus.Available;
+        private readonly LotStatus done = LotStatus.Done;
+
         private readonly IInventoryReceiptRepository _inventoryReceiptRepository;
         private readonly IInventoryReceiptEntryRepository _inventoryReceiptEntryRepository;
         private readonly IReceiptLotRepository _receiptLotRepository;
         private readonly IReceiptSubLotRepository _receiptSubLotRepository;
         private readonly IMaterialLotRepository _materialLotRepository;
+        private readonly IMaterialSubLotRepository _materialSubLotRepository;
         private readonly ISupplierRepository _supplierRepository;
         private readonly IPersonRepository _personRepository;
         private readonly IWarehouseRepository _warehouseRepository;
 
-        public CreateInventoryReceiptCommandHandler(IInventoryReceiptRepository inventoryReceiptRepository, IInventoryReceiptEntryRepository inventoryReceiptEntryRepository, IReceiptLotRepository receiptLotRepository, IReceiptSubLotRepository receiptSubLotRepository, IMaterialLotRepository materialLotRepository, ISupplierRepository supplierRepository, IPersonRepository personRepository, IWarehouseRepository warehouseRepository)
+        public CreateInventoryReceiptCommandHandler(IInventoryReceiptRepository inventoryReceiptRepository, IInventoryReceiptEntryRepository inventoryReceiptEntryRepository, IReceiptLotRepository receiptLotRepository, IReceiptSubLotRepository receiptSubLotRepository, IMaterialLotRepository materialLotRepository, IMaterialSubLotRepository materialSubLotRepository, ISupplierRepository supplierRepository, IPersonRepository personRepository, IWarehouseRepository warehouseRepository)
         {
             _inventoryReceiptRepository = inventoryReceiptRepository;
             _inventoryReceiptEntryRepository = inventoryReceiptEntryRepository;
             _receiptLotRepository = receiptLotRepository;
             _receiptSubLotRepository = receiptSubLotRepository;
             _materialLotRepository = materialLotRepository;
+            _materialSubLotRepository = materialSubLotRepository;
             _supplierRepository = supplierRepository;
             _personRepository = personRepository;
             _warehouseRepository = warehouseRepository;
@@ -60,8 +66,7 @@
                                                         supplierId: request.SupplierId,
                                                         personId: request.PersonId,
                                                         warehouseId: request.WarehouseId);
-
-
+            
             foreach(var entry in request.Entries)
             {
                 var Entry = await _inventoryReceiptEntryRepository.GetById(entry.InventoryReceiptEntryId);
@@ -93,11 +98,6 @@
                                                    receiptLotStatus: LotStatus,
                                                    inventoryReceiptEntryId: entry.InventoryReceiptEntryId);
 
-                var newMaterialLot = new MaterialLot(lotNumber: entry.ReceiptLot.ReceiptLotId,
-                                                     lotStatus: LotStatus,
-                                                     materialId: entry.MaterialId,
-                                                     exisitingQuantity: entry.ReceiptLot.ImportedQuantity);
-
                 foreach(var subLot in entry.ReceiptLot.ReceiptSublots)
                 {
 
@@ -125,21 +125,56 @@
 
                     newReceiptLot.AddSublot(newReceiptSubLot);
 
-                    var newMaterialSubLot = new MaterialSubLot(subLotId: subLot.ReceiptSublotId,
-                                                               subLotStatus: SubLotStatus,
-                                                               existingQuality: subLot.ImportedQuantity,
-                                                               unitOfMeasure: unitOfMeasures,
-                                                               locationId: subLot.LocationId,
-                                                               lotNumber: subLot.receiptLotId);
-
-                    newMaterialLot.AddSubLot(newMaterialSubLot);
                 }
-
-                _materialLotRepository.Create(newMaterialLot);
 
                 newEntry.receiptLot = newReceiptLot;
 
                 newInventoryReceipt.AddEntry(newEntry);
+            }
+
+            var newMaterialLots = new List<MaterialLot>();
+            if (newInventoryReceipt.receiptStatus == completedStatus)
+            {
+                foreach(var entry in newInventoryReceipt.entries)
+                {
+                    if (entry.receiptLot.receiptLotStatus == done)
+                    {
+                        var materialLot = await _materialLotRepository.GetMaterialLotById(entry.receiptLot.receiptLotId);
+                        if(materialLot != null)
+                        {
+                            throw new DuplicateRecordException(nameof(MaterialLot),entry.receiptLot.receiptLotId);
+                        }
+
+                        var newMaterialLot = new MaterialLot(lotNumber: entry.receiptLot.receiptLotId,
+                                                             lotStatus: available,
+                                                             materialId:entry.materialId,
+                                                             exisitingQuantity: entry.receiptLot.importedQuantity);
+
+                        foreach(var sublot in entry.receiptLot.receiptSublots)
+                        {
+                            var existedSublot = await _materialSubLotRepository.GetByIdAsync(sublot.receiptSublotId);
+                            if(existedSublot != null)
+                            {
+                                throw new DuplicateRecordException(nameof(MaterialSubLot),sublot.receiptSublotId);
+                            }
+
+                            var newSubLot = new MaterialSubLot(subLotId: sublot.receiptSublotId,
+                                                               subLotStatus: available,
+                                                               existingQuality: sublot.importedQuantity,
+                                                               unitOfMeasure: sublot.unitOfMeasure,
+                                                               locationId: sublot.locationId,
+                                                               lotNumber: sublot.receiptLotId);
+
+                            newMaterialLot.AddSubLot(newSubLot);
+                        }
+
+                        newMaterialLots.Add(newMaterialLot);
+                    }
+                    
+                }
+
+                newInventoryReceipt.Confirm(newMaterialLots, newInventoryReceipt);
+
             }
 
             _inventoryReceiptRepository.Create(newInventoryReceipt);

@@ -1,4 +1,6 @@
-﻿namespace WMS.Domain.AggregateModels.MaterialAggregate
+﻿using WMS.Domain.DomainEvents.InventoryReceiptEvents;
+
+namespace WMS.Domain.AggregateModels.MaterialAggregate
 {
     public class MaterialLot : Entity, IAggregateRoot
     {

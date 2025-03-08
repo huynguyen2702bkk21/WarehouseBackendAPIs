@@ -5,7 +5,7 @@
         Received,
         InQualityCheck,
         Approved,
-        Rejected,
+        Rejected,   
         Pending,
         Completed,
         Cancelled,

@@ -1,4 +1,7 @@
-﻿namespace WMS.Domain.AggregateModels.InventoryReceiptAggregate
+﻿using WMS.Domain.DomainEvents.InventoryLogEvents;
+using WMS.Domain.DomainEvents.InventoryReceiptEvents;
+
+namespace WMS.Domain.AggregateModels.InventoryReceiptAggregate
 {
     public class InventoryReceipt : Entity, IAggregateRoot
     {
@@ -36,6 +39,25 @@
         public void AddEntry(InventoryReceiptEntry entry)
         {
             entries.Add(entry);
+        }
+
+        public void Confirm(List<MaterialLot> materialLots, InventoryReceipt inventoryReceipt)
+        {
+            AddDomainEvent(new MaterialLotsImportedDomainEvent(materialLots));
+
+            foreach(var materialLot in materialLots)
+            {
+
+                AddDomainEvent(new InventoryLogAddedDomainEvent(transactionType: TransactionType.Receipt,
+                                                                transactionDate: DateTime.UtcNow,
+                                                                previousQuantity: 0,
+                                                                changedQuantity: materialLot.exisitingQuantity,
+                                                                afterQuantity: materialLot.exisitingQuantity,
+                                                                note: "",
+                                                                lotNumber: materialLot.lotNumber,
+                                                                warehouseId: inventoryReceipt.warehouseId));
+            }
+
         }
 
     }

@@ -16,7 +16,8 @@
         Accepted,
         Pending,
         Shipped,
-        Cancelled
+        Cancelled,
+        Done
 
     }
 

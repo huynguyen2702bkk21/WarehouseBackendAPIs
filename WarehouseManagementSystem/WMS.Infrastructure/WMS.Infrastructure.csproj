@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\InventoryLogRepositories\" />
     <Folder Include="Repositories\MaterialLotAdjustmentRepositories\" />
   </ItemGroup>
 
