@@ -1,4 +1,6 @@
-﻿namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts
+﻿using Azure.Core;
+
+namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts
 {
     public class CreateInventoryReceiptCommandHandler : IRequestHandler<CreateInventoryReceiptCommand, bool>
     {
@@ -55,24 +57,36 @@
                 throw new EntityNotFoundException(nameof(Warehouse),request.WarehouseId);
             }
 
-            if(!Enum.TryParse<ReceiptStatus>(request.ReceiptStatus,out var Status))
+            var newInventoryReceipt = await CreateNewInventoryReceipt(request);
+
+            await AddToMaterialLot(newInventoryReceipt);
+
+            _inventoryReceiptRepository.Create(newInventoryReceipt);
+            
+            return await _inventoryReceiptRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
+
+        }
+
+        public async Task<InventoryReceipt> CreateNewInventoryReceipt(CreateInventoryReceiptCommand request)
+        {
+            if (!Enum.TryParse<ReceiptStatus>(request.ReceiptStatus, out var Status))
             {
                 throw new Exception($"Invalid receipt status: {request.ReceiptStatus}");
             }
 
             var newInventoryReceipt = new InventoryReceipt(inventoryReceiptId: request.InventoryReceiptId,
-                                                        receiptDate: request.ReceiptDate,
-                                                        receiptStatus: Status,
-                                                        supplierId: request.SupplierId,
-                                                        personId: request.PersonId,
-                                                        warehouseId: request.WarehouseId);
-            
-            foreach(var entry in request.Entries)
+                                            receiptDate: request.ReceiptDate,
+                                            receiptStatus: Status,
+                                            supplierId: request.SupplierId,
+                                            personId: request.PersonId,
+                                            warehouseId: request.WarehouseId);
+
+            foreach (var entry in request.Entries)
             {
                 var Entry = await _inventoryReceiptEntryRepository.GetById(entry.InventoryReceiptEntryId);
-                if(Entry != null)
+                if (Entry != null)
                 {
-                    throw new DuplicateRecordException(nameof(InventoryReceiptEntry),entry.InventoryReceiptEntryId);
+                    throw new DuplicateRecordException(nameof(InventoryReceiptEntry), entry.InventoryReceiptEntryId);
                 }
 
                 var newEntry = new InventoryReceiptEntry(inventoryReceiptEntryId: entry.InventoryReceiptEntryId,
@@ -83,9 +97,9 @@
                                                          inventoryReceiptId: entry.InventoryReceiptId);
 
                 var receiptLot = await _receiptLotRepository.GetById(entry.ReceiptLot.ReceiptLotId);
-                if(receiptLot != null)
+                if (receiptLot != null)
                 {
-                    throw new DuplicateRecordException(nameof(ReceiptLot),entry.ReceiptLot.ReceiptLotId);
+                    throw new DuplicateRecordException(nameof(ReceiptLot), entry.ReceiptLot.ReceiptLotId);
                 }
 
                 if (!Enum.TryParse<LotStatus>(entry.ReceiptLot.ReceiptLotStatus, out var LotStatus))
@@ -98,13 +112,13 @@
                                                    receiptLotStatus: LotStatus,
                                                    inventoryReceiptEntryId: entry.InventoryReceiptEntryId);
 
-                foreach(var subLot in entry.ReceiptLot.ReceiptSublots)
+                foreach (var subLot in entry.ReceiptLot.ReceiptSublots)
                 {
 
                     var SubLot = await _receiptSubLotRepository.GetByIdAsync(subLot.ReceiptSublotId);
-                    if(SubLot != null)
+                    if (SubLot != null)
                     {
-                        throw new DuplicateRecordException(nameof(ReceiptSublot),subLot.ReceiptSublotId);
+                        throw new DuplicateRecordException(nameof(ReceiptSublot), subLot.ReceiptSublotId);
                     }
 
                     if (!Enum.TryParse<LotStatus>(subLot.SubLotStatus, out var SubLotStatus))
@@ -132,30 +146,36 @@
                 newInventoryReceipt.AddEntry(newEntry);
             }
 
+            return newInventoryReceipt;
+
+        }
+
+        public async Task AddToMaterialLot(InventoryReceipt newInventoryReceipt)
+        {
             var newMaterialLots = new List<MaterialLot>();
             if (newInventoryReceipt.receiptStatus == completedStatus)
             {
-                foreach(var entry in newInventoryReceipt.entries)
+                foreach (var entry in newInventoryReceipt.entries)
                 {
                     if (entry.receiptLot.receiptLotStatus == done)
                     {
                         var materialLot = await _materialLotRepository.GetMaterialLotById(entry.receiptLot.receiptLotId);
-                        if(materialLot != null)
+                        if (materialLot != null)
                         {
-                            throw new DuplicateRecordException(nameof(MaterialLot),entry.receiptLot.receiptLotId);
+                            throw new DuplicateRecordException(nameof(MaterialLot), entry.receiptLot.receiptLotId);
                         }
 
                         var newMaterialLot = new MaterialLot(lotNumber: entry.receiptLot.receiptLotId,
                                                              lotStatus: available,
-                                                             materialId:entry.materialId,
+                                                             materialId: entry.materialId,
                                                              exisitingQuantity: entry.receiptLot.importedQuantity);
 
-                        foreach(var sublot in entry.receiptLot.receiptSublots)
+                        foreach (var sublot in entry.receiptLot.receiptSublots)
                         {
                             var existedSublot = await _materialSubLotRepository.GetByIdAsync(sublot.receiptSublotId);
-                            if(existedSublot != null)
+                            if (existedSublot != null)
                             {
-                                throw new DuplicateRecordException(nameof(MaterialSubLot),sublot.receiptSublotId);
+                                throw new DuplicateRecordException(nameof(MaterialSubLot), sublot.receiptSublotId);
                             }
 
                             var newSubLot = new MaterialSubLot(subLotId: sublot.receiptSublotId,
@@ -170,17 +190,16 @@
 
                         newMaterialLots.Add(newMaterialLot);
                     }
-                    
+
                 }
 
                 newInventoryReceipt.Confirm(newMaterialLots, newInventoryReceipt);
 
             }
 
-            _inventoryReceiptRepository.Create(newInventoryReceipt);
-            
-            return await _inventoryReceiptRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
         }
+
     }
+
 }
