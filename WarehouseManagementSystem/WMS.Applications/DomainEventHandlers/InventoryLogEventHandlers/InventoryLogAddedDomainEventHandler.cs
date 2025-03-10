@@ -1,8 +1,4 @@
-﻿using WMS.Domain.AggregateModels.InventoryLogAggregate;
-using WMS.Domain.DomainEvents.InventoryLogEvents;
-using WMS.Domain.InterfaceRepositories.IInventoryLog;
-
-namespace WMS.Application.DomainEventHandlers.InventoryLogEventHandlers
+﻿namespace WMS.Application.DomainEventHandlers.InventoryLogEventHandlers
 {
     public class InventoryLogAddedDomainEventHandler : INotificationHandler<InventoryLogAddedDomainEvent>
     {

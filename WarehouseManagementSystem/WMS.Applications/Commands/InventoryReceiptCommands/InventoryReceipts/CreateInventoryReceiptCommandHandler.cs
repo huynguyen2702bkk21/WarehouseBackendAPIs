@@ -67,6 +67,11 @@ namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts
 
         }
 
+
+
+
+
+
         private static DateTime GetVietnamTime()
         {
             return TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time"));
@@ -158,50 +163,54 @@ namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts
         public async Task AddToMaterialLot(InventoryReceipt newInventoryReceipt)
         {
             var newMaterialLots = new List<MaterialLot>();
-            if (newInventoryReceipt.receiptStatus == completedStatus)
+            var inventoryReceiptStatus = completedStatus;
+            foreach (var entry in newInventoryReceipt.entries)
             {
-                foreach (var entry in newInventoryReceipt.entries)
+                if (entry.receiptLot.receiptLotStatus != done)
                 {
-                    if (entry.receiptLot.receiptLotStatus == done)
-                    {
-                        var materialLot = await _materialLotRepository.GetMaterialLotById(entry.receiptLot.receiptLotId);
-                        if (materialLot != null)
-                        {
-                            throw new DuplicateRecordException(nameof(MaterialLot), entry.receiptLot.receiptLotId);
-                        }
-
-                        var newMaterialLot = new MaterialLot(lotNumber: entry.receiptLot.receiptLotId,
-                                                             lotStatus: available,
-                                                             materialId: entry.materialId,
-                                                             exisitingQuantity: entry.receiptLot.importedQuantity);
-
-                        foreach (var sublot in entry.receiptLot.receiptSublots)
-                        {
-                            var existedSublot = await _materialSubLotRepository.GetByIdAsync(sublot.receiptSublotId);
-                            if (existedSublot != null)
-                            {
-                                throw new DuplicateRecordException(nameof(MaterialSubLot), sublot.receiptSublotId);
-                            }
-
-                            var newSubLot = new MaterialSubLot(subLotId: sublot.receiptSublotId,
-                                                               subLotStatus: available,
-                                                               existingQuality: sublot.importedQuantity,
-                                                               unitOfMeasure: sublot.unitOfMeasure,
-                                                               locationId: sublot.locationId,
-                                                               lotNumber: sublot.receiptLotId);
-
-                            newMaterialLot.AddSubLot(newSubLot);
-                        }
-
-                        newMaterialLots.Add(newMaterialLot);
-                    }
-
+                    inventoryReceiptStatus = ReceiptStatus.Pending;
                 }
 
-                newInventoryReceipt.Confirm(newMaterialLots, newInventoryReceipt);
+                var materialLot = await _materialLotRepository.GetMaterialLotById(entry.receiptLot.receiptLotId);
+                if (materialLot != null)
+                {
+                    throw new DuplicateRecordException(nameof(MaterialLot), entry.receiptLot.receiptLotId);
+                }
 
+                var newMaterialLot = new MaterialLot(lotNumber: entry.receiptLot.receiptLotId,
+                                                     lotStatus: available,
+                                                     materialId: entry.materialId,
+                                                     exisitingQuantity: entry.receiptLot.importedQuantity);
+
+                foreach (var sublot in entry.receiptLot.receiptSublots)
+                {
+                    var existedSublot = await _materialSubLotRepository.GetByIdAsync(sublot.receiptSublotId);
+                    if (existedSublot != null)
+                    {
+                        throw new DuplicateRecordException(nameof(MaterialSubLot), sublot.receiptSublotId);
+                    }
+
+                    var newSubLot = new MaterialSubLot(subLotId: sublot.receiptSublotId,
+                                                       subLotStatus: available,
+                                                       existingQuality: sublot.importedQuantity,
+                                                       unitOfMeasure: sublot.unitOfMeasure,
+                                                       locationId: sublot.locationId,
+                                                       lotNumber: sublot.receiptLotId);
+
+                    newMaterialLot.AddSubLot(newSubLot);
+                }
+                newMaterialLots.Add(newMaterialLot);
             }
 
+            if (inventoryReceiptStatus == completedStatus)
+            {
+                newInventoryReceipt.Confirm(newMaterialLots, newInventoryReceipt);
+                newInventoryReceipt.receiptStatus = inventoryReceiptStatus;
+            }
+            else
+            {
+                newInventoryReceipt.receiptStatus = inventoryReceiptStatus;
+            }
 
         }
 
