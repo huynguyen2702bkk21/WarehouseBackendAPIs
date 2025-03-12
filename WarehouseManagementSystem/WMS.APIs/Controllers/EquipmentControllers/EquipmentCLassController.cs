@@ -1,6 +1,7 @@
 ﻿using WMS.Application.Commands.EquipmentCommands.EquipmentCLasses;
 using WMS.Application.Commands.EquipmentCommands.EquipmentClassProperties;
 using WMS.Application.DTOs.EquipmentDTOs;
+using WMS.Application.DTOs.EquipmentDTOs.EquipmentClasses;
 using WMS.Application.Queries.EquipmentQueries.EquipmentClasses;
 using WMS.Application.Queries.EquipmentQueries.EquipmentClassProperties;
 

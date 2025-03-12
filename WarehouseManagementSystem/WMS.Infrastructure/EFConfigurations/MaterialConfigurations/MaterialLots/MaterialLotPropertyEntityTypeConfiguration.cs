@@ -1,4 +1,4 @@
-﻿namespace WMS.Infrastructure.EFConfigurations.MaterialConfigurations
+﻿namespace WMS.Infrastructure.EFConfigurations.MaterialConfigurations.MaterialLots
 {
     public class MaterialLotPropertyEntityTypeConfiguration : IEntityTypeConfiguration<MaterialLotProperty>
     {
@@ -6,12 +6,12 @@
         {
             builder.HasKey(b => b.propertyId);
 
-            builder.Property(b => b.propertyName)               
+            builder.Property(b => b.propertyName)
                 .IsRequired()
-                .HasMaxLength(50);      
+                .HasMaxLength(50);
 
             builder.Property(b => b.propertyValue)
-                .IsRequired()             
+                .IsRequired()
                 .HasMaxLength(50);
 
             builder.Property(b => b.unitOfMeasure)
@@ -27,5 +27,5 @@
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }
-    
+
 }

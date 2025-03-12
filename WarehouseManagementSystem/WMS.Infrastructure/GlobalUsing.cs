@@ -23,6 +23,10 @@ global using WMS.Infrastructure.EFConfigurations.PartyConfigurations;
 global using WMS.Infrastructure.EFConfigurations.StorageConfigurations;
 global using WMS.Domain.InterfaceRepositories.IInventoryIssue;
 global using WMS.Domain.InterfaceRepositories.IEquipment;
+global using WMS.Domain.AggregateModels.PartyAggregate.People;
+global using WMS.Infrastructure.EFConfigurations.InventoryLogConfigurations;
+global using WMS.Infrastructure.EFConfigurations.MaterialLotAdjustmentConfigurations;
+
 
 
 

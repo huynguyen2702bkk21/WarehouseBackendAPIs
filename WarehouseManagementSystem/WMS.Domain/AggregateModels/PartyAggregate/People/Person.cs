@@ -1,4 +1,6 @@
-﻿namespace WMS.Domain.AggregateModels.PartyAggregate
+﻿using WMS.Domain.AggregateModels.PartyAggregate.People;
+
+namespace WMS.Domain.AggregateModels.PartyAggregate
 {
     public class Person : Entity, IAggregateRoot
     {
@@ -11,6 +13,7 @@
         public List<InventoryReceipt> inventoryReceipts { get; set; }
         public List<InventoryIssue> inventoryIssues { get; set; }
         public List<MaterialLotAdjustment> materialLotAdjustments { get; set; }
+        public List<PersonProperty> properties { get; set; }
 
         public Person(string personId, string personName, EmployeeType role)
         {

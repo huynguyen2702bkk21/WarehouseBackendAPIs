@@ -1,8 +1,8 @@
-﻿namespace WMS.Infrastructure.EFConfigurations.EquipmentConfigurations
+﻿namespace WMS.Infrastructure.EFConfigurations.EquipmentConfigurations.EquipmentClasses
 {
-    public class EquipmentPropertyEntityTypeConfiguration : IEntityTypeConfiguration<EquipmentProperty>
+    public class EquipmentClassPropertyEntityTypeConfiguration : IEntityTypeConfiguration<EquipmentClassProperty>
     {
-        public void Configure(EntityTypeBuilder<EquipmentProperty> builder)
+        public void Configure(EntityTypeBuilder<EquipmentClassProperty> builder)
         {
             builder.HasKey(b => b.propertyId);
 
@@ -19,13 +19,12 @@
                 .HasMaxLength(50)
                 .IsRequired();
 
-            builder.HasOne(b => b.equipment)
+            builder.HasOne(b => b.equipmentClass)
                 .WithMany(b => b.properties)
-                .HasForeignKey(b => b.equipmentId)
+                .HasForeignKey(b => b.equipmentClassId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
         }
     }
-    
 }

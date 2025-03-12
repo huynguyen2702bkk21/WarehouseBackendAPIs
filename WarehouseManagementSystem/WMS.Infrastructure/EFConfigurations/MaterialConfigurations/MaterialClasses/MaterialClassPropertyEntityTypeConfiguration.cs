@@ -1,4 +1,4 @@
-﻿namespace WMS.Infrastructure.EFConfigurations.MaterialConfigurations
+﻿namespace WMS.Infrastructure.EFConfigurations.MaterialConfigurations.MaterialClasses
 {
     public class MaterialClassPropertyEntityTypeConfiguration : IEntityTypeConfiguration<MaterialClassProperty>
     {

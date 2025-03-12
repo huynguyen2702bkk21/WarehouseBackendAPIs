@@ -9,11 +9,10 @@
 
   <ItemGroup>
     <Folder Include="Commands\InventoryIssueCommands\" />
+    <Folder Include="DTOs\StorageDTOs\Zones\" />
     <Folder Include="ErrorNotifications\" />
     <Folder Include="Exceptions\" />
-    <Folder Include="Queries\InventoryTrackingQueries\InventoryLogReceipt\" />
-    <Folder Include="Queries\InventoryTrackingQueries\InventoryLogIssue\" />
-    <Folder Include="Queries\InventoryTrackingQueries\InventoryLogAdjustment\" />
+    <Folder Include="Queries\InventoryTrackingQueries\" />
   </ItemGroup>
 
   <ItemGroup>

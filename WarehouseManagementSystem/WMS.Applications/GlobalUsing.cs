@@ -28,6 +28,9 @@ global using WMS.Domain.InterfaceRepositories.IInventoryReceipt;
 global using WMS.Domain.InterfaceRepositories.IMaterial;
 global using WMS.Domain.InterfaceRepositories.IParty;
 global using WMS.Domain.InterfaceRepositories.IStorage;
+global using WMS.Application.DTOs.PartyDTOs.People;
+global using WMS.Domain.AggregateModels.PartyAggregate.People;
+global using WMS.Domain.InterfaceRepositories.IParty.People;
 
 
 

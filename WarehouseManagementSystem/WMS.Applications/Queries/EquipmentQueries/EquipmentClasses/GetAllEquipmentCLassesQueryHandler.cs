@@ -1,4 +1,6 @@
-﻿namespace WMS.Application.Queries.EquipmentQueries.EquipmentClasses
+﻿using WMS.Application.DTOs.EquipmentDTOs.EquipmentClasses;
+
+namespace WMS.Application.Queries.EquipmentQueries.EquipmentClasses
 {
     public class GetAllEquipmentCLassesQueryHandler : IRequestHandler<GetAllEquipmentCLassesQuery, IEnumerable<EquipmentCLassDTO>>
     {

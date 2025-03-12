@@ -1,7 +1,9 @@
 ﻿using WMS.Domain.InterfaceRepositories.IEquipment;
 using WMS.Domain.InterfaceRepositories.IInventoryLog;
+using WMS.Domain.InterfaceRepositories.IParty.People;
 using WMS.Infrastructure.Repositories.EquipmentRepositories;
 using WMS.Infrastructure.Repositories.InventoryLogRepositories;
+using WMS.Infrastructure.Repositories.PartyRepositories.People;
 
 namespace WMS.APIs
 {
@@ -31,6 +33,7 @@ namespace WMS.APIs
             // Register the repositories with scoped lifetime
 
             builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+            builder.Services.AddScoped<IPersonPropertyRepository, PersonPropertyRepository>();
             builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
             builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
             builder.Services.AddScoped<ILocationRepository, LocationRepository>();

@@ -1,5 +1,8 @@
-﻿using WMS.Infrastructure.EFConfigurations.InventoryLogConfigurations;
-using WMS.Infrastructure.EFConfigurations.MaterialLotAdjustmentConfigurations;
+﻿using WMS.Infrastructure.EFConfigurations.EquipmentConfigurations.EquipmentClasses;
+using WMS.Infrastructure.EFConfigurations.EquipmentConfigurations.Equipments;
+using WMS.Infrastructure.EFConfigurations.MaterialConfigurations.MaterialClasses;
+using WMS.Infrastructure.EFConfigurations.MaterialConfigurations.MaterialLots;
+using WMS.Infrastructure.EFConfigurations.PartyConfigurations.People;
 
 namespace WMS.Infrastructure
 {
@@ -9,6 +12,7 @@ namespace WMS.Infrastructure
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Person> Persons { get; set; }
+        public DbSet<PersonProperty> PersonProperties { get; set; }
 
         // Storage Aggregate
         public DbSet<Location> Locations { get; set; }
@@ -65,6 +69,7 @@ namespace WMS.Infrastructure
         {
             // party aggregate
             modelBuilder.ApplyConfiguration(new PersonEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new PersonPropertyEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new CustomerEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new SupplierEntityTypeConfiguration());
 

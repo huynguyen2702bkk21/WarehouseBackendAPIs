@@ -1,4 +1,4 @@
-﻿namespace WMS.Infrastructure.EFConfigurations.EquipmentConfigurations
+﻿namespace WMS.Infrastructure.EFConfigurations.EquipmentConfigurations.Equipments
 {
     public class EquipmentEntityTypeConfiguration : IEntityTypeConfiguration<Equipment>
     {

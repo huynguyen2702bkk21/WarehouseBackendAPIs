@@ -19,7 +19,9 @@
 
         public async Task<Person> GetPersonById(string id)
         {
-            return await _context.Persons.FirstOrDefaultAsync(x => x.personId== id);
+            return await _context.Persons
+                .Include(s => s.properties)
+                .FirstOrDefaultAsync(x => x.personId== id);
         }
 
         public void Update(Person person)

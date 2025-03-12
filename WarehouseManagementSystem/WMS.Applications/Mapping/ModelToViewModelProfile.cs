@@ -1,7 +1,6 @@
-﻿using WMS.Application.DTOs.EquipmentDTOs;
-using WMS.Application.DTOs.InventoryIssueDTOs;
-using WMS.Application.DTOs.InventoryReceiptDTOs;
-using WMS.Domain.AggregateModels.InventoryReceiptAggregate;
+﻿using WMS.Application.DTOs.EquipmentDTOs.EquipmentClasses;
+using WMS.Application.DTOs.PartyDTOs.People;
+using WMS.Domain.AggregateModels.PartyAggregate.People;
 
 namespace WMS.Application.Mapping
 {
@@ -10,6 +9,7 @@ namespace WMS.Application.Mapping
         public ModelToViewModelProfile()
         {
             MapPersonViewModel();
+            MapPersonPropertyViewModel();
             MapCustomerViewModel();
             MapSupplierViewModel();
 
@@ -48,9 +48,18 @@ namespace WMS.Application.Mapping
         public void MapPersonViewModel()
         {
             CreateMap<Person, PersonDTO>()
-                .ForMember(s => s.EmployeeType, s => s.MapFrom(s => s.role.ToString()));
+                .ForMember(s => s.EmployeeType, s => s.MapFrom(s => s.role.ToString()))
+                .ForMember(s => s.personPropertyDTOs, s => s.MapFrom(s => s.properties));
 
         }
+
+        public void MapPersonPropertyViewModel()
+        {
+            CreateMap<PersonProperty, PersonPropertyDTO>()
+                .ForMember(s => s.UnitOfMeasure, s => s.MapFrom(s => s.unitOfMeasure.ToString()));
+                    
+        }
+
 
         public void MapCustomerViewModel()
         {

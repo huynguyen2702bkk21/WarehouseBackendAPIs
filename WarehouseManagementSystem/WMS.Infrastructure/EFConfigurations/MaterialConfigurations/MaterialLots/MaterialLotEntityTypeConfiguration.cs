@@ -1,6 +1,6 @@
-﻿namespace WMS.Infrastructure.EFConfigurations.MaterialConfigurations
+﻿namespace WMS.Infrastructure.EFConfigurations.MaterialConfigurations.MaterialLots
 {
-    public class MaterialLotEntityTypeConfiguration : IEntityTypeConfiguration<MaterialLot> 
+    public class MaterialLotEntityTypeConfiguration : IEntityTypeConfiguration<MaterialLot>
     {
         public void Configure(EntityTypeBuilder<MaterialLot> builder)
         {

@@ -1,4 +1,4 @@
-﻿namespace WMS.Application.DTOs.EquipmentDTOs
+﻿namespace WMS.Application.DTOs.EquipmentDTOs.EquipmentClasses
 {
     public class EquipmentCLassDTO
     {

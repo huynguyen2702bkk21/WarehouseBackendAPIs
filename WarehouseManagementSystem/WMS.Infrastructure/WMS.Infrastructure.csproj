@@ -28,7 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="EFConfigurations\StorageConfigurations\Zones\" />
     <Folder Include="Repositories\MaterialLotAdjustmentRepositories\" />
+    <Folder Include="Repositories\StogareRepositories\Zones\" />
   </ItemGroup>
 
 </Project>

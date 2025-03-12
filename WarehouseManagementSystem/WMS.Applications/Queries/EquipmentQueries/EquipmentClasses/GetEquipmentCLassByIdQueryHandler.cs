@@ -1,4 +1,5 @@
-﻿using WMS.Domain.AggregateModels.EquipmentAggregate;
+﻿using WMS.Application.DTOs.EquipmentDTOs.EquipmentClasses;
+using WMS.Domain.AggregateModels.EquipmentAggregate;
 
 namespace WMS.Application.Queries.EquipmentQueries.EquipmentClasses
 {

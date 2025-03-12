@@ -735,6 +735,37 @@ namespace WMS.APIs.Migrations
                     b.ToTable("Customers");
                 });
 
+            modelBuilder.Entity("WMS.Domain.AggregateModels.PartyAggregate.People.PersonProperty", b =>
+                {
+                    b.Property<string>("propertyId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("personId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("propertyName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("propertyValue")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("unitOfMeasure")
+                        .HasColumnType("int");
+
+                    b.HasKey("propertyId");
+
+                    b.HasIndex("personId");
+
+                    b.ToTable("PersonProperties");
+                });
+
             modelBuilder.Entity("WMS.Domain.AggregateModels.PartyAggregate.Person", b =>
                 {
                     b.Property<string>("personId")
@@ -1131,6 +1162,17 @@ namespace WMS.APIs.Migrations
                     b.Navigation("warehouse");
                 });
 
+            modelBuilder.Entity("WMS.Domain.AggregateModels.PartyAggregate.People.PersonProperty", b =>
+                {
+                    b.HasOne("WMS.Domain.AggregateModels.PartyAggregate.Person", "person")
+                        .WithMany("properties")
+                        .HasForeignKey("personId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("person");
+                });
+
             modelBuilder.Entity("WMS.Domain.AggregateModels.StorageAggregate.Location", b =>
                 {
                     b.HasOne("WMS.Domain.AggregateModels.StorageAggregate.Warehouse", "warehouse")
@@ -1234,6 +1276,8 @@ namespace WMS.APIs.Migrations
                     b.Navigation("inventoryReceipts");
 
                     b.Navigation("materialLotAdjustments");
+
+                    b.Navigation("properties");
                 });
 
             modelBuilder.Entity("WMS.Domain.AggregateModels.PartyAggregate.Supplier", b =>
