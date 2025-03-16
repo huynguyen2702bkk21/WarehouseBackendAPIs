@@ -4,10 +4,6 @@ namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts
 {
     public class CreateInventoryReceiptCommandHandler : IRequestHandler<CreateInventoryReceiptCommand, bool>
     {
-        private readonly ReceiptStatus completedStatus = ReceiptStatus.Completed;
-        private readonly LotStatus available = LotStatus.Available;
-        private readonly LotStatus done = LotStatus.Done;
-
         private readonly IInventoryReceiptRepository _inventoryReceiptRepository;
         private readonly IInventoryReceiptEntryRepository _inventoryReceiptEntryRepository;
         private readonly IReceiptLotRepository _receiptLotRepository;
@@ -68,14 +64,6 @@ namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts
         }
 
 
-
-
-
-
-        private static DateTime GetVietnamTime()
-        {
-            return TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time"));
-        }
 
         public async Task<InventoryReceipt> CreateNewInventoryReceipt(CreateInventoryReceiptCommand request)
         {
@@ -163,10 +151,10 @@ namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts
         public async Task AddToMaterialLot(InventoryReceipt newInventoryReceipt)
         {
             var newMaterialLots = new List<MaterialLot>();
-            var inventoryReceiptStatus = completedStatus;
+            var inventoryReceiptStatus = ReceiptStatus.Completed;
             foreach (var entry in newInventoryReceipt.entries)
             {
-                if (entry.receiptLot.receiptLotStatus != done)
+                if (entry.receiptLot.receiptLotStatus != LotStatus.Done)
                 {
                     inventoryReceiptStatus = ReceiptStatus.Pending;
                 }
@@ -178,7 +166,7 @@ namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts
                 }
 
                 var newMaterialLot = new MaterialLot(lotNumber: entry.receiptLot.receiptLotId,
-                                                     lotStatus: available,
+                                                     lotStatus: LotStatus.Available,
                                                      materialId: entry.materialId,
                                                      exisitingQuantity: entry.receiptLot.importedQuantity);
 
@@ -191,7 +179,7 @@ namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts
                     }
 
                     var newSubLot = new MaterialSubLot(subLotId: sublot.receiptSublotId,
-                                                       subLotStatus: available,
+                                                       subLotStatus: LotStatus.Available,
                                                        existingQuality: sublot.importedQuantity,
                                                        unitOfMeasure: sublot.unitOfMeasure,
                                                        locationId: sublot.locationId,
@@ -202,7 +190,7 @@ namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts
                 newMaterialLots.Add(newMaterialLot);
             }
 
-            if (inventoryReceiptStatus == completedStatus)
+            if (inventoryReceiptStatus == ReceiptStatus.Completed)
             {
                 newInventoryReceipt.Confirm(newMaterialLots, newInventoryReceipt);
                 newInventoryReceipt.receiptStatus = inventoryReceiptStatus;
@@ -212,6 +200,11 @@ namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts
                 newInventoryReceipt.receiptStatus = inventoryReceiptStatus;
             }
 
+        }
+
+        private static DateTime GetVietnamTime()
+        {
+            return TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time"));
         }
 
     }

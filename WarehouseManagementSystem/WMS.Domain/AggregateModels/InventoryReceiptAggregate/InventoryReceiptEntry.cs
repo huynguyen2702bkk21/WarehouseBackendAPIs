@@ -47,5 +47,11 @@
             InventoryReceiptId = inventoryReceiptId;
             this.inventoryReceipt = inventoryReceipt;
         }
+
+        public void Update(string purchaseOrderNumber)
+        {
+            this.purchaseOrderNumber = purchaseOrderNumber;
+        }
+
     }
 }

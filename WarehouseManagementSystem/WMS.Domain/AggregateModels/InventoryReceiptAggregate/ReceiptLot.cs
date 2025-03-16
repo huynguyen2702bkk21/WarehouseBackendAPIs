@@ -41,6 +41,12 @@
             receiptSublots.Add(sublot);
         }
 
+        public void Update(double importedQuantity, LotStatus receiptLotStatus)
+        {
+            this.importedQuantity = importedQuantity;
+            this.receiptLotStatus = receiptLotStatus;
+        }
+
 
     }
 }

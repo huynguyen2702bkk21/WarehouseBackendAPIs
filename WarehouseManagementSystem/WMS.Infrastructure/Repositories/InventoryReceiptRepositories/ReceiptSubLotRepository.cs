@@ -17,5 +17,10 @@ namespace WMS.Infrastructure.Repositories.InventoryReceiptRepositories
         {
             return await _context.ReceiptSublots.FirstOrDefaultAsync(x => x.receiptSublotId== receiptSublotId);
         }
+
+        public Task<List<ReceiptSublot>> GetSublotsByLotId(string lotId)
+        {
+            return _context.ReceiptSublots.Where(x => x.receiptLotId == lotId).ToListAsync();
+        }
     }
 }

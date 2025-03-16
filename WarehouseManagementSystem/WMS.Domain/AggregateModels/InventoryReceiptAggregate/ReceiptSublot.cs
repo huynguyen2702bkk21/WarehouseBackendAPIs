@@ -1,4 +1,6 @@
-﻿namespace WMS.Domain.AggregateModels.InventoryReceiptAggregate
+﻿using WMS.Domain.AggregateModels.StorageAggregate;
+
+namespace WMS.Domain.AggregateModels.InventoryReceiptAggregate
 {
     public class ReceiptSublot : Entity, IAggregateRoot
     {
@@ -26,5 +28,16 @@
             this.locationId = locationId;
             this.receiptLotId = receiptLotId;
         }
+
+        public void Update(double importedQuantity, LotStatus subLotStatus, UnitOfMeasure unitOfMeasure, string locationId)
+        {
+            this.importedQuantity = importedQuantity;
+            this.subLotStatus = subLotStatus;
+            this.unitOfMeasure = unitOfMeasure;
+            this.locationId = locationId;
+
+        }
+
+
     }
 }

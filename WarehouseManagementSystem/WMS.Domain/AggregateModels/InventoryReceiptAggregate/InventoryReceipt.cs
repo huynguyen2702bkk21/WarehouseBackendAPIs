@@ -49,7 +49,7 @@ namespace WMS.Domain.AggregateModels.InventoryReceiptAggregate
             {
 
                 AddDomainEvent(new InventoryLogAddedDomainEvent(transactionType: TransactionType.Receipt,
-                                                                transactionDate: inventoryReceipt.receiptDate,
+                                                                transactionDate: GetVietnamTime(),
                                                                 previousQuantity: 0,
                                                                 changedQuantity: materialLot.exisitingQuantity,
                                                                 afterQuantity: materialLot.exisitingQuantity,
@@ -59,6 +59,12 @@ namespace WMS.Domain.AggregateModels.InventoryReceiptAggregate
             }
 
         }
+
+        private static DateTime GetVietnamTime()
+        {
+            return TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time"));
+        }
+
 
     }
 }

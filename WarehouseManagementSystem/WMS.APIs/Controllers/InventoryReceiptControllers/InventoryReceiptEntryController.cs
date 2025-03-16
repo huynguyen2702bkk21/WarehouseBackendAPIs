@@ -1,4 +1,5 @@
 ﻿
+using WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts;
 using WMS.Application.Queries.InventoryReceiptQueries.InventoryReceipts;
 
 namespace WMS.APIs.Controllers.InventoryReceiptControllers
@@ -29,6 +30,18 @@ namespace WMS.APIs.Controllers.InventoryReceiptControllers
             var result = await _mediator.Send(query);
 
             return result;
+        }
+
+        [HttpPost("CreateInventoryReceiptEntry")]
+        public async Task<IActionResult> CreateInventoryReceiptEntry([FromBody] CreateInventoryReceiptEntryCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+        [HttpPut("Update InventoryReceiptEntries")]
+        public async Task<IActionResult> UpdateInventoryReceiptEntries([FromBody] UpdateInventoryReceiptEntriesCommand command)
+        {
+            return await CommandAsync(command);
         }
 
 

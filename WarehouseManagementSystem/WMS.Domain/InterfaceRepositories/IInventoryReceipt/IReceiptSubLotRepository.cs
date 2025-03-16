@@ -4,5 +4,6 @@
     {
         Task<List<ReceiptSublot>> GetAllAsync();
         Task<ReceiptSublot> GetByIdAsync(string receiptSublotId);
+        Task<List<ReceiptSublot>> GetSublotsByLotId(string lotId);
     }
 }
