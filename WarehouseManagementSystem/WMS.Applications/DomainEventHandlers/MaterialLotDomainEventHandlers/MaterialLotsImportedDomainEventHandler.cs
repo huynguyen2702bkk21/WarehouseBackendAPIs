@@ -1,6 +1,4 @@
-﻿using WMS.Domain.DomainEvents.InventoryReceiptEvents;
-
-namespace WMS.Application.DomainEventHandlers.InventoryReceiptEventHandlers
+﻿namespace WMS.Application.DomainEventHandlers.InventoryReceiptEventHandlers
 {
     public class MaterialLotsImportedDomainEventHandler : INotificationHandler<MaterialLotsImportedDomainEvent>
     {
@@ -17,7 +15,7 @@ namespace WMS.Application.DomainEventHandlers.InventoryReceiptEventHandlers
                 var materialLotExists = await _materialLotRepository.GetMaterialLotById(materialLot.lotNumber);
                 if (materialLotExists != null)
                 {
-                    continue;
+                    throw new DuplicateRecordException(nameof(MaterialLot), materialLot.lotNumber);
                 }
                 _materialLotRepository.Create(materialLot);
             }

@@ -9,5 +9,6 @@
         Task<List<MaterialSubLot>> GetMaterialSubLotsByStatus(string Status);
         void Create(MaterialSubLot materialSubLot);
         void Delete(MaterialSubLot materialSubLot);
+        void Update(MaterialSubLot materialSubLot);
     }
 }

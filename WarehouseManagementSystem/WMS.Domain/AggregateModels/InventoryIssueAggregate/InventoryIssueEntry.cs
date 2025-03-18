@@ -21,5 +21,18 @@
         [ForeignKey("inventoryIssueId")]
         public string inventoryIssueId { get; set; }
         public InventoryIssue inventoryIssue { get; set; }
+
+        public InventoryIssueEntry(string inventoryIssueEntryId, string purchaseOrderNumber, double requestedQuantity, string note, string materialId, string issueLotId, string inventoryIssueId)
+        {
+            this.inventoryIssueEntryId = inventoryIssueEntryId;
+            this.purchaseOrderNumber = purchaseOrderNumber;
+            this.requestedQuantity = requestedQuantity;
+            this.note = note;
+            this.materialId = materialId;
+            this.issueLotId = issueLotId;
+            this.inventoryIssueId = inventoryIssueId;
+        }
+
+
     }
 }

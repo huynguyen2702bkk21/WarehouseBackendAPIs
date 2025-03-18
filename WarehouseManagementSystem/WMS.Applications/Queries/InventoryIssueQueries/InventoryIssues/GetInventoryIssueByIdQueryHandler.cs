@@ -25,10 +25,10 @@
                 throw new EntityNotFoundException(nameof(InventoryIssue), request.InventoryIssueId);
             }
 
-            var person = await _personRepository.GetPersonById(inventoryIssue.pesonId);
+            var person = await _personRepository.GetPersonById(inventoryIssue.personId);
             if (person == null)
             {
-                throw new EntityNotFoundException(nameof(Person), inventoryIssue.pesonId);
+                throw new EntityNotFoundException(nameof(Person), inventoryIssue.personId);
             }
 
             var customer = await _customerRepository.GetCustomerById(inventoryIssue.customerId);

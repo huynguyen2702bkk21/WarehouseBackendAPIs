@@ -37,5 +37,16 @@
             this.lotNumber = lotNumber;
         }
 
+        public void Export(double requestedQuantity)
+        {
+            if (requestedQuantity > existingQuality)
+            {
+                throw new Exception("Requested quantity is greater than existing quality");
+            }
+
+            existingQuality = existingQuality - requestedQuantity;
+        }
+
+
     }
 }

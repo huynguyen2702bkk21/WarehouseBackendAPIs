@@ -11,17 +11,19 @@
 
         public async Task Handle(InventoryLogAddedDomainEvent notification, CancellationToken cancellationToken)
         {
-            var inventoryLog = await _inventoryLogRepository.GetInventoryLogByLotNumber(notification.LotNumber);
-            if(inventoryLog != null)
+
+            var newChangedQuantity = notification.ChangedQuantity;
+
+            if (notification.TransactionType == TransactionType.Issue)
             {
-                throw new DuplicateRecordException(nameof(InventoryLog),notification.LotNumber);
+                newChangedQuantity = -notification.ChangedQuantity;
             }
 
             var newInventoryLog = new InventoryLog(inventoryLogId: notification.InventoryLogId,
                                                    transactionType: notification.TransactionType,
                                                    transactionDate: notification.TransactionDate,
                                                    previousQuantity: notification.PreviousQuantity,
-                                                   changedQuantity: notification.ChangedQuantity,
+                                                   changedQuantity: newChangedQuantity,
                                                    afterQuantity: notification.AfterQuantity,
                                                    note: notification.Note,
                                                    lotNumber: notification.LotNumber,

@@ -1,4 +1,4 @@
-﻿namespace WMS.Domain.DomainEvents.InventoryReceiptEvents
+﻿namespace WMS.Domain.DomainEvents.MaterialLotDomainEvents
 {
     public class MaterialLotsImportedDomainEvent : INotification
     {

@@ -1,8 +1,9 @@
 ﻿using Azure.Core;
+using WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts;
 
-namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts
+namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceiptEntries
 {
-    public class UpdateInventoryReceiptEntriesCommandHandler : IRequestHandler<UpdateInventoryReceiptEntriesCommand,bool>
+    public class UpdateInventoryReceiptEntriesCommandHandler : IRequestHandler<UpdateInventoryReceiptEntriesCommand, bool>
     {
         private readonly IInventoryReceiptRepository _inventoryReceiptRepository;
         private readonly IInventoryReceiptEntryRepository _inventoryReceiptEntryRepository;
@@ -37,7 +38,7 @@ namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts
 
             await AddToMaterialLot(inventoryReceipt);
 
-            return await _inventoryReceiptRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);   
+            return await _inventoryReceiptRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
         }
 

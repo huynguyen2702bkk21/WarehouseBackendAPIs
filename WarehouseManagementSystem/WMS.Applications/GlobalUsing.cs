@@ -31,6 +31,7 @@ global using WMS.Domain.InterfaceRepositories.IStorage;
 global using WMS.Application.DTOs.PartyDTOs.People;
 global using WMS.Domain.AggregateModels.PartyAggregate.People;
 global using WMS.Domain.InterfaceRepositories.IParty.People;
+global using WMS.Domain.DomainEvents.MaterialLotDomainEvents;
 
 
 

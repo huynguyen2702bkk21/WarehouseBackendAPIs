@@ -23,7 +23,7 @@
 
             builder.HasOne(s => s.issuedBy)
                 .WithMany(s => s.inventoryIssues)
-                .HasForeignKey(s => s.pesonId)
+                .HasForeignKey(s => s.personId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 

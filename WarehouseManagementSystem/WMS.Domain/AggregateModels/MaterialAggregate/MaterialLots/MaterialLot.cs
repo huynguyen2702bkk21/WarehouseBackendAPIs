@@ -1,4 +1,4 @@
-﻿using WMS.Domain.DomainEvents.InventoryReceiptEvents;
+﻿using WMS.Domain.DomainEvents.MaterialLotDomainEvents;
 
 namespace WMS.Domain.AggregateModels.MaterialAggregate
 {
@@ -45,6 +45,17 @@ namespace WMS.Domain.AggregateModels.MaterialAggregate
         {
             lotStatus = LotStatus;
             exisitingQuantity = ExisitingQuantity;
+        }
+
+        public void Export(double requestedQuantity)
+        {
+            if (requestedQuantity > exisitingQuantity)
+            {
+                throw new Exception("Requested quantity is greater than existing quality");
+            }
+
+            exisitingQuantity = exisitingQuantity - requestedQuantity;
+
         }
 
     }

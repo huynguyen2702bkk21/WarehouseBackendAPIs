@@ -1,7 +1,4 @@
-﻿using WMS.Application.Queries.InventoryReceiptQueries.InventoryReceipts;
-using WMS.Domain.AggregateModels.InventoryReceiptAggregate;
-
-namespace WMS.Application.Queries.InventoryReceiptQueries.InventoryReceiptEntries
+﻿namespace WMS.Application.Queries.InventoryReceiptQueries.InventoryReceiptEntries
 {
     public class GetInventoryReceiptEntryByIdQueryHandler : IRequestHandler<GetInventoryReceiptEntryByIdQuery, InventoryReceiptEntryDTO>
     {
@@ -27,14 +24,6 @@ namespace WMS.Application.Queries.InventoryReceiptQueries.InventoryReceiptEntrie
             }
 
             var inventoryReceiptEntryDTO = _mapper.Map<InventoryReceiptEntryDTO>(inventoryReceiptEntry);
-
-            var receiptLot = await _receiptLotRepository.GetByIdAsnc(inventoryReceiptEntry.lotNumber);
-            if (receiptLot == null)
-            {
-                throw new EntityNotFoundException(nameof(ReceiptLot), inventoryReceiptEntry.lotNumber);
-            }
-
-            inventoryReceiptEntryDTO.ReceiptLot = _mapper.Map<ReceiptLotDTO>(receiptLot);
 
             var material = await _materialRepository.GetByIdAsync(inventoryReceiptEntry.materialId);
             if (material == null)

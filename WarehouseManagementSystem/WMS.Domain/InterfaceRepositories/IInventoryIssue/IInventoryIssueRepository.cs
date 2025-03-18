@@ -4,5 +4,6 @@
     {
         Task<IEnumerable<InventoryIssue>> GetAllAsync();
         Task<InventoryIssue> GetByIdAsync(string inventoryIssueId);
+        void Create(InventoryIssue inventoryIssue);
     }
 }

@@ -1,5 +1,5 @@
 ﻿using WMS.Domain.DomainEvents.InventoryLogEvents;
-using WMS.Domain.DomainEvents.InventoryReceiptEvents;
+using WMS.Domain.DomainEvents.MaterialLotDomainEvents;
 
 namespace WMS.Domain.AggregateModels.InventoryReceiptAggregate
 {

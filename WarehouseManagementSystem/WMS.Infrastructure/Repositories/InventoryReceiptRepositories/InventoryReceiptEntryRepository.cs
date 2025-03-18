@@ -14,7 +14,12 @@ namespace WMS.Infrastructure.Repositories.InventoryReceiptRepositories
 
         public async Task<InventoryReceiptEntry> GetById(string inventoryReceiptEntryId)
         {
-            return await _context.InventoryReceiptEntries.FirstOrDefaultAsync(x => x.inventoryReceiptEntryId== inventoryReceiptEntryId);
+            var entry = await _context.InventoryReceiptEntries
+                .Include(s => s.receiptLot)
+                    .ThenInclude(s => s.receiptSublots)
+                .FirstOrDefaultAsync(x => x.inventoryReceiptEntryId== inventoryReceiptEntryId);
+
+            return entry;
         }
     }
 }

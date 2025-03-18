@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\InventoryIssueCommands\" />
     <Folder Include="DTOs\StorageDTOs\Zones\" />
     <Folder Include="ErrorNotifications\" />
     <Folder Include="Exceptions\" />

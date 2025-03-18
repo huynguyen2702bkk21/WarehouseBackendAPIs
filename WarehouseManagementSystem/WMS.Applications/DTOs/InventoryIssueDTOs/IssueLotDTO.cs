@@ -11,6 +11,10 @@
         public string InventoryIssueEntryId { get; set; }
         public List<IssueSubLotDTO> IssueSublots { get; set; }
 
+        public IssueLotDTO()
+        {
+        }
+
         public IssueLotDTO(string issueLotId, double requestedQuantity, List<IssueSubLotDTO> issueSublots, LotStatus issueLotStatus, string materialLotId, string inventoryIssueEntryId)
         {
             IssueLotId = issueLotId;

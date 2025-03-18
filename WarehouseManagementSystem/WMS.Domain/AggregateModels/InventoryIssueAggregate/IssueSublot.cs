@@ -14,5 +14,17 @@
         [ForeignKey("issueLotId")]
         public string issueLotId { get; set; }
         public IssueLot issueLot { get; set; }
+
+        public IssueSublot()
+        {
+        }
+
+        public IssueSublot(string issueSublotId, double requestedQuantity, string materialSublotId, string issueLotId)
+        {
+            this.issueSublotId = issueSublotId;
+            this.requestedQuantity = requestedQuantity;
+            this.sublotId = materialSublotId;
+            this.issueLotId = issueLotId;
+        }
     }
 }

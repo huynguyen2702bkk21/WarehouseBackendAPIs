@@ -31,10 +31,10 @@
             {
                 var inventoryIssueDTO = _mapper.Map<InventoryIssueDTO>(inventoryIssue);
 
-                var person = await _personRepository.GetPersonById(inventoryIssue.pesonId);
+                var person = await _personRepository.GetPersonById(inventoryIssue.personId);
                 if (person == null)
                 {
-                    throw new EntityNotFoundException(nameof(Person), inventoryIssue.pesonId);
+                    throw new EntityNotFoundException(nameof(Person), inventoryIssue.personId);
                 }
 
                 var customer = await _customerRepository.GetCustomerById(inventoryIssue.customerId);
@@ -46,7 +46,7 @@
                 var warehouse = await _warehouseRepository.GetWarehouseById(inventoryIssue.warehouseId);
                 if (warehouse == null)
                 {
-                    throw new EntityNotFoundException(nameof(Warehouse), inventoryIssue.pesonId);
+                    throw new EntityNotFoundException(nameof(Warehouse), inventoryIssue.personId);
                 }
 
                 inventoryIssueDTO.MapName(customer.customerName, person.personName, warehouse.warehouseName);

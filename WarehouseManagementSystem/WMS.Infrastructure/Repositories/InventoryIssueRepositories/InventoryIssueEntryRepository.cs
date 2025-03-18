@@ -20,14 +20,9 @@ namespace WMS.Infrastructure.Repositories.InventoryIssueRepositories
         {
             var inventoryIssueEntry =  await _context.InventoryIssueEntries
                 .Include(x => x.issueLot)
+                    .ThenInclude(x => x.issueSublots)
+                        .ThenInclude(x => x.materialSublot)
                 .FirstOrDefaultAsync(x => x.inventoryIssueEntryId == InventoryIssueEntryId);
-
-            var issuSubLots = await _context.IssueSublots
-                .Where(x => x.issueLotId == inventoryIssueEntry.issueLotId)
-                .Include(s => s.materialSublot)
-                .ToListAsync();
-
-            inventoryIssueEntry.issueLot.issueSublots = issuSubLots;
 
             return inventoryIssueEntry;
         }

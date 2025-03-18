@@ -1,4 +1,6 @@
-﻿namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts
+﻿using WMS.Application.Commands.InventoryReceiptCommands.ReceiptLots;
+
+namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceiptEntries
 {
     public class CreateInventoryReceiptEntryCommand : IRequest<bool>
     {

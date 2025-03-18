@@ -1,6 +1,4 @@
-﻿using WMS.Application.Queries.InventoryIssueQueries.InventoryIssueEntries;
-
-namespace WMS.APIs.Controllers.InventoryIssueControllers
+﻿namespace WMS.APIs.Controllers.InventoryIssueControllers
 {
     [ApiController]
     [Route("WarehouseAPI/[controller]")]
@@ -28,6 +26,12 @@ namespace WMS.APIs.Controllers.InventoryIssueControllers
             var result = await _mediator.Send(query);
 
             return result;
+        }
+
+        [HttpPost("CreateInventoryIssue")]
+        public async Task<IActionResult> CreateIssue([FromBody] CreateInventoryIssueCommand command)
+        {
+            return await CommandAsync(command);
         }
 
     }

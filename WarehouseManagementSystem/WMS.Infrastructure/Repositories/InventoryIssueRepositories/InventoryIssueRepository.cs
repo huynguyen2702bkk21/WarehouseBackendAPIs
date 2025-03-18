@@ -6,6 +6,11 @@
         {
         }
 
+        public void Create(InventoryIssue inventoryIssue)
+        {
+            _context.InventoryIssues.Add(inventoryIssue);
+        }
+
         public async Task<IEnumerable<InventoryIssue>> GetAllAsync()
         {
             return await _context.InventoryIssues.ToListAsync();

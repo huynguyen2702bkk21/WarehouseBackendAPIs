@@ -46,5 +46,10 @@
         {
             _context.MaterialSubLots.Remove(materialSubLot);
         }
+
+        public void Update(MaterialSubLot materialSubLot)
+        {
+            _context.MaterialSubLots.Update(materialSubLot);
+        }
     }
 }

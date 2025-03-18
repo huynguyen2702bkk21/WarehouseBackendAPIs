@@ -1,4 +1,4 @@
-﻿namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts
+﻿namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceiptEntries
 {
     public class CreateInventoryReceiptEntryCommandHandler : IRequestHandler<CreateInventoryReceiptEntryCommand, bool>
     {
@@ -34,7 +34,7 @@
                 throw new DuplicateRecordException(nameof(InventoryReceiptEntry), request.InventoryReceiptEntryId);
             }
 
-            var newEntry = await CreateEntry(request);  
+            var newEntry = await CreateEntry(request);
 
             inventoryReceipt.AddEntry(newEntry);
 

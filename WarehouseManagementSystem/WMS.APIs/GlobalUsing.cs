@@ -38,6 +38,8 @@ global using WMS.Infrastructure.Repositories.StogareRepositories;
 global using WMS.Application.Queries.InventoryIssueQueries.InventoryIssueEntries;
 global using WMS.Application.Queries.InventoryIssueQueries.InventoryIssues;
 global using WMS.Application.DTOs.PartyDTOs.People;
+global using WMS.Application.Commands.InventoryIssueCommands.InventoryIssues;
+
 
 
 
