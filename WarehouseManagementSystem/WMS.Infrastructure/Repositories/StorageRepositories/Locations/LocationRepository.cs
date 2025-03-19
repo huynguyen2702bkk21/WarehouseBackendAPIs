@@ -1,6 +1,6 @@
 ﻿using WMS.Domain.InterfaceRepositories.IStorage;
 
-namespace WMS.Infrastructure.Repositories.StogareRepositories
+namespace WMS.Infrastructure.Repositories.StorageRepositories
 {
     public class LocationRepository : BaseRepository, ILocationRepository
     {

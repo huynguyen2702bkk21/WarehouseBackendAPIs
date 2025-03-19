@@ -1,7 +1,6 @@
-﻿using DocumentFormat.OpenXml.Office2010.Excel;
-using WMS.Domain.InterfaceRepositories.IStorage;
+﻿using WMS.Domain.InterfaceRepositories.IStorage;
 
-namespace WMS.Infrastructure.Repositories.StogareRepositories
+namespace WMS.Infrastructure.Repositories.StorageRepositories
 {
     public class WarehouseRepository : BaseRepository, IWarehouseRepository
     {

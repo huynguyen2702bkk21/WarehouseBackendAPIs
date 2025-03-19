@@ -30,7 +30,7 @@
   <ItemGroup>
     <Folder Include="EFConfigurations\StorageConfigurations\Zones\" />
     <Folder Include="Repositories\MaterialLotAdjustmentRepositories\" />
-    <Folder Include="Repositories\StogareRepositories\Zones\" />
+    <Folder Include="Repositories\StorageRepositories\Zones\" />
   </ItemGroup>
 
 </Project>

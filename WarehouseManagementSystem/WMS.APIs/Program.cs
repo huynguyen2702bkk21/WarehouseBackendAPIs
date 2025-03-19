@@ -1,4 +1,6 @@
-﻿using WMS.Domain.InterfaceRepositories.IEquipment;
+﻿using WMS.Application.Commands.InventoryIssueCommands.InventoryIssueServices;
+using WMS.Application.Commands.InventoryReceiptCommands.InventoryReceiptServices;
+using WMS.Domain.InterfaceRepositories.IEquipment;
 using WMS.Domain.InterfaceRepositories.IInventoryLog;
 using WMS.Domain.InterfaceRepositories.IParty.People;
 using WMS.Infrastructure.Repositories.EquipmentRepositories;
@@ -63,6 +65,9 @@ namespace WMS.APIs
             builder.Services.AddScoped<IEquipmentCLassPropertyRepository, EquipmentClassPropertyRepository>();
 
             builder.Services.AddScoped<IInventoryLogRepository, InventoryLogRepository>();
+
+            builder.Services.AddScoped<IReceiptServices, ReceiptServices>();
+            builder.Services.AddScoped<IIssueServices, IssueServices>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
