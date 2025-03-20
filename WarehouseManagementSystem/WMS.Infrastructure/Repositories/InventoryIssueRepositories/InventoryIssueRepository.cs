@@ -11,7 +11,7 @@
             _context.InventoryIssues.Add(inventoryIssue);
         }
 
-        public async Task<IEnumerable<InventoryIssue>> GetAllAsync()
+        public async Task<List<InventoryIssue>> GetAllAsync()
         {
             return await _context.InventoryIssues.ToListAsync();
         }
@@ -20,6 +20,8 @@
         {
             var inventoryIssue = await _context.InventoryIssues
                 .Include(x => x.entries)
+                    .ThenInclude(x => x.issueLot)
+                        .ThenInclude(x => x.issueSublots)
                 .FirstOrDefaultAsync(x => x.inventoryIssueId == inventoryIssueId);
 
             return inventoryIssue;

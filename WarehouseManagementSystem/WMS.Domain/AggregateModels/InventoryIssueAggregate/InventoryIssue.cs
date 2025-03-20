@@ -47,28 +47,39 @@ namespace WMS.Domain.AggregateModels.InventoryIssueAggregate
 
         public void Confirm(List<MaterialLot> materialLots, InventoryIssue inventoryIssue)
         {
-            foreach(var materialLot in materialLots)
-            {
-                double requestedQuantity = 0;
-                foreach (var entry in inventoryIssue.entries)
-                {
-                    if (materialLot.lotNumber == entry.issueLot.materialLotId)
-                    {
-                        requestedQuantity = entry.issueLot.requestedQuantity;
-                    }
-                }
+            AddDomainEvent(new MaterialLotsExportedDomainEvent(inventoryIssue, materialLots));
 
-                AddDomainEvent(new InventoryLogAddedDomainEvent(transactionType: TransactionType.Issue,
-                                                                transactionDate: GetVietnamTime(),
-                                                                previousQuantity: materialLot.exisitingQuantity,
-                                                                changedQuantity: requestedQuantity,
-                                                                afterQuantity: materialLot.exisitingQuantity - requestedQuantity,
-                                                                note: "",
-                                                                lotNumber: materialLot.lotNumber,
-                                                                warehouseId: inventoryIssue.warehouseId));
+            if (materialLots.Count == 0)
+            {
+                throw new Exception("MaterialLots is empty, cannot confirm issue.");
             }
 
-            AddDomainEvent(new MaterialLotsExportedDomainEvent(inventoryIssue, materialLots));
+            foreach (var lot in materialLots)
+            {
+                double exisitingQuantity = lot.exisitingQuantity;
+                foreach (var entry in inventoryIssue.entries)
+                {
+                    if (entry.issueLot.materialLotId == lot.lotNumber)
+                    {
+                        var ChangedQuantity = entry.issueLot.requestedQuantity;
+                        
+                        AddDomainEvent(new InventoryLogAddedDomainEvent(transactionType: TransactionType.Issue,
+                                                                        transactionDate: GetVietnamTime(),
+                                                                        previousQuantity: exisitingQuantity,
+                                                                        changedQuantity: ChangedQuantity,
+                                                                        afterQuantity: exisitingQuantity - ChangedQuantity,
+                                                                        note: "",
+                                                                        lotNumber: lot.lotNumber,
+                                                                        warehouseId: inventoryIssue.warehouseId));
+
+                        exisitingQuantity = exisitingQuantity - ChangedQuantity;
+
+                    }
+
+
+
+                }
+            }
 
         }
 

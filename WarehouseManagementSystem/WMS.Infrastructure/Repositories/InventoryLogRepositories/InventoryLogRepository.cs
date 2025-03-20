@@ -13,14 +13,19 @@ namespace WMS.Infrastructure.Repositories.InventoryLogRepositories
             _context.InventoryLogs.AddRange(inventoryLog);
         }
 
-        public async Task<InventoryLog> GetInventoryLogByLotNumber(string lotNumber)
+        public async Task<List<InventoryLog>> GetInventoryLogByLotNumber(string lotNumber)
         {
-            var inventoryLog = await _context.InventoryLogs
-                .Include(s => s.materialLot)
-                .Include(s => s.warehouse)
-                .FirstOrDefaultAsync(x => x.lotNumber == lotNumber);
+            var inventoryLogs = await _context.InventoryLogs
+                .Where(x => x.lotNumber == lotNumber)
+                .ToListAsync();
 
-            return inventoryLog;
+            inventoryLogs = inventoryLogs.OrderByDescending(x => x.transactionDate).ToList();
+
+
+            return inventoryLogs;
         }
+
+
+
     }
 }

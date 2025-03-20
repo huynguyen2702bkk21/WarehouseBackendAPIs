@@ -2,7 +2,7 @@
 {
     public interface IIssueLotRepository : IRepository<IssueLot>
     {
-        Task<IEnumerable<IssueLot>> GetAllIssueLotsAsync();
+        Task<List<IssueLot>> GetAllIssueLotsAsync();
         Task<IssueLot> GetIssueLotByIdAsync(string id);
     }
 }

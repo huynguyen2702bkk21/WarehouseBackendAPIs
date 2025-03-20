@@ -16,7 +16,7 @@
             _context.EquipmentClassProperties.Remove(equipmentClassProperty);
         }
 
-        public async Task<IEnumerable<EquipmentClassProperty>> GetAllAsync()
+        public async Task<List<EquipmentClassProperty>> GetAllAsync()
         {
             return await _context.EquipmentClassProperties.ToListAsync();
 

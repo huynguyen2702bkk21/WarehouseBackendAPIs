@@ -18,7 +18,7 @@
         public async Task<List<InventoryReceiptEntryDTO>> Handle(GetAllInventoryReceiptEntriesQuery request, CancellationToken cancellationToken)
         {
             var inventoryReceiptEntries = await _inventoryReceiptEntryRepository.GetAllAsync();
-            if (inventoryReceiptEntries == null)
+            if (inventoryReceiptEntries.Count == 0)
             {
                 throw new Exception("No inventory receipt entries found");
             }

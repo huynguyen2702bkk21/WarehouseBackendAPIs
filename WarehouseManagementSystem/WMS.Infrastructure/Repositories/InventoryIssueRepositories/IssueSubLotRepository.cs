@@ -7,7 +7,7 @@ namespace WMS.Infrastructure.Repositories.InventoryIssueRepositories
         {
         }
 
-        public async Task<IEnumerable<IssueSublot>> GetAllAsync()
+        public async Task<List<IssueSublot>> GetAllAsync()
         {
             return await _context.IssueSublots.ToListAsync();
              

@@ -16,7 +16,7 @@ namespace WMS.Application.Queries.MaterialQueries.Materials
         public async Task<IEnumerable<MaterialPropertyDTO>> Handle(GetAllMaterialPropertiesQuery request, CancellationToken cancellationToken)
         {
             var materialProperties = await _materialPropertyRepository.GetAllAsync();
-            if (materialProperties == null)
+            if (materialProperties.Count == 0)
             {
                 throw new Exception("Material properties not found");
             }

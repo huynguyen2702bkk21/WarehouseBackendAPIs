@@ -4,7 +4,7 @@
     {
         Task<List<Material>> GetAllAsync();
         Task<Material> GetByIdAsync(string materialId);
-        Task<MaterialClass> GetByClassIdAsync(string classId);
+        Task<List<Material>> GetByClassIdAsync(string classId);
         Task<Material> GetById(string id);
         void Create(Material material);
         void Delete(Material material);

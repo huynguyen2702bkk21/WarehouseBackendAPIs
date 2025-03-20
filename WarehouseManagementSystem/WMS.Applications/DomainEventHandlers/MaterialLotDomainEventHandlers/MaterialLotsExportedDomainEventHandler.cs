@@ -15,22 +15,21 @@
             foreach (var entry in notification.InventoryIssue.entries)
             {
                 var materialSublots = await _materialSubLotRepository.GetMaterialSubLotsByLotNumber(entry.issueLot.materialLotId);
-                var totalQualitySublotBeFore = materialSublots.Sum(x => x.existingQuality);
 
-                foreach (var subLot in entry.issueLot.issueSublots)
+                foreach (var issueSubLot in entry.issueLot.issueSublots)
                 {
-                    var materialSubLot = await _materialSubLotRepository.GetByIdAsync(subLot.sublotId);
+                    var materialSubLot = await _materialSubLotRepository.GetByIdAsync(issueSubLot.sublotId);
                     if (materialSubLot == null)
                     {
-                        throw new EntityNotFoundException(nameof(MaterialSubLot), subLot.sublotId);
+                        throw new EntityNotFoundException(nameof(MaterialSubLot), issueSubLot.sublotId);
                     }
 
-                    if (subLot.requestedQuantity > materialSubLot.existingQuality)
+                    if (issueSubLot.requestedQuantity > materialSubLot.existingQuality)
                     {
-                        throw new Exception($"Requested quantity ({subLot.requestedQuantity}) exceeds available quantity ({materialSubLot.existingQuality}) for sublot {subLot.sublotId}");
+                        throw new Exception($"Requested quantity ({issueSubLot.requestedQuantity}) exceeds available quantity ({materialSubLot.existingQuality}) for sublot {issueSubLot.sublotId}");
                     }
 
-                    materialSubLot.Export(subLot.requestedQuantity);
+                    materialSubLot.Export(issueSubLot.requestedQuantity);
 
                     if (materialSubLot.existingQuality == 0)
                     {
@@ -38,9 +37,6 @@
                     }
 
                 }
-
-                var totalQuantityShipped = entry.issueLot.issueSublots.Sum(x => x.requestedQuantity);
-                var totalQualitySublotAfter = totalQualitySublotBeFore - totalQuantityShipped;  // This also mean LotQuantity
 
                 var materialLot = await _materialLotRepository.GetMaterialLotById(entry.issueLot.materialLotId);
                 if (materialLot == null)
@@ -54,11 +50,6 @@
                 }
 
                 materialLot.Export(entry.issueLot.requestedQuantity);
-
-                if (materialLot.exisitingQuantity != totalQualitySublotAfter)
-                {
-                    throw new Exception("The quantity of sublots does not match the quantity of the lot");
-                }
 
                 if (materialLot.exisitingQuantity == 0)
                 {

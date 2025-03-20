@@ -22,62 +22,7 @@
             return TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time"));
         }
 
-        public async Task AddReceiptLotToMaterialLot(InventoryReceipt newInventoryReceipt)
-        {
-            var newMaterialLots = new List<MaterialLot>();
-            var inventoryReceiptStatus = ReceiptStatus.Completed;
-            foreach (var entry in newInventoryReceipt.entries)
-            {
-                if (entry.receiptLot.receiptLotStatus != LotStatus.Done)
-                {
-                    inventoryReceiptStatus = ReceiptStatus.Pending;
-                }
-
-                var materialLot = await _materialLotRepository.GetMaterialLotById(entry.receiptLot.receiptLotId);
-                if (materialLot != null)
-                {
-                    throw new DuplicateRecordException(nameof(MaterialLot), entry.receiptLot.receiptLotId);
-                }
-
-                var newMaterialLot = new MaterialLot(lotNumber: entry.receiptLot.receiptLotId,
-                                                     lotStatus: LotStatus.Available,
-                                                     materialId: entry.materialId,
-                                                     exisitingQuantity: entry.receiptLot.importedQuantity);
-
-                var receiptSublots = await _receiptSubLotRepository.GetSublotsByLotId(entry.receiptLot.receiptLotId);
-
-                foreach (var sublot in receiptSublots)
-                {
-                    var existedSublot = await _materialSubLotRepository.GetByIdAsync(sublot.receiptSublotId);
-                    if (existedSublot != null)
-                    {
-                        throw new DuplicateRecordException(nameof(MaterialSubLot), sublot.receiptSublotId);
-                    }
-
-                    var newSubLot = new MaterialSubLot(subLotId: sublot.receiptSublotId,
-                                                       subLotStatus: LotStatus.Available,
-                                                       existingQuality: sublot.importedQuantity,
-                                                       unitOfMeasure: sublot.unitOfMeasure,
-                                                       locationId: sublot.locationId,
-                                                       lotNumber: sublot.receiptLotId);
-
-                    newMaterialLot.AddSubLot(newSubLot);
-                }
-                newMaterialLots.Add(newMaterialLot);
-            }
-
-            if (inventoryReceiptStatus == ReceiptStatus.Completed)
-            {
-                newInventoryReceipt.Confirm(newMaterialLots, newInventoryReceipt);
-                newInventoryReceipt.receiptStatus = inventoryReceiptStatus;
-            }
-            else
-            {
-                newInventoryReceipt.receiptStatus = inventoryReceiptStatus;
-            }
-
-        }
-
+        
         public async Task AddToMaterialLot(InventoryReceipt newInventoryReceipt)
         {
             var newMaterialLots = new List<MaterialLot>();
@@ -322,6 +267,11 @@
                 }
 
             }
+
+
         }
+
+
+
     }
 }

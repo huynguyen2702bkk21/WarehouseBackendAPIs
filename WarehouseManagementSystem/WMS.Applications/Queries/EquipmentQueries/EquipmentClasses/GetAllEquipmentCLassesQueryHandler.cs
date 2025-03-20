@@ -1,4 +1,5 @@
 ﻿using WMS.Application.DTOs.EquipmentDTOs.EquipmentClasses;
+using WMS.Domain.AggregateModels.MaterialAggregate;
 
 namespace WMS.Application.Queries.EquipmentQueries.EquipmentClasses
 {
@@ -16,7 +17,7 @@ namespace WMS.Application.Queries.EquipmentQueries.EquipmentClasses
         public async Task<IEnumerable<EquipmentCLassDTO>> Handle(GetAllEquipmentCLassesQuery request, CancellationToken cancellationToken)
         {
             var equipmentCLasses = await _equipmentClassRepository.GetAllAsync();
-            if (equipmentCLasses == null)
+            if (equipmentCLasses.Count == 0)
             {
                 throw new EntityNotFoundException("EquipmentClasses is Null");
             }

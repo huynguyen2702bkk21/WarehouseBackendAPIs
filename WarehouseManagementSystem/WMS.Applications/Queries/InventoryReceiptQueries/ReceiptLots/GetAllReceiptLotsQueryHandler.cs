@@ -14,7 +14,7 @@
         public async Task<IEnumerable<ReceiptLotDTO>> Handle(GetAllReceiptLotsQuery request, CancellationToken cancellationToken)
         {
             var receiptLots = await _receiptLotRepository.GetAllAsync();
-            if (receiptLots == null)
+            if (receiptLots.Count == 0)
             {
                 throw new Exception("No receipt lots found");
             }

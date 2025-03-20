@@ -28,6 +28,18 @@
             return result;
         }
 
+        [HttpPost("CreateIssueEntry")]
+        public async Task<IActionResult> CreateIssueEntry([FromBody] CreateInventoryIssueEntryCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+        [HttpPut("UpdateIssueEntry")]
+        public async Task<IActionResult> UpdateIssueEntry([FromBody] UpdateInventoryIssueEntryCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
 
     }
 }

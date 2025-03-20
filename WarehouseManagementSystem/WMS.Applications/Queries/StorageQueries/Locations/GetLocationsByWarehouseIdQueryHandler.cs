@@ -16,7 +16,7 @@
         public async Task<List<LocationDTO>> Handle(GetLocationsByWarehouseIdQuery request, CancellationToken cancellationToken)
         {
             var locations = await _locationRepository.GetLocationsByWarehouseId(request.WarehouseId);
-            if (locations == null)
+            if (locations.Count == 0)
             {
                  throw new EntityNotFoundException("Locaitons Not Found");
             }

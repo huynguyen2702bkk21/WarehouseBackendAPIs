@@ -6,7 +6,6 @@
         Task AddToMaterialLot(InventoryReceipt newInventoryReceipt);
         Task<InventoryReceiptEntry> CreateEntry(CreateInventoryReceiptEntryCommand request);
         Task UpdateReceiptEntries(UpdateInventoryReceiptEntriesCommand request);
-        Task AddReceiptLotToMaterialLot(InventoryReceipt newInventoryReceipt);
 
 
     }

@@ -15,7 +15,7 @@
         {
             var materialLots = await _materialLotRepository.GetMaterialLotsByStatus(request.Status);
 
-            if (materialLots == null)
+            if (materialLots.Count == 0)
             {
                 throw new EntityNotFoundException(nameof(MaterialLot), request.Status);
             }

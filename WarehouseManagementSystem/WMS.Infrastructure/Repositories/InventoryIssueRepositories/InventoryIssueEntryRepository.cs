@@ -7,7 +7,7 @@ namespace WMS.Infrastructure.Repositories.InventoryIssueRepositories
         {
         }
 
-        public async Task<IEnumerable<InventoryIssueEntry>> GetAllInventoryIssueEntriesAsync()
+        public async Task<List<InventoryIssueEntry>> GetAllInventoryIssueEntriesAsync()
         {
             var inventoryIssueEntries = await _context.InventoryIssueEntries
                 .Include(x => x.issueLot)

@@ -20,7 +20,7 @@ namespace WMS.Application.Queries.InventoryIssueQueries.IssueSubLots
         public async Task<IEnumerable<IssueSubLotDTO>> Handle(GetAllIssueSubLotsQuery request, CancellationToken cancellationToken)
         {
             var issueSubLots = await _issueSubLotRepository.GetAllAsync();
-            if (issueSubLots == null)
+            if (issueSubLots.Count == 0)
             {
                 throw new Exception("No issue sub lots found");
             }

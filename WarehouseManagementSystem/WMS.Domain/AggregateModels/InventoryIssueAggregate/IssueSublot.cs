@@ -26,5 +26,15 @@
             this.sublotId = materialSublotId;
             this.issueLotId = issueLotId;
         }
+
+        public void Update(double requestedQuantity, string materialSubLotId)
+        {
+            this.requestedQuantity = requestedQuantity;
+            this.sublotId = materialSubLotId;
+
+        }
+
+
+
     }
 }

@@ -14,7 +14,7 @@
         public async Task<IEnumerable<MaterialClassPropertyDTO>> Handle(GetAllMaterialClassPropertiesQuerry request, CancellationToken cancellationToken)
         {
             var materialClassProperties = await _materialClassPropertyRepository.GetAllAsync();
-            if (materialClassProperties == null)
+            if (materialClassProperties.Count == 0)
             {
                 throw new EntityNotFoundException("MaterialClassProperties", "No material class properties found");
             }

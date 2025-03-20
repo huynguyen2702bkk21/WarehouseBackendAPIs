@@ -20,9 +20,9 @@
         public async Task<IEnumerable<InventoryIssueDTO>> Handle(GetAllInventoryIssuesQuery request, CancellationToken cancellationToken)
         {
             var inventoryIssues = await _inventoryIssueRepository.GetAllAsync();
-            if (inventoryIssues == null)
+            if (inventoryIssues.Count == 0)
             {
-                throw new Exception("No inventory issues found");
+                throw new EntityNotFoundException("No inventory issues found");
             }
 
             var inventoryIssueDTOs = new List<InventoryIssueDTO>();

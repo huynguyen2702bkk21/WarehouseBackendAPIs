@@ -22,7 +22,7 @@ namespace WMS.Application.Queries.InventoryReceiptQueries.InventoryReceipts
         public async Task<IEnumerable<InventoryReceiptDTO>> Handle(GetAllInventoryReceiptsQuery request, CancellationToken cancellationToken)
         {
             var inventoryReceipts = await _inventoryReceiptRepository.GetAllAsync();
-            if (inventoryReceipts == null)
+            if (inventoryReceipts.Count == 0)
             {
                 throw new Exception("No inventory receipts found");
             }

@@ -16,7 +16,7 @@ namespace WMS.Application.Queries.PartyQueries.Persons
         public async  Task<IEnumerable<PersonPropertyDTO>> Handle(GetAllPersonPropertiesQuery request, CancellationToken cancellationToken)
         {
             var personProperties = await _personPropertyRepository.GetAllPersonProperties();
-            if (personProperties == null)
+            if (personProperties.Count == 0)
             {
                 throw new EntityNotFoundException("PersonProperties is not Found");
             }

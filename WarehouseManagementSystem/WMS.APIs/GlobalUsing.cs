@@ -39,6 +39,9 @@ global using WMS.Application.Queries.InventoryIssueQueries.InventoryIssueEntries
 global using WMS.Application.Queries.InventoryIssueQueries.InventoryIssues;
 global using WMS.Application.DTOs.PartyDTOs.People;
 global using WMS.Application.Commands.InventoryIssueCommands.InventoryIssues;
+global using WMS.Application.Commands.InventoryIssueCommands.InventoryIssueEntries;
+global using WMS.Application.DTOs.InventoryTrackingDTOs;
+global using WMS.Application.Queries.InventoryTracking.InventoryLogs;
 
 
 

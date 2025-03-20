@@ -14,7 +14,7 @@
         public async Task<IEnumerable<MaterialSubLotDTO>> Handle (GetMaterialSubLotsByLocationIdQuery request, CancellationToken cancellationToken)
         {
             var materialSubLots = await _materialSubLotRepository.GetMaterialSubLotsByLocationId(request.LocationId);
-            if (materialSubLots == null)
+            if (materialSubLots.Count == 0)
             {
                 throw new EntityNotFoundException("MaterialSubLots", "No material sublots found");
             }

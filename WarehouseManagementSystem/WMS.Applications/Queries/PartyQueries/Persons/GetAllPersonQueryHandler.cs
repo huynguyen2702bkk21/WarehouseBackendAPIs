@@ -15,7 +15,7 @@
         {
             var persons = await _personRepository.GetAllAsync();
 
-            if (persons == null)
+            if (persons.Count == 0)
             {
                 throw new EntityNotFoundException("Persons", "No persons found");
             }

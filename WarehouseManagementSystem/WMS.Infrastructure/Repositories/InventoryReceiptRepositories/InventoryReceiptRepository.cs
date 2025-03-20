@@ -22,6 +22,7 @@ namespace WMS.Infrastructure.Repositories.InventoryReceiptRepositories
             var inventoryReceipt = await _context.InventoryReceipts
                 .Include(s => s.entries)
                     .ThenInclude(s => s.receiptLot)
+                        .ThenInclude(s => s.receiptSublots)
                 .FirstOrDefaultAsync(x => x.inventoryReceiptId == inventoryReceiptId);
 
             return inventoryReceipt;

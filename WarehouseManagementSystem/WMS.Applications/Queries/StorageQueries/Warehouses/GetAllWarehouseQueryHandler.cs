@@ -15,7 +15,7 @@
         {
             var warehouses = await _warehouseRepository.GetAllWarehouses();
 
-            if (warehouses == null)
+            if (warehouses.Count == 0)
             {
                 throw new EntityNotFoundException("Warehouses", "No warehouses found");
             }

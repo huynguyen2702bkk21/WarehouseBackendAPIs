@@ -1,6 +1,6 @@
 ﻿namespace WMS.Application.Queries.MaterialQueries.Materials
 {
-    public class GetMaterialsByClassIdQueryHandler : IRequestHandler<GetMaterialsByClassIdQuery, MaterialClassDTO>
+    public class GetMaterialsByClassIdQueryHandler : IRequestHandler<GetMaterialsByClassIdQuery, IEnumerable<MaterialDTO>>
     {
         private readonly IMaterialRepository _materialRepository;
         private readonly IMapper _mapper;
@@ -11,15 +11,15 @@
             _mapper = mapper;
         }
 
-        public async Task<MaterialClassDTO> Handle(GetMaterialsByClassIdQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<MaterialDTO>> Handle(GetMaterialsByClassIdQuery request, CancellationToken cancellationToken)
         {
             var materials = await _materialRepository.GetByClassIdAsync(request.ClassId);
-            if (materials == null)
+            if (materials.Count == 0)
             {
                 throw new EntityNotFoundException("Materials not found");
             }
 
-            var materialDTOs = _mapper.Map<MaterialClassDTO>(materials);
+            var materialDTOs = _mapper.Map<IEnumerable<MaterialDTO>>(materials);
 
             return materialDTOs;
         }

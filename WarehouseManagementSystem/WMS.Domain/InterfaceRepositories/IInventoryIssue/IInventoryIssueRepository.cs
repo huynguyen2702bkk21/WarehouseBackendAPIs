@@ -2,7 +2,7 @@
 {
     public interface IInventoryIssueRepository : IRepository<InventoryIssue>
     {
-        Task<IEnumerable<InventoryIssue>> GetAllAsync();
+        Task<List<InventoryIssue>> GetAllAsync();
         Task<InventoryIssue> GetByIdAsync(string inventoryIssueId);
         void Create(InventoryIssue inventoryIssue);
     }

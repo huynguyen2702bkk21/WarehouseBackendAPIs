@@ -51,7 +51,7 @@ namespace WMS.APIs.Controllers.MaterialControllers
         }
 
         [HttpGet("GetMaterialsByClassIdQuery/{classId}")]
-        public async Task<MaterialClassDTO> GetMaterialsByClassId(string classId)
+        public async Task<IEnumerable<MaterialDTO>> GetMaterialsByClassId(string classId)
         {
             var query = new GetMaterialsByClassIdQuery(classId);
             var result = await _mediator.Send(query);

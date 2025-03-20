@@ -11,7 +11,6 @@
     <Folder Include="DTOs\StorageDTOs\Zones\" />
     <Folder Include="ErrorNotifications\" />
     <Folder Include="Exceptions\" />
-    <Folder Include="Queries\InventoryTrackingQueries\" />
   </ItemGroup>
 
   <ItemGroup>

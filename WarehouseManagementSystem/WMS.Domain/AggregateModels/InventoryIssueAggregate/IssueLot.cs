@@ -34,6 +34,14 @@ namespace WMS.Domain.AggregateModels.InventoryIssueAggregate
             issueSublots.Add(sublot);
         }
 
+        public void Update(double requestedQuantity, LotStatus issueLotStatus, string materialLotId)
+        {
+            this.requestedQuantity = requestedQuantity;
+            this.issueLotStatus = issueLotStatus;
+            this.materialLotId = materialLotId; 
+
+        }
+
 
     }
 }

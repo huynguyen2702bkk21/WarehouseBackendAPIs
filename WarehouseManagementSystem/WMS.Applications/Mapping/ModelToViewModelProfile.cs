@@ -1,4 +1,5 @@
 ﻿using WMS.Application.DTOs.EquipmentDTOs.EquipmentClasses;
+using WMS.Application.DTOs.InventoryTrackingDTOs;
 using WMS.Application.DTOs.PartyDTOs.People;
 using WMS.Domain.AggregateModels.PartyAggregate.People;
 
@@ -41,6 +42,10 @@ namespace WMS.Application.Mapping
             MapEquipmentClassPropertyViewModel();
             MapEquipmentViewModel();
             MapEquipmentPropertyViewModel();
+
+            MapInventoryLogViewModel();
+
+
 
 
         }
@@ -207,6 +212,13 @@ namespace WMS.Application.Mapping
         {
             CreateMap<EquipmentProperty, EquipmentPropertyDTO>()
                 .ForMember(s => s.UnitOfMeasure, s => s.MapFrom(s => s.unitOfMeasure.ToString()));
+        }
+
+        public void MapInventoryLogViewModel()
+        {
+            CreateMap<InventoryLog, InventoryLogDTO>()
+                .ForMember(s => s.TransactionType, s => s.MapFrom(s => s.transactionType.ToString()));
+
         }
 
     }

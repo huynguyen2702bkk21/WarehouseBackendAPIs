@@ -14,7 +14,7 @@
         public async Task<IEnumerable<MaterialLotPropertyDTO>> Handle(GetAllMaterialLotPropertiesQuery request, CancellationToken cancellationToken)
         {
             var materialLotProperties = await _materialLotPropertyRepository.GetAllAsync();
-            if (materialLotProperties == null)
+            if (materialLotProperties.Count == 0)
             {
                 throw new Exception("Material lot properties not found");
             }

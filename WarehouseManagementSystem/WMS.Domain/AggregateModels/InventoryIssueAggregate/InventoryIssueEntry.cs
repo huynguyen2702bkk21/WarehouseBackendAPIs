@@ -34,5 +34,14 @@
         }
 
 
+        public void Update(string purchaseOrderNumber, double requestedQuantity, string note)
+        {
+            this.purchaseOrderNumber = purchaseOrderNumber;
+            this.requestedQuantity = requestedQuantity;
+            this.note = note;
+
+        }
+
+
     }
 }

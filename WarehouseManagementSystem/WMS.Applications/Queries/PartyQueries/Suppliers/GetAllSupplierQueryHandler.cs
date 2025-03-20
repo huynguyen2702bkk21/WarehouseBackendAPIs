@@ -15,7 +15,7 @@
         {
             var suppliers = await _supplierRepository.GetAllAsync();
 
-            if (suppliers == null)
+            if (suppliers.Count == 0)
             {
                 throw new EntityNotFoundException("Suppliers", "No suppliers found");
             }

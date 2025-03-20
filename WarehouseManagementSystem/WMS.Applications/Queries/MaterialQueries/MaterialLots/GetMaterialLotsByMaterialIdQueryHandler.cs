@@ -16,7 +16,7 @@ namespace WMS.Application.Queries.MaterialQueries.MaterialLots
         public async Task<IEnumerable<MaterialLotDTO>> Handle(GetMaterialLotsByMaterialIdQuery request, CancellationToken cancellationToken)
         {
             var materialLots = await _materialLotRepository.GetMaterialLotsByMaterialId(request.MaterialId);
-            if (materialLots == null)
+            if (materialLots.Count == 0)
             {
                 throw new EntityNotFoundException(nameof(MaterialLot), request.MaterialId);
             }

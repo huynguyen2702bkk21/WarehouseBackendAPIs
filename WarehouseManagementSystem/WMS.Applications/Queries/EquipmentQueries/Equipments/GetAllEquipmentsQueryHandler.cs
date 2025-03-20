@@ -14,7 +14,7 @@
         public async Task<IEnumerable<EquipmentDTO>> Handle(GetAllEquipmentsQuery request, CancellationToken cancellationToken)
         {
             var equipments = await _equipmentRepository.GetAllAsync();
-            if (equipments == null)
+            if (equipments.Count ==  0)
             {
                 throw new EntityNotFoundException("Equipments has not Existed");
             }

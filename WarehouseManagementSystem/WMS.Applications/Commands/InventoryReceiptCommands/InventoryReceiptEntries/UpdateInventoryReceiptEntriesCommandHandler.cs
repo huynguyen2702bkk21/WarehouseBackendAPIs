@@ -25,7 +25,7 @@
 
             await _receiptServices.UpdateReceiptEntries(request);
 
-            await _receiptServices.AddReceiptLotToMaterialLot(inventoryReceipt);
+            await _receiptServices.AddToMaterialLot(inventoryReceipt);
 
             return await _inventoryReceiptRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
