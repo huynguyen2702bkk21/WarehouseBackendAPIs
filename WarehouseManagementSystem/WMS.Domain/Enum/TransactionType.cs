@@ -5,6 +5,7 @@
         Receipt,
         Issue,
         Adjustment,
-        Transfer
+        Transfer,
+        Both
     }
 }

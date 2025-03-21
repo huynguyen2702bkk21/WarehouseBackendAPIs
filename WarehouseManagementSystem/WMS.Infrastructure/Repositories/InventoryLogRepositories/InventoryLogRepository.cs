@@ -1,4 +1,5 @@
-﻿using WMS.Domain.InterfaceRepositories.IInventoryLog;
+﻿using DocumentFormat.OpenXml.Vml.Office;
+using WMS.Domain.InterfaceRepositories.IInventoryLog;
 
 namespace WMS.Infrastructure.Repositories.InventoryLogRepositories
 {
@@ -13,16 +14,40 @@ namespace WMS.Infrastructure.Repositories.InventoryLogRepositories
             _context.InventoryLogs.AddRange(inventoryLog);
         }
 
-        public async Task<List<InventoryLog>> GetInventoryLogByLotNumber(string lotNumber)
+        public async Task<List<InventoryLog>> GetInventoryLogByLotNumberAndStatus(string lotNumber, string status)
         {
-            var inventoryLogs = await _context.InventoryLogs
-                .Where(x => x.lotNumber == lotNumber)
-                .ToListAsync();
+            if (!Enum.TryParse<TransactionType>(status, out var transactionType))
+            {
+                throw new Exception($"Invalid LotStatus status: {status}");
+            }
 
-            inventoryLogs = inventoryLogs.OrderByDescending(x => x.transactionDate).ToList();
+            var inventoryLogs = new List<InventoryLog>();
 
+            switch (transactionType)
+            {
+                case TransactionType.Issue:
+                    inventoryLogs = await _context.InventoryLogs
+                        .Where(x => x.lotNumber == lotNumber && x.transactionType == TransactionType.Issue)
+                        .ToListAsync();
+                    break;
+                   
+                case TransactionType.Receipt:
+                    inventoryLogs = await _context.InventoryLogs
+                        .Where(x => x.lotNumber == lotNumber && x.transactionType == TransactionType.Receipt)
+                        .ToListAsync();
+                    break;
+
+                default:
+                    inventoryLogs = await _context.InventoryLogs
+                        .Where(x => x.lotNumber == lotNumber)
+                        .OrderByDescending(x => x.transactionDate)
+                        .ToListAsync();
+                    break;
+
+            }
 
             return inventoryLogs;
+
         }
 
 

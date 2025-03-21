@@ -11,17 +11,14 @@
         }
 
         [HttpGet("GetInventoryLogByLotNumber/{lotNumber}")]
-        public async Task<IEnumerable<InventoryLogDTO>> GetInventoryLogByLotNumber(string lotNumber)
+        public async Task<IEnumerable<InventoryLogDTO>> GetInventoryLogByLotNumber(string lotNumber, string transactionType = "Both")
         {
-            var query = new GetInventoryLogByLotNumberQuery(lotNumber);
+            var query = new GetInventoryLogByLotNumberQuery(lotNumber, transactionType);
             var result = await _mediator.Send(query);
 
             return result;
 
         }
-
-
-
 
     }
 }

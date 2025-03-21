@@ -13,7 +13,7 @@
 
         public async Task<IEnumerable<InventoryLogDTO>> Handle(GetInventoryLogByLotNumberQuery request, CancellationToken cancellationToken)
         {
-            var inventoryLogs = await _inventoryLogRepository.GetInventoryLogByLotNumber(request.LotNumber);
+            var inventoryLogs = await _inventoryLogRepository.GetInventoryLogByLotNumberAndStatus(request.LotNumber, request.Status);
             if (inventoryLogs.Count == 0) 
             {
                 throw new EntityNotFoundException("InventoryLog Not Found");

@@ -2,7 +2,7 @@
 {
     public interface IInventoryLogRepository : IRepository<InventoryLog>
     {
-        Task<List<InventoryLog>> GetInventoryLogByLotNumber(string lotNumber);
+        Task<List<InventoryLog>> GetInventoryLogByLotNumberAndStatus(string lotNumber, string status);
         void Create(InventoryLog inventoryLog);
     }
 }
