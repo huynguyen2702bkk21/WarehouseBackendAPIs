@@ -41,6 +41,13 @@ namespace WMS.Domain.AggregateModels.InventoryReceiptAggregate
             entries.Add(entry);
         }
 
+        public void Update(string supplierId, string personId, string warehouseId)
+        {
+            this.supplierId = supplierId;
+            this.personId = personId;
+            this.warehouseId = warehouseId;
+        }
+
         public void Confirm(List<MaterialLot> materialLots, InventoryReceipt inventoryReceipt)
         {
             AddDomainEvent(new MaterialLotsImportedDomainEvent(materialLots));

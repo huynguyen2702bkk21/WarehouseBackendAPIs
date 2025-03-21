@@ -34,6 +34,25 @@
             return await CommandAsync(command);
         }
 
+        [HttpPut("UpdateReceipt")]
+        public async Task<IActionResult> UpdateReceipt([FromBody] UpdateInventoryReceiptCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+        [HttpPut("RefreshReceiptStatus")]
+        public async Task<IActionResult> RefreshReceiptStatus([FromBody] RefreshInventoryReceiptStatusCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+        [HttpDelete("DeleteReceipt")]
+        public async Task<IActionResult> DeleteReceipt([FromBody] DeleteInventoryReceiptCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+
 
     }
 }

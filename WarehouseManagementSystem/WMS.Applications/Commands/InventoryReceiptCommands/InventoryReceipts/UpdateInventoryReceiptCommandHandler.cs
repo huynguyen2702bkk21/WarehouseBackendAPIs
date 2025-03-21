@@ -1,17 +1,15 @@
-﻿namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceiptEntries
+﻿namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts
 {
-    public class UpdateInventoryReceiptEntriesCommandHandler : IRequestHandler<UpdateInventoryReceiptEntriesCommand, bool>
+    public class UpdateInventoryReceiptCommandHandler : IRequestHandler<UpdateInventoryReceiptCommand, bool>
     {
         private readonly IInventoryReceiptRepository _inventoryReceiptRepository;
-        private readonly IReceiptServices _receiptServices;
 
-        public UpdateInventoryReceiptEntriesCommandHandler(IInventoryReceiptRepository inventoryReceiptRepository, IReceiptServices receiptServices)
+        public UpdateInventoryReceiptCommandHandler(IInventoryReceiptRepository inventoryReceiptRepository)
         {
             _inventoryReceiptRepository = inventoryReceiptRepository;
-            _receiptServices = receiptServices;
         }
 
-        public async Task<bool> Handle(UpdateInventoryReceiptEntriesCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(UpdateInventoryReceiptCommand request, CancellationToken cancellationToken)
         {
             var inventoryReceipt = await _inventoryReceiptRepository.GetByIdAsync(request.InventoryReceiptId);
             if (inventoryReceipt == null)
@@ -23,11 +21,15 @@
                 throw new Exception("The Receipt has been saved");
             }
 
-            await _receiptServices.UpdateReceiptEntries(request);
+            inventoryReceipt.Update(supplierId: request.SupplierId,
+                                    personId: request.PersonId,
+                                    warehouseId: request.WarehouseId);
 
             return await _inventoryReceiptRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
-
         }
+
+
+
 
     }
 }

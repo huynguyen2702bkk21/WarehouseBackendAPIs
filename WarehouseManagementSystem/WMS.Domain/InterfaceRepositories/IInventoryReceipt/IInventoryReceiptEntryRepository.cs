@@ -4,5 +4,7 @@
     {
         Task<List<InventoryReceiptEntry>> GetAllAsync();
         Task<InventoryReceiptEntry> GetById(string inventoryReceiptEntryId);
+
+
     }
 }

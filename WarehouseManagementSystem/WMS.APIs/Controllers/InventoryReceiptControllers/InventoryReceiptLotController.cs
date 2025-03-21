@@ -1,4 +1,6 @@
-﻿namespace WMS.APIs.Controllers.InventoryReceiptControllers
+﻿using WMS.Application.Commands.InventoryReceiptCommands.ReceiptLots;
+
+namespace WMS.APIs.Controllers.InventoryReceiptControllers
 {
     [ApiController]
     [Route("WarehouseAPI/[controller]")]
@@ -26,6 +28,12 @@
             var result = await _mediator.Send(query);
 
             return result;
+        }
+
+        [HttpPut("UpdateReceiptLotStatus")]
+        public async Task<IActionResult> UpdateReceiptLotStatus([FromBody] UpdateReceiptLotStatusCommand command)
+        {
+            return await CommandAsync(command);
         }
 
 

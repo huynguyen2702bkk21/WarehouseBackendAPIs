@@ -31,6 +31,8 @@
 
             _inventoryLogRepository.Create(newInventoryLog);
 
+            await Task.CompletedTask;
+
         }
 
     }

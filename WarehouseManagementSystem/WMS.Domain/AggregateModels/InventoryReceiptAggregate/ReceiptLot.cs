@@ -47,6 +47,11 @@
             this.receiptLotStatus = receiptLotStatus;
         }
 
+        public void Update(LotStatus receiptLotStatus)
+        {
+            this.receiptLotStatus = receiptLotStatus;
+        }
+
 
     }
 }
