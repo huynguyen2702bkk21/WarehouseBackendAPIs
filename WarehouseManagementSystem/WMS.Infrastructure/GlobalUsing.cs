@@ -26,6 +26,11 @@ global using WMS.Domain.InterfaceRepositories.IEquipment;
 global using WMS.Domain.AggregateModels.PartyAggregate.People;
 global using WMS.Infrastructure.EFConfigurations.InventoryLogConfigurations;
 global using WMS.Infrastructure.EFConfigurations.MaterialLotAdjustmentConfigurations;
+global using WMS.Infrastructure.EFConfigurations.EquipmentConfigurations.EquipmentClasses;
+global using WMS.Infrastructure.EFConfigurations.EquipmentConfigurations.Equipments;
+global using WMS.Infrastructure.EFConfigurations.MaterialConfigurations.MaterialClasses;
+global using WMS.Infrastructure.EFConfigurations.MaterialConfigurations.MaterialLots;
+global using WMS.Infrastructure.EFConfigurations.PartyConfigurations.People;
 
 
 

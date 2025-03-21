@@ -1,4 +1,4 @@
-﻿namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceiptServices
+﻿namespace WMS.Application.Services.InventoryReceiptServices
 {
     public class ReceiptServices : IReceiptServices
     {

@@ -1,6 +1,4 @@
-﻿using WMS.Application.Commands.InventoryIssueCommands.IssueSubLots;
-
-namespace WMS.Application.Commands.InventoryIssueCommands.IssueLots
+﻿namespace WMS.Application.Commands.InventoryIssueCommands.IssueLots
 {
     public class CreateIssueLotCommand : IRequest<bool>
     {

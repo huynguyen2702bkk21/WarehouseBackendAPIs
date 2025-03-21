@@ -1,7 +1,4 @@
-﻿using WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts;
-using WMS.Application.Queries.InventoryReceiptQueries.InventoryReceiptEntries;
-
-namespace WMS.APIs.Controllers.InventoryReceiptControllers
+﻿namespace WMS.APIs.Controllers.InventoryReceiptControllers
 {
     [ApiController]
     [Route("WarehouseAPI/[controller]")]

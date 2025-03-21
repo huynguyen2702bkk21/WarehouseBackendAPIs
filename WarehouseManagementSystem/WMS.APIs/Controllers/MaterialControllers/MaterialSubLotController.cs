@@ -1,8 +1,4 @@
-﻿
-using WMS.Application.Commands.MaterialCommands.MaterialSubLots;
-using WMS.Application.Queries.MaterialQueries.MaterialSublots;
-
-namespace WMS.APIs.Controllers.MaterialControllers
+﻿namespace WMS.APIs.Controllers.MaterialControllers
 {
     [ApiController]
     [Route("WarehouseAPI/[controller]")]

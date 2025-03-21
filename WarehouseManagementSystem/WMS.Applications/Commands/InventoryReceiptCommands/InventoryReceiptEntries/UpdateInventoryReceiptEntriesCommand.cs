@@ -1,6 +1,4 @@
-﻿using WMS.Application.Commands.InventoryReceiptCommands.InventoryReceiptEntries;
-
-namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts
+﻿namespace WMS.Application.Commands.InventoryReceiptCommands.InventoryReceipts
 {
     public class UpdateInventoryReceiptEntriesCommand : IRequest<bool>
     {

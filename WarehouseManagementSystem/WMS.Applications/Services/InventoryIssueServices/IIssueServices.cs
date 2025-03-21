@@ -1,4 +1,4 @@
-﻿namespace WMS.Application.Commands.InventoryIssueCommands.InventoryIssueServices
+﻿namespace WMS.Application.Services.InventoryIssueServices
 {
     public interface IIssueServices
     {

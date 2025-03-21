@@ -1,11 +1,4 @@
-﻿using WMS.Application.Commands.EquipmentCommands.EquipmentCLasses;
-using WMS.Application.Commands.EquipmentCommands.EquipmentProperties;
-using WMS.Application.Commands.EquipmentCommands.Equipments;
-using WMS.Application.DTOs.EquipmentDTOs;
-using WMS.Application.Queries.EquipmentQueries.EquipmentProperties;
-using WMS.Application.Queries.EquipmentQueries.Equipments;
-
-namespace WMS.APIs.Controllers.EquipmentControllers
+﻿namespace WMS.APIs.Controllers.EquipmentControllers
 {
     [ApiController]
     [Route("WarehouseAPI/[controller]")]

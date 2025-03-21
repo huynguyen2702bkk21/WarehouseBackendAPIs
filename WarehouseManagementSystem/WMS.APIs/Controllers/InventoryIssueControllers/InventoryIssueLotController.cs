@@ -1,7 +1,4 @@
-﻿
-using WMS.Application.Queries.InventoryIssueQueries.IssueLots;
-
-namespace WMS.APIs.Controllers.InventoryIssueControllers
+﻿namespace WMS.APIs.Controllers.InventoryIssueControllers
 {
     [ApiController]
     [Route("WarehouseAPI/[controller]")]

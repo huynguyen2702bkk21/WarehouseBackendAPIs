@@ -1,13 +1,4 @@
-﻿using WMS.Application.Commands.InventoryIssueCommands.InventoryIssueServices;
-using WMS.Application.Commands.InventoryReceiptCommands.InventoryReceiptServices;
-using WMS.Domain.InterfaceRepositories.IEquipment;
-using WMS.Domain.InterfaceRepositories.IInventoryLog;
-using WMS.Domain.InterfaceRepositories.IParty.People;
-using WMS.Infrastructure.Repositories.EquipmentRepositories;
-using WMS.Infrastructure.Repositories.InventoryLogRepositories;
-using WMS.Infrastructure.Repositories.PartyRepositories.People;
-
-namespace WMS.APIs
+﻿namespace WMS.APIs
 {
     public class Program
     {

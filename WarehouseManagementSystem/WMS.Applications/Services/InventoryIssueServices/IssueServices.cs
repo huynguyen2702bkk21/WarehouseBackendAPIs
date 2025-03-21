@@ -1,7 +1,4 @@
-﻿
-using WMS.Domain.AggregateModels.InventoryIssueAggregate;
-
-namespace WMS.Application.Commands.InventoryIssueCommands.InventoryIssueServices
+﻿namespace WMS.Application.Services.InventoryIssueServices
 {
     public class IssueServices : IIssueServices
     {
@@ -302,8 +299,8 @@ namespace WMS.Application.Commands.InventoryIssueCommands.InventoryIssueServices
             var groupEntries = inventoryIssue.entries
                 .SelectMany(e => e.issueLot.issueSublots, (entry, sublot) => new
                 {
-                    sublotId = sublot.sublotId,
-                    requestedQuantity = sublot.requestedQuantity
+                    sublot.sublotId,
+                    sublot.requestedQuantity
                 })
                 .GroupBy(x => x.sublotId)
                 .Select(g => new

@@ -1,10 +1,4 @@
-﻿using WMS.Infrastructure.EFConfigurations.EquipmentConfigurations.EquipmentClasses;
-using WMS.Infrastructure.EFConfigurations.EquipmentConfigurations.Equipments;
-using WMS.Infrastructure.EFConfigurations.MaterialConfigurations.MaterialClasses;
-using WMS.Infrastructure.EFConfigurations.MaterialConfigurations.MaterialLots;
-using WMS.Infrastructure.EFConfigurations.PartyConfigurations.People;
-
-namespace WMS.Infrastructure
+﻿namespace WMS.Infrastructure
 {
     public class WMSDbContext : DbContext, IUnitOfWork
     {
