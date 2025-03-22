@@ -1,19 +1,18 @@
-﻿namespace WMS.Application.Commands.InventoryIssueCommands.InventoryIssueEntries
+﻿namespace WMS.Application.Commands.InventoryIssueCommands.InventoryIssues
 {
-    public class UpdateInventoryIssueEntryCommandHandler : IRequestHandler<UpdateInventoryIssueEntryCommand, bool>
+    public class RefreshInventoryIssueStatusCommandHandler : IRequestHandler<RefreshInventoryIssueStatusCommand,bool>
     {
         private readonly IInventoryIssueRepository _inventoryIssueRepository;
         private readonly IIssueServices _issueServices;
 
-        public UpdateInventoryIssueEntryCommandHandler(IInventoryIssueRepository inventoryIssueRepository, IIssueServices issueServices)
+        public RefreshInventoryIssueStatusCommandHandler(IInventoryIssueRepository inventoryIssueRepository, IIssueServices issueServices)
         {
             _inventoryIssueRepository = inventoryIssueRepository;
             _issueServices = issueServices;
         }
 
-        public async Task<bool> Handle(UpdateInventoryIssueEntryCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(RefreshInventoryIssueStatusCommand request, CancellationToken cancellationToken)
         {
-
             var inventoryIssue = await _inventoryIssueRepository.GetByIdAsync(request.InventoryIssueId);
             if (inventoryIssue == null)
             {
@@ -24,10 +23,9 @@
                 throw new Exception("The Issue has been saved");
             }
 
-            await _issueServices.UpdateIssueEntries(request);
+            await _issueServices.UpdateMaterialLot(inventoryIssue);
 
             return await _inventoryIssueRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
-
         }
 
 

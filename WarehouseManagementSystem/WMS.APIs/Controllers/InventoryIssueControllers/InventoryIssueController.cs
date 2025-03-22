@@ -34,6 +34,26 @@
             return await CommandAsync(command);
         }
 
+        [HttpPut("RefreshInventoryIssueStatus/{IssueId}")]
+        public async Task<IActionResult> RefreshIssueStatus(string IssueId)
+        {
+            var command = new RefreshInventoryIssueStatusCommand(IssueId);
+            return await CommandAsync(command);
+        }
+
+        [HttpPut("UpdateInventoryIssue")]
+        public async Task<IActionResult> UpdateIssue([FromBody] UpdateInventoryIssueCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+        [HttpDelete("DeleteInventoryIssue/{IssueId}")]
+        public async Task<IActionResult> DeleteIssue(string IssueId)
+        {
+            var command = new DeleteInventoryIssueCommand(IssueId);
+            return await CommandAsync(command);
+        }
+
     }
 
 }

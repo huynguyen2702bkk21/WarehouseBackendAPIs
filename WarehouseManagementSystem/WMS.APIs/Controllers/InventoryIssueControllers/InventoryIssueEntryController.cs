@@ -40,6 +40,12 @@
             return await CommandAsync(command);
         }
 
+        [HttpDelete("DeleteIssueEntries")]
+        public async Task<IActionResult> DeleteIssueEntries([FromBody] DeleteInventoryIssueEntriesCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
 
     }
 }

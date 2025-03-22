@@ -26,5 +26,18 @@ namespace WMS.Infrastructure.Repositories.InventoryIssueRepositories
 
             return inventoryIssueEntry;
         }
+
+        public async Task<List<InventoryIssue>> GetInventoryIssuesByEntryIds(List<string> entryId)
+        {
+            var inventoryIssues = await _context.InventoryIssues
+                .Include(s => s.entries)
+                    .ThenInclude(s => s.issueLot)
+                        .ThenInclude(s => s.issueSublots)
+                .Where(x => x.entries.Any(y => entryId.Contains(y.inventoryIssueEntryId)))
+                .ToListAsync();
+
+            return inventoryIssues;
+        }
+
     }
 }

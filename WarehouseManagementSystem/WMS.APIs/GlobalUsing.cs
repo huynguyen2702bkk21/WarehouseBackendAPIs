@@ -71,6 +71,7 @@ global using WMS.Infrastructure.Repositories.MaterialRepositories;
 global using WMS.Infrastructure.Repositories.PartyRepositories;
 global using WMS.Infrastructure.Repositories.PartyRepositories.People;
 global using WMS.Infrastructure.Repositories.StorageRepositories;
+global using Microsoft.OpenApi.Models;
 
 
 

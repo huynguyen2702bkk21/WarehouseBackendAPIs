@@ -45,6 +45,13 @@ namespace WMS.Domain.AggregateModels.InventoryIssueAggregate
             entries.Add(issueEntry);
         }
 
+        public void UpdateIssue(string customerId, string personId, string warehouseId)
+        {
+            this.customerId = customerId;
+            this.personId = personId;
+            this.warehouseId = warehouseId;
+        }
+
         public void Confirm(List<MaterialLot> materialLots, InventoryIssue inventoryIssue)
         {
             AddDomainEvent(new MaterialLotsExportedDomainEvent(inventoryIssue, materialLots));

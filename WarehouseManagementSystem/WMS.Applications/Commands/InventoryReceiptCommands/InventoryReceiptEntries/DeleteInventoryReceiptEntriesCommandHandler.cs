@@ -13,7 +13,7 @@
 
         public async Task<bool> Handle(DeleteInventoryReceiptEntriesCommand request, CancellationToken cancellationToken)
         {
-            var inventoryReceipts = await _inventoryReceiptRepository.GetInventoryReceiptByEntryId(request.entryIds);
+            var inventoryReceipts = await _inventoryReceiptRepository.GetInventoryReceiptsByEntryIds(request.entryIds);
             if (inventoryReceipts.Count == 0)
             {
                 throw new EntityNotFoundException("The InventoryReceipts Not Found");

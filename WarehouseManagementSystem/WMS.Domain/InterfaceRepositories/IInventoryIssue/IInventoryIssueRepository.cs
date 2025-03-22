@@ -5,5 +5,6 @@
         Task<List<InventoryIssue>> GetAllAsync();
         Task<InventoryIssue> GetByIdAsync(string inventoryIssueId);
         void Create(InventoryIssue inventoryIssue);
+        void Delete(InventoryIssue inventoryIssue);
     }
 }

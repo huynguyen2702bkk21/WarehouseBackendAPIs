@@ -1,19 +1,16 @@
-﻿namespace WMS.Application.Commands.InventoryIssueCommands.InventoryIssueEntries
+﻿namespace WMS.Application.Commands.InventoryIssueCommands.InventoryIssues
 {
-    public class UpdateInventoryIssueEntryCommandHandler : IRequestHandler<UpdateInventoryIssueEntryCommand, bool>
+    public class DeleteInventoryIssueCommandHandler : IRequestHandler<DeleteInventoryIssueCommand, bool>
     {
         private readonly IInventoryIssueRepository _inventoryIssueRepository;
-        private readonly IIssueServices _issueServices;
 
-        public UpdateInventoryIssueEntryCommandHandler(IInventoryIssueRepository inventoryIssueRepository, IIssueServices issueServices)
+        public DeleteInventoryIssueCommandHandler(IInventoryIssueRepository inventoryIssueRepository)
         {
             _inventoryIssueRepository = inventoryIssueRepository;
-            _issueServices = issueServices;
         }
 
-        public async Task<bool> Handle(UpdateInventoryIssueEntryCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(DeleteInventoryIssueCommand request, CancellationToken cancellationToken)
         {
-
             var inventoryIssue = await _inventoryIssueRepository.GetByIdAsync(request.InventoryIssueId);
             if (inventoryIssue == null)
             {
@@ -24,7 +21,7 @@
                 throw new Exception("The Issue has been saved");
             }
 
-            await _issueServices.UpdateIssueEntries(request);
+            _inventoryIssueRepository.Delete(inventoryIssue);
 
             return await _inventoryIssueRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 

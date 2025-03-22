@@ -33,7 +33,7 @@ namespace WMS.Infrastructure.Repositories.InventoryReceiptRepositories
             return inventoryReceipt;
         }
 
-        public async Task<List<InventoryReceipt>> GetInventoryReceiptByEntryId(List<string> entryId)
+        public async Task<List<InventoryReceipt>> GetInventoryReceiptsByEntryIds(List<string> entryId)
         {
             var inventoryReceipt = await _context.InventoryReceipts
                 .Include(s => s.entries)

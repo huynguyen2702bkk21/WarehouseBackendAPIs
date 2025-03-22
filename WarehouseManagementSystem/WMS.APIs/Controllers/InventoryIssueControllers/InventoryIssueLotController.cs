@@ -1,4 +1,6 @@
-﻿namespace WMS.APIs.Controllers.InventoryIssueControllers
+﻿using WMS.Application.Commands.InventoryIssueCommands.IssueLots;
+
+namespace WMS.APIs.Controllers.InventoryIssueControllers
 {
     [ApiController]
     [Route("WarehouseAPI/[controller]")]
@@ -26,6 +28,12 @@
             var result = await _mediator.Send(query);
 
             return result;
+        }
+
+        [HttpPut("UpdateIssueLotStatus")]
+        public async Task<IActionResult> UpdateIssueLotStatus([FromBody] UpdateIssueLotStatusCommand command)
+        {
+            return await CommandAsync(command);
         }
 
     }

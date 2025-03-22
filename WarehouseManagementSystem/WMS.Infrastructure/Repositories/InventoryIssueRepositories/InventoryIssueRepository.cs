@@ -11,6 +11,11 @@
             _context.InventoryIssues.Add(inventoryIssue);
         }
 
+        public void Delete(InventoryIssue inventoryIssue)
+        {
+            _context.InventoryIssues.Remove(inventoryIssue);
+        }
+
         public async Task<List<InventoryIssue>> GetAllAsync()
         {
             return await _context.InventoryIssues.ToListAsync();

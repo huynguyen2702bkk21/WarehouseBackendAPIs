@@ -40,15 +40,17 @@
             return await CommandAsync(command);
         }
 
-        [HttpPut("RefreshReceiptStatus")]
-        public async Task<IActionResult> RefreshReceiptStatus([FromBody] RefreshInventoryReceiptStatusCommand command)
+        [HttpPut("RefreshReceiptStatus/{receiptId}")]
+        public async Task<IActionResult> RefreshReceiptStatus(string receiptId)
         {
+            var command = new RefreshInventoryReceiptStatusCommand(receiptId);
             return await CommandAsync(command);
         }
 
-        [HttpDelete("DeleteReceipt")]
-        public async Task<IActionResult> DeleteReceipt([FromBody] DeleteInventoryReceiptCommand command)
+        [HttpDelete("DeleteReceipt/{receiptId}")]
+        public async Task<IActionResult> DeleteReceipt(string receiptId)
         {
+            var command = new DeleteInventoryReceiptCommand(receiptId);
             return await CommandAsync(command);
         }
 

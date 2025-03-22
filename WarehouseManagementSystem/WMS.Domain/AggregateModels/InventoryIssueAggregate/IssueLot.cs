@@ -42,6 +42,11 @@ namespace WMS.Domain.AggregateModels.InventoryIssueAggregate
 
         }
 
+        public void Update(LotStatus issueLotStatus)
+        {
+            this.issueLotStatus = issueLotStatus;
+        }
+
 
     }
 }
